@@ -11,7 +11,7 @@ import { Redirect } from "react-router";
 function Register() {
     //ação do botao cadastrar
     const handleClickRegister = (values) => {
-        Axios.post("http://localhost:3001/register", {
+        Axios.post(`${process.env.REACT_APP_BACKEND_URL}/register`, {
             nome: values.nome,
             email: values.email,
             password: values.password

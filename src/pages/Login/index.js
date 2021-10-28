@@ -18,7 +18,7 @@ function Login() {
 
     //ação do botão login
     const handleClickLogin = (values) => {
-        Axios.post("http://localhost:3001/login", {
+        Axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, {
             nome: values.nome,
             email: values.email,
             password: values.password
