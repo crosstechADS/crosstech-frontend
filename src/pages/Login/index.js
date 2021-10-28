@@ -58,7 +58,7 @@ function Login() {
                 validationSchema={validationLogin}>
                 <Form className="login-form">
                     <div className="login-form-group">
-                        <Field as={Input} size="large" name="email" className="form-field" placeholder="Email" />
+                        <Field as={Input} size="large" name="email" className="form-field" placeholder="E-mail" />
                         <ErrorMessage
                             component="span"
                             name="email"
