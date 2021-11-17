@@ -16,7 +16,8 @@ import Notifications from 'react-notify-toast';
 // import { Container } from './styles';
 
 function App() {
-  return <div>
+  return (
+  <div>
     <Notifications options={{ zIndex: 200, top: '50px' }} /><Router><Switch>
 
       <Route path="/" exact strict>
@@ -32,13 +33,13 @@ function App() {
         <Register />
       </Route>
 
-      <Route path="/dashboard">
-        <h1>Dashboard</h1>
+      <Route path="/home">
+        <Home />
       </Route>
 
     </Switch>
     </Router>
-  </div>;
+  </div>);
 }
 
 export default App;

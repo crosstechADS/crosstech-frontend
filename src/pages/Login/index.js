@@ -29,7 +29,7 @@ function Login() {
                 history.push("/login");
             }
             else {
-                history.push("/dashboard");
+                history.push("/home");
             }
 
         });
