@@ -7,7 +7,8 @@ import {
 } from "react-router-dom";
 import '../../App.css'
 import Navbar from '../../components/Navbar';
-import Cards from '../../components/Cards';
+import Treino from '../Treino/Treino';
+import './index.css'
 
 // import { Container } from './styles';
 
@@ -15,12 +16,11 @@ function Home() {
   return (
     <>
       <Router>
-        <Navbar />
         <Switch>
-          <Route path='/' exact />
+          <Route path='/' exact component= {Home}/>
+          <Route path='/treino' component={Treino} />
         </Switch>
       </Router>
-      <Cards />
     </>
   );
 }

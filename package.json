@@ -10,6 +10,7 @@
     "formik": "^2.2.9",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-input-number": "^5.0.19",
     "react-notify-toast": "^0.5.1",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",

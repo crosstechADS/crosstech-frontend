@@ -11,14 +11,14 @@ h1 {
   display: block;
   flex-flow: column;
   align-items: center;
-  max-width: 520px;
+  max-width: 620px;
   width: 90%;
   margin: 0 auto;
 }
 
 .cards__wrapper {
   position: relative;
-  max-width: 620px;
+  max-width: 720px;
   margin: 50px 0 45px;
 }
 

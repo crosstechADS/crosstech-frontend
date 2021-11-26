@@ -1,0 +1,47 @@
+.exercicio {
+  display: inline-block;
+  padding: 10px 200px;
+  font-family: 'PT Sans', sans-serif;
+  flex-flow: column;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.exercicio-media {
+  display: inline-block;
+}
+
+.exercicio-descricao {
+  display: inline-block;
+  align-items: center;
+  position: absolute;
+}
+
+.titulo-exercicio {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+#peso {
+  width: 50px;
+}
+
+@media only screen and (max-width: 960px) {
+  .exercicio {
+    display: block;
+    margin-bottom: 50px;
+    padding: 10px 0;
+  }
+
+  .exercicio-media {
+    display: flex;
+    padding-bottom: 60px;
+  }
+
+  .exercicio-descricao {
+    display: block;
+    align-items: center;
+    position: relative;
+  }
+}

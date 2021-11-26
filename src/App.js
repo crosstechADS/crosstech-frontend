@@ -10,7 +10,12 @@ import {
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Treino from './pages/Treino/Treino';
 import Notifications from 'react-notify-toast';
+import Navbar from './components/Navbar';
+import HomeBg from './components/HomeBg';
+import TreinoView from './pages/TreinoView/TreinoView';
+import Exercicio from './components/Exercicio';
 
 
 // import { Container } from './styles';
@@ -19,7 +24,8 @@ function App() {
   return (
   <div>
     <Notifications options={{ zIndex: 200, top: '50px' }} /><Router><Switch>
-
+      
+    
       <Route path="/" exact strict>
         {/* <Home /> */}
         <Redirect to="/login" />
@@ -35,7 +41,23 @@ function App() {
 
       <Route path="/home">
         <Home />
+        <Navbar />
+        <HomeBg />
       </Route>
+
+      <Route path="/treino">
+        <Navbar />
+        <Treino />
+      </Route>
+
+      <Route path="/treinoview">
+        <Navbar />
+        <TreinoView />
+        <Exercicio />
+        <Exercicio />
+        <Exercicio />
+      </Route>
+
 
     </Switch>
     </Router>
