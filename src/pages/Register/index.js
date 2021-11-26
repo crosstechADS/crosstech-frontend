@@ -14,11 +14,12 @@ function Register() {
         Axios.post(`${process.env.REACT_APP_BACKEND_URL}/register`, {
             nome: values.nome,
             email: values.email,
-            password: values.password
+            password: values.password,
+            profile: values.profile
         }).then((Response) => {
             const isError = !Response.data.msg.includes("sucesso");
             notify.show(Response.data.msg, isError ? "error" : "success");
-            // notify.show(Response.data.msg);
+            // notify.show(Response.data.msg)
         });
     };
 
@@ -31,6 +32,10 @@ function Register() {
             .string()
             .email("Formato inválido.")
             .required("Campo E-mail obrigatório"),
+        profile: yup
+            .number()
+            .min(1, "Formato inválido.")
+            .required("Campo Tipo perfil obrigatório"),
         password: yup
             .string()
             .min(8, "Formato de senha inválido")
@@ -47,7 +52,7 @@ function Register() {
             validationSchema={validationCadastro}>
             <Form className="login-form">
                 <div className="login-form-group">
-                    <Field as={Input} size="large" name="nome" className="form-field" placeholder="nome" />
+                    <Field as={Input} size="large" name="nome" className="form-field" placeholder="Nome" />
                     <ErrorMessage
                         component="span"
                         name="nome"
@@ -55,10 +60,25 @@ function Register() {
                     />
                 </div>
                 <div className="login-form-group">
-                    <Field as={Input} size="large" name="email" className="form-field" placeholder="Email" />
+                    <Field as={Input} size="large"
+                        name="email"
+                        className="form-field"
+                        placeholder="Email" />
                     <ErrorMessage
                         component="span"
                         name="email"
+                        className="form-error"
+                    />
+                </div>
+
+                <div className="login-form-group">
+                    <Field as={Input} size="large"
+                        name="profile"
+                        className="form-field"
+                        placeholder="Tipo Perfil" />
+                    <ErrorMessage
+                        component="span"
+                        name="profile"
                         className="form-error"
                     />
                 </div>
