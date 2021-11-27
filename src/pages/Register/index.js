@@ -51,14 +51,19 @@ function Register() {
             onSubmit={handleClickRegister}
             validationSchema={validationCadastro}>
             <Form className="login-form">
+
                 <div className="login-form-group">
-                    <Field as={Input} size="large" name="nome" className="form-field" placeholder="Nome" />
+                    <Field as={Input} size="large"
+                        name="nome"
+                        className="form-field"
+                        placeholder="Nome" />
                     <ErrorMessage
                         component="span"
                         name="nome"
                         className="form-error"
                     />
                 </div>
+
                 <div className="login-form-group">
                     <Field as={Input} size="large"
                         name="email"
@@ -97,7 +102,8 @@ function Register() {
                 </div>
 
                 <div className="login-form-group">
-                    <Field as={Input} size="large" name="confirmPassword"
+                    <Field as={Input} size="large"
+                        name="confirmPassword"
                         type="password"
                         className="form-field"
                         placeholder="Confirme sua senha" />
@@ -107,6 +113,19 @@ function Register() {
                         className="form-error"
                     />
                 </div>
+
+                <div className="login-form-group">
+                    <Field as={Input} size="large"
+                        name="rua"
+                        className="form-field"
+                        placeholder="Rua" />
+                    <ErrorMessage
+                        component="span"
+                        name="rua"
+                        className="form-error"
+                    />
+                </div>
+
                 <Button className="btn-login" size="large" primary type="submit">Cadastrar</Button>
             </Form>
 
