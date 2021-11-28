@@ -10,6 +10,9 @@ import {
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Exercicios from './pages/Exercicios/Exercicios';
+import ExerciciosView from './pages/ExerciciosView/ExerciciosView';
+import ExerciciosRegister from './pages/ExerciciosRegister/ExerciciosRegister';
 import Treino from './pages/Treino/Treino';
 import Notifications from 'react-notify-toast';
 import Navbar from './components/Navbar';
@@ -43,6 +46,21 @@ function App() {
         <Home />
         <Navbar />
         <HomeBg />
+      </Route>
+
+      <Route path="/exercicios">
+        <Navbar />
+        <Exercicios />
+      </Route>
+
+      <Route path="/exerciciosview">
+        <Navbar />
+        <ExerciciosView />
+      </Route>
+
+      <Route path="/exerciciosregister">
+        <Navbar />
+        <ExerciciosRegister />
       </Route>
 
       <Route path="/treino">

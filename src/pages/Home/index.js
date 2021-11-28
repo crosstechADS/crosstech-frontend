@@ -8,6 +8,7 @@ import {
 import '../../App.css'
 import Navbar from '../../components/Navbar';
 import Treino from '../Treino/Treino';
+import Exercicios from '../Exercicios/Exercicios'
 import './index.css'
 
 // import { Container } from './styles';
@@ -18,6 +19,7 @@ function Home() {
       <Router>
         <Switch>
           <Route path='/' exact component= {Home}/>
+          <Route path='/exercicios' component={Exercicios} />
           <Route path='/treino' component={Treino} />
         </Switch>
       </Router>

@@ -1,0 +1,13 @@
+.exerciciosview {
+    padding: 4rem;
+    background: #fff;
+  }
+  
+  .view__container {
+    display: block;
+    flex-flow: column;
+    align-items: center;
+    max-width: 620px;
+    width: 90%;
+    margin: 0 auto;
+  }
