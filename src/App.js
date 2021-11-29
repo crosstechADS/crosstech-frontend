@@ -25,61 +25,61 @@ import Exercicio from './components/Exercicio';
 
 function App() {
   return (
-  <div>
-    <Notifications options={{ zIndex: 200, top: '50px' }} /><Router><Switch>
-      
-    
-      <Route path="/" exact strict>
-        {/* <Home /> */}
-        <Redirect to="/login" />
-      </Route>
-
-      <Route path="/login">
-        <Login />
-      </Route>
-
-      <Route path="/register">
-        <Register />
-      </Route>
-
-      <Route path="/home">
-        <Home />
-        <Navbar />
-        <HomeBg />
-      </Route>
-
-      <Route path="/exercicios">
-        <Navbar />
-        <Exercicios />
-      </Route>
-
-      <Route path="/exerciciosview">
-        <Navbar />
-        <ExerciciosView />
-      </Route>
-
-      <Route path="/exerciciosregister">
-        <Navbar />
-        <ExerciciosRegister />
-      </Route>
-
-      <Route path="/treino">
-        <Navbar />
-        <Treino />
-      </Route>
-
-      <Route path="/treinoview">
-        <Navbar />
-        <TreinoView />
-        <Exercicio />
-        <Exercicio />
-        <Exercicio />
-      </Route>
+    <div>
+      <Notifications options={{ zIndex: 200, top: '150px' }} /><Router><Switch>
 
 
-    </Switch>
-    </Router>
-  </div>);
+        <Route path="/" exact strict>
+          {/* <Home /> */}
+          <Redirect to="/login" />
+        </Route>
+
+        <Route path="/login">
+          <Login />
+        </Route>
+
+        <Route path="/register">
+          <Register />
+        </Route>
+
+        <Route path="/home">
+          <Home />
+          <Navbar />
+          <HomeBg />
+        </Route>
+
+        <Route path="/exercicios">
+          <Navbar />
+          <Exercicios />
+        </Route>
+
+        <Route path="/exerciciosview">
+          <Navbar />
+          <ExerciciosView />
+        </Route>
+
+        <Route path="/exerciciosregister">
+          <Navbar />
+          <ExerciciosRegister />
+        </Route>
+
+        <Route path="/treino">
+          <Navbar />
+          <Treino />
+        </Route>
+
+        <Route path="/treinoview">
+          <Navbar />
+          <TreinoView />
+          <Exercicio />
+          <Exercicio />
+          <Exercicio />
+        </Route>
+
+
+      </Switch>
+      </Router>
+    </div>);
 }
 
 export default App;

@@ -7,13 +7,15 @@ import { Input, Button } from "semantic-ui-react";
 import { notify } from "react-notify-toast";
 import { Redirect } from "react-router";
 import Authentication from '../Authentication';
- 
+
 function ExerciciosRegister() {
     //ação do botao cadastrar
     const handleClickRegister = (values) => {
         Axios.post(`${process.env.REACT_APP_BACKEND_URL}/exerciciosregister`, {
             exercicio: values.exercicio,
-            exercicioObs: values.exercicioObs
+            exercicioObs: values.exercicioObs,
+            exercicioTipo: values.exercicioTipo
+
         }).then((Response) => {
             const isError = !Response.data.msg.includes("sucesso");
             notify.show(Response.data.msg, isError ? "error" : "success");
@@ -31,7 +33,8 @@ function ExerciciosRegister() {
     return <Authentication>
         <h1>Cadastro de Exercício</h1>
         <Formik initialValues={{}}
-            onSubmit={handleClickRegister}>
+            onSubmit={handleClickRegister}
+            validationSchema={validationCadastro}>
             <Form className="login-form">
 
                 <div className="login-form-group">
@@ -70,7 +73,7 @@ function ExerciciosRegister() {
                     />
                 </div>
 
-                <Button className="btn-login" size="large" primary type="submit">Cadastrar</Button>
+                <Button className="btn-login" size="large" primary type="submit">Cadastrar Exercício</Button>
             </Form>
 
         </Formik>
