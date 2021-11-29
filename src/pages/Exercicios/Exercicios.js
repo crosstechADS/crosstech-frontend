@@ -13,10 +13,14 @@ import CardItem from '../../components/CardItem';
 import { Link, useHistory } from "react-router-dom";
 
 function Exercicios() {
-  return (
-    <div className="exercicio-container">
-      <Link to="/exerciciosregister" className="btn-login" size="large"> Criar Exercicio </Link>
+  let history = useHistory();
 
+  const redirect = () => {
+    history.push('../exerciciosregister')
+  }
+  return (
+    <div className="exercicios-container">
+      <Button onClick={redirect} content='Criar Exercicio' basic />
       <ExerciciosCards />
     </div>
   )

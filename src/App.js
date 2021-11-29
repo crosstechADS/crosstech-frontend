@@ -14,6 +14,7 @@ import Exercicios from './pages/Exercicios/Exercicios';
 import ExerciciosView from './pages/ExerciciosView/ExerciciosView';
 import ExerciciosRegister from './pages/ExerciciosRegister/ExerciciosRegister';
 import Treino from './pages/Treino/Treino';
+import TreinoRegister from './pages/TreinoRegister/TreinoRegister';
 import Notifications from 'react-notify-toast';
 import Navbar from './components/Navbar';
 import HomeBg from './components/HomeBg';
@@ -66,6 +67,11 @@ function App() {
         <Route path="/treino">
           <Navbar />
           <Treino />
+        </Route>
+
+        <Route path="/treinoregister">
+          <Navbar />
+          <TreinoRegister />
         </Route>
 
         <Route path="/treinoview">
