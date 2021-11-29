@@ -6,7 +6,7 @@ import Axios from "axios";
 import { Input, Button } from "semantic-ui-react";
 import { notify } from "react-notify-toast";
 import { Redirect } from "react-router";
-import Authentication from '../Authentication';
+import TreinoAuthentication from "../TreinoAuthentication/TreinoAuthentication";
 
 function TreinoRegister() {
     //ação do botao cadastrar
@@ -29,7 +29,7 @@ function TreinoRegister() {
             .required("Campo Nome do Treino obrigatório")
     });
 
-    return <Authentication>
+    return <TreinoAuthentication>
         <h1>Cadastro de Treino</h1>
         <Formik initialValues={{}}
             onSubmit={handleClickRegister}
@@ -64,7 +64,7 @@ function TreinoRegister() {
             </Form>
 
         </Formik>
-    </Authentication>
+    </TreinoAuthentication>
 }
 
 export default TreinoRegister;

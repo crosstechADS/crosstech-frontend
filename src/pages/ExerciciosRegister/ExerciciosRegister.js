@@ -3,10 +3,12 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import Axios from "axios";
-import { Input, Button } from "semantic-ui-react";
+import { Input, Button, TextArea, Select} from "semantic-ui-react";
 import { notify } from "react-notify-toast";
 import { Redirect } from "react-router";
-import Authentication from '../Authentication';
+import ExerciciosAuthentication from "../ExerciciosAuthentication/ExerciciosAuthentication";
+
+
 
 function ExerciciosRegister() {
     //ação do botao cadastrar
@@ -30,7 +32,13 @@ function ExerciciosRegister() {
             .required("Campo Nome do Exercicio obrigatório")
     });
 
-    return <Authentication>
+    const options = [
+        { key: 'a', text: 'Aerobica', value: 'aerobica' },
+        { key: 'f', text: 'Funcional', value: 'funcional' },
+        { key: 'p', text: 'Pilates', value: 'pilates' },
+      ]
+
+    return <ExerciciosAuthentication>
         <h1>Cadastro de Exercício</h1>
         <Formik initialValues={{}}
             onSubmit={handleClickRegister}
@@ -38,13 +46,13 @@ function ExerciciosRegister() {
             <Form className="login-form">
 
                 <div className="login-form-group">
-                    <Field as={Input} size="large"
+                    <Field required as={Input} size="large"
                         name="exercicio"
                         className="form-field"
                         placeholder="Nome do Exercício" />
                     <ErrorMessage
                         component="span"
-                        name="nome"
+                        name="exercicio"
                         className="form-error"
                     />
                 </div>
@@ -62,10 +70,11 @@ function ExerciciosRegister() {
                 </div>
 
                 <div className="login-form-group">
-                    <Field as={Input} size="large"
+                    <Field as={Select} size="large"
                         name="exercicioTipo"
                         className="form-field"
-                        placeholder="Tipo de exercício" />
+                        placeholder="Tipo de exercício"
+                        options = {options} />
                     <ErrorMessage
                         component="span"
                         name="exercicioTipo"
@@ -77,7 +86,7 @@ function ExerciciosRegister() {
             </Form>
 
         </Formik>
-    </Authentication>
+    </ExerciciosAuthentication>
 }
 
 export default ExerciciosRegister;

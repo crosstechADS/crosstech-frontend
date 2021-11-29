@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import Axios from "axios";
 import Authentication from '../Authentication';
-import { Input, Button } from "semantic-ui-react";
+import { Input, Button, Select} from "semantic-ui-react";
 import { notify } from "react-notify-toast";
 import { Redirect } from "react-router";
 
@@ -45,6 +45,13 @@ function Register() {
             .oneOf([yup.ref("password"), null], "A combinação de senhas não bate."),
     });
 
+    const options = [
+        { key: 'g', text: 'Gerente', value: 'gerente' },
+        { key: 'r', text: 'Recepcionista', value: 'recepcionista' },
+        { key: 'p', text: 'Professor', value: 'professor' },
+        { key: 'a', text: 'Aluno', value: 'aluno'}
+      ]
+
     return <Authentication>
         <h1>Cadastro</h1>
         <Formik initialValues={{}}
@@ -77,10 +84,11 @@ function Register() {
                 </div>
 
                 <div className="login-form-group">
-                    <Field as={Input} size="large"
+                    <Field as={Select} size="large"
                         name="profile"
                         className="form-field"
-                        placeholder="Tipo Perfil" />
+                        placeholder="Tipo Perfil"
+                        options = {options} />
                     <ErrorMessage
                         component="span"
                         name="profile"
