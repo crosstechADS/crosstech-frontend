@@ -13,7 +13,8 @@ function TreinoRegister() {
     const handleClickRegister = (values) => {
         Axios.post(`${process.env.REACT_APP_BACKEND_URL}/treinoregister`, {
             treino: values.treino,
-            treinoObs: values.treinoObs
+            treinoObs: values.treinoObs,
+            email: values.email
 
         }).then((Response) => {
             const isError = !Response.data.msg.includes("sucesso");
@@ -56,6 +57,18 @@ function TreinoRegister() {
                     <ErrorMessage
                         component="span"
                         name="treinoObs"
+                        className="form-error"
+                    />
+                </div>
+
+                <div className="login-form-group">
+                    <Field as={Input} size="large"
+                        name="email"
+                        className="form-field"
+                        placeholder="Email" />
+                    <ErrorMessage
+                        component="span"
+                        name="email"
                         className="form-error"
                     />
                 </div>
