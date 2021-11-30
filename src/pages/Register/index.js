@@ -15,7 +15,15 @@ function Register() {
             nome: values.nome,
             email: values.email,
             password: values.password,
-            profile: values.profile
+            profile: values.profile,
+            cpf: values.cpf,
+            dataNascimento: values.dataNascimento,
+            cep: values.cep,
+            cidade: values.cidade,
+            uf: values.uf,
+            rua: values.rua,
+            numeroLogradouro: values.numeroLogradouro,
+            bairro: values.bairro
         }).then((Response) => {
             const isError = !Response.data.msg.includes("sucesso");
             notify.show(Response.data.msg, isError ? "error" : "success");
@@ -43,6 +51,30 @@ function Register() {
         confirmPassword: yup
             .string()
             .oneOf([yup.ref("password"), null], "A combinação de senhas não bate."),
+        cpf: yup
+            .string()
+            .required("Campo CPF obrigatório"),
+        dataNascimento: yup
+            .date()
+            .required("Campo Nascimento obrigatório"),
+        cep: yup
+            .string()
+            .required("Campo CEP obrigatório"),
+        cidade: yup
+            .string()
+            .required("Campo Cidade obrigatório"),
+        uf: yup
+            .string()
+            .required("Campo UF obrigatório"),
+        rua: yup
+            .string()
+            .required("Campo Rua obrigatório"),
+        numeroLogradouro: yup
+            .string()
+            .required("Campo Nº do logradouro obrigatório"),
+        bairro: yup
+            .string()
+            .required("Campo Bairro obrigatório")
     });
 
     const options = [
@@ -84,11 +116,10 @@ function Register() {
                 </div>
 
                 <div className="login-form-group">
-                    <Field as={Select} size="large"
+                    <Field as={Input} size="large"
                         name="profile"
                         className="form-field"
-                        placeholder="Tipo Perfil"
-                        options = {options} />
+                        placeholder="Tipo Perfil"/>
                     <ErrorMessage
                         component="span"
                         name="profile"
@@ -121,6 +152,65 @@ function Register() {
                         className="form-error"
                     />
                 </div>
+                <div className="login-form-group">
+                    <Field as={Input} size="large"
+                        name="cpf"
+                        className="form-field"
+                        placeholder="CPF" />
+                    <ErrorMessage
+                        component="span"
+                        name="cpf"
+                        className="form-error"
+                    />
+                </div>
+
+                <div className="login-form-group">
+                    <Field as={Input} size="large"
+                        name="dataNascimento"
+                        className="form-field"
+                        placeholder="Data de nascimento" />
+                    <ErrorMessage
+                        component="span"
+                        name="dataNascimento"
+                        className="form-error"
+                    />
+                </div>
+
+                <div className="login-form-group">
+                    <Field as={Input} size="large"
+                        name="cep"
+                        className="form-field"
+                        placeholder="CEP" />
+                    <ErrorMessage
+                        component="span"
+                        name="cep"
+                        className="form-error"
+                    />
+                </div>
+
+                <div className="login-form-group">
+                    <Field as={Input} size="large"
+                        name="cidade"
+                        className="form-field"
+                        placeholder="Cidade" />
+                    <ErrorMessage
+                        component="span"
+                        name="cidade"
+                        className="form-error"
+                    />
+                </div>
+
+                <div className="login-form-group">
+                    <Field as={Input} size="large"
+                        name="uf"
+                        className="form-field"
+                        placeholder="UF" />
+                    <ErrorMessage
+                        component="span"
+                        name="uf"
+                        className="form-error"
+                    />
+                </div>
 
                 <div className="login-form-group">
                     <Field as={Input} size="large"
@@ -130,6 +220,30 @@ function Register() {
                     <ErrorMessage
                         component="span"
                         name="rua"
+                        className="form-error"
+                    />
+                </div>
+
+                <div className="login-form-group">
+                    <Field as={Input} size="large"
+                        name="numeroLogradouro"
+                        className="form-field"
+                        placeholder="Nº do logradouro" />
+                    <ErrorMessage
+                        component="span"
+                        name="numeroLogradouro"
+                        className="form-error"
+                    />
+                </div>
+
+                <div className="login-form-group">
+                    <Field as={Input} size="large"
+                        name="bairro"
+                        className="form-field"
+                        placeholder="Bairro" />
+                    <ErrorMessage
+                        component="span"
+                        name="bairro"
                         className="form-error"
                     />
                 </div>
