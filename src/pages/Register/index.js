@@ -41,7 +41,7 @@ function Register() {
             .email("Formato inválido.")
             .required("Campo E-mail obrigatório"),
         profile: yup
-            .number()
+            .string()
             .min(1, "Formato inválido.")
             .required("Campo Tipo perfil obrigatório"),
         password: yup
