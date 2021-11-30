@@ -33,9 +33,9 @@ function ExerciciosRegister() {
     });
 
     const options = [
-        { key: 5, text: 'Aerobica', value: 5 },
-        { key: 15, text: 'Funcional', value: 15 },
-        { key: 25, text: 'Pilates', value: 25 },
+        { key: 5, text: 'Aerobica', values: 5 },
+        { key: 15, text: 'Funcional', values: 15 },
+        { key: 25, text: 'Pilates', values: 25 },
       ]
 
     return <ExerciciosAuthentication>
