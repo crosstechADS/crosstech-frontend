@@ -6,22 +6,25 @@ function Cards() {
   return (
     <div className="cards">
       <div className="cards__container">
-        <h3>Treinos</h3>
+        <h1>Treinos</h1>
         <div className="cards__wrapper">
           <ul className="cards__items">
             <CardItem 
               src="crossfit1.jpg"
-              text="Treino A"
+              title="Treino A"
+              text="Treino focado no desenvolvimento dos membros superiores"
               label="Treino"
             />
             <CardItem 
               src="crossfit1.jpg"
-              text="Treino B"
+              title="Treino B"
+              text = "Treino focado no desenvolvimento dos membros inferiores"
               label="Treino"
             />
             <CardItem 
               src="crossfit1.jpg"
-              text="Treino C"
+              title="Treino C"
+              text= "Treino com foco no desenvolvimento cardiovascular"
               label="Treino"
             />
           </ul>

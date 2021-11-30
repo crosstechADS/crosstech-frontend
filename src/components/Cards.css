@@ -23,7 +23,7 @@ h1 {
 }
 
 .cards__items {
-  margin-bottom: 24px;
+  margin-bottom: 10px;
 }
 
 .cards__item {
@@ -76,7 +76,7 @@ h1 {
   top: 0;
   right: 0;
   bottom: 0;
-  left: 0;
+  left: -15px;
   display: block;
   width: 100%;
   max-width: 100%;
@@ -96,7 +96,7 @@ h1 {
 
 .cards__item__text {
   color: #252e48;
-  font-size: 18px;
+  font-size: 15px;
   line-height: 24px;
 }
 
