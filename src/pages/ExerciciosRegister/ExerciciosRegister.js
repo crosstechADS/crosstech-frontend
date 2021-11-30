@@ -16,7 +16,7 @@ function ExerciciosRegister() {
         Axios.post(`${process.env.REACT_APP_BACKEND_URL}/exerciciosregister`, {
             exercicio: values.exercicio,
             exercicioObs: values.exercicioObs,
-            exercicioTipo: 5 //values.exercicioTipo
+            exercicioTipo: values.exercicioTipo
 
         }).then((Response) => {
             const isError = !Response.data.msg.includes("sucesso");
@@ -32,12 +32,12 @@ function ExerciciosRegister() {
             .required("Campo Nome do Exercicio obrigatório")
     });
 
-    const options = [
+    /*const options = [
         { key: 5, text: 'Aerobica', value: 5 },
         { key: 15, text: 'Funcional', value: 15 },
         { key: 25, text: 'Pilates', value: 25 },
-      ]
-
+      ]*/
+    
     return <ExerciciosAuthentication>
         <h1>Cadastro de Exercício</h1>
         <Formik initialValues={{}}
@@ -70,11 +70,10 @@ function ExerciciosRegister() {
                 </div>
 
                 <div className="login-form-group">
-                    <Field as={Select} size="large"
+                    <Field as={Input} size="large"
                         name="exercicioTipo"
                         className="form-field"
-                        placeholder="Tipo de exercício"
-                        options = {options} />
+                        placeholder="Tipo de exercício"/>
                     <ErrorMessage
                         component="span"
                         name="exercicioTipo"
