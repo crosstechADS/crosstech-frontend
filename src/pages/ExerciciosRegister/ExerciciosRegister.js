@@ -16,7 +16,7 @@ function ExerciciosRegister() {
         Axios.post(`${process.env.REACT_APP_BACKEND_URL}/exerciciosregister`, {
             exercicio: values.exercicio,
             exercicioObs: values.exercicioObs,
-            exercicioTipo: values.exercicioTipo
+            exercicioTipo: 5 //values.exercicioTipo
 
         }).then((Response) => {
             const isError = !Response.data.msg.includes("sucesso");
@@ -33,9 +33,9 @@ function ExerciciosRegister() {
     });
 
     const options = [
-        { key: 5, text: 'Aerobica', values: 5 },
-        { key: 15, text: 'Funcional', values: 15 },
-        { key: 25, text: 'Pilates', values: 25 },
+        { key: 5, text: 'Aerobica', value: 5 },
+        { key: 15, text: 'Funcional', value: 15 },
+        { key: 25, text: 'Pilates', value: 25 },
       ]
 
     return <ExerciciosAuthentication>
