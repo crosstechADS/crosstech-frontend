@@ -7,8 +7,11 @@ import Authentication from '../Authentication';
 import { Input, Button, Select} from "semantic-ui-react";
 import { notify } from "react-notify-toast";
 import { Redirect } from "react-router";
+import { Link, useHistory } from "react-router-dom";
+
 
 function Register() {
+    const history = useHistory();
     //ação do botao cadastrar
     const handleClickRegister = (values) => {
         Axios.post(`${process.env.REACT_APP_BACKEND_URL}/register`, {
@@ -27,7 +30,12 @@ function Register() {
         }).then((Response) => {
             const isError = !Response.data.msg.includes("sucesso");
             notify.show(Response.data.msg, isError ? "error" : "success");
-            // notify.show(Response.data.msg)
+            if (isError) {
+                history.push("/register");
+            }
+            else {
+                history.push("/login");
+            }
         });
     };
 
@@ -249,6 +257,7 @@ function Register() {
                 </div>
 
                 <Button className="btn-login" size="large" primary type="submit">Cadastrar</Button>
+                <Link to="/login" >Voltar</Link>
             </Form>
 
         </Formik>

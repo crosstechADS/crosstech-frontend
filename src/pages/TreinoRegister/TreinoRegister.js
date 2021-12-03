@@ -7,8 +7,11 @@ import { Input, Button } from "semantic-ui-react";
 import { notify } from "react-notify-toast";
 import { Redirect } from "react-router";
 import TreinoAuthentication from "../TreinoAuthentication/TreinoAuthentication";
+import { Link, useHistory } from "react-router-dom";
+
 
 function TreinoRegister() {
+    const history = useHistory();
     //ação do botao cadastrar
     const handleClickRegister = (values) => {
         Axios.post(`${process.env.REACT_APP_BACKEND_URL}/treinoregister`, {
@@ -19,7 +22,12 @@ function TreinoRegister() {
         }).then((Response) => {
             const isError = !Response.data.msg.includes("sucesso");
             notify.show(Response.data.msg, isError ? "error" : "success");
-            // notify.show(Response.data.msg)
+            if (isError) {
+                history.push("/treinoregister");
+            }
+            else {
+                history.push("/treino");
+            }
         });
     };
 
@@ -74,6 +82,7 @@ function TreinoRegister() {
                 </div>
 
                 <Button className="btn-login" size="large" primary type="submit">Cadastrar Treino</Button>
+                <Link to="/treino" >Voltar</Link>
             </Form>
 
         </Formik>

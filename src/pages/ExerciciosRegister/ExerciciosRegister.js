@@ -7,10 +7,13 @@ import { Input, Button, TextArea, Select} from "semantic-ui-react";
 import { notify } from "react-notify-toast";
 import { Redirect } from "react-router";
 import ExerciciosAuthentication from "../ExerciciosAuthentication/ExerciciosAuthentication";
+import { Link, useHistory } from "react-router-dom";
+
 
 
 
 function ExerciciosRegister() {
+    const history = useHistory();
     //ação do botao cadastrar
     const handleClickRegister = (values) => {
         Axios.post(`${process.env.REACT_APP_BACKEND_URL}/exerciciosregister`, {
@@ -21,7 +24,12 @@ function ExerciciosRegister() {
         }).then((Response) => {
             const isError = !Response.data.msg.includes("sucesso");
             notify.show(Response.data.msg, isError ? "error" : "success");
-            // notify.show(Response.data.msg)
+            if (isError) {
+                history.push("/exerciciosregister");
+            }
+            else {
+                history.push("/exercicios");
+            }
         });
     };
 
@@ -82,6 +90,7 @@ function ExerciciosRegister() {
                 </div>
 
                 <Button className="btn-login" size="large" primary type="submit">Cadastrar Exercício</Button>
+                <Link to="/exercicios" >Voltar</Link>
             </Form>
 
         </Formik>
