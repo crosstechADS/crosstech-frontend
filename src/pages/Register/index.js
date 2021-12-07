@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import Axios from "axios";
 import Authentication from '../Authentication';
-import { Input, Button, Select} from "semantic-ui-react";
+import { Input, Button, Select } from "semantic-ui-react";
 import { notify } from "react-notify-toast";
 import { Redirect } from "react-router";
 import { Link, useHistory } from "react-router-dom";
@@ -18,6 +18,8 @@ function Register() {
             nome: values.nome,
             email: values.email,
             password: values.password,
+            inicioMatricula: values.inicioMatricula,
+            fimMatricula: values.fimMatricula,
             profile: values.profile,
             cpf: values.cpf,
             dataNascimento: values.dataNascimento,
@@ -65,6 +67,12 @@ function Register() {
         dataNascimento: yup
             .date()
             .required("Campo Nascimento obrigatório"),
+        inicioMatricula: yup
+            .date()
+            .required("Campo Início Matrícula obrigatório"),
+        fimMatricula: yup
+            .date()
+            .required("Campo Fim Matrícula obrigatório"),
         cep: yup
             .string()
             .required("Campo CEP obrigatório"),
@@ -85,12 +93,12 @@ function Register() {
             .required("Campo Bairro obrigatório")
     });
 
-    const options = [
+    /*const options = [
         { key: 'g', text: 'Gerente', value: 'gerente' },
         { key: 'r', text: 'Recepcionista', value: 'recepcionista' },
         { key: 'p', text: 'Professor', value: 'professor' },
-        { key: 'a', text: 'Aluno', value: 'aluno'}
-      ]
+        { key: 'a', text: 'Aluno', value: 'aluno' }
+    ]*/
 
     return <Authentication>
         <h1>Cadastro</h1>
@@ -127,7 +135,7 @@ function Register() {
                     <Field as={Input} size="large"
                         name="profile"
                         className="form-field"
-                        placeholder="Tipo Perfil"/>
+                        placeholder="Tipo Perfil" />
                     <ErrorMessage
                         component="span"
                         name="profile"
@@ -157,6 +165,28 @@ function Register() {
                     <ErrorMessage
                         component="span"
                         name="confirmPassword"
+                        className="form-error"
+                    />
+                </div>
+                <div className="login-form-group">
+                    <Field as={Input} size="large"
+                        name="inicioMatricula"
+                        className="form-field"
+                        placeholder="Início da Matrícula" />
+                    <ErrorMessage
+                        component="span"
+                        name="inicioMatricula"
+                        className="form-error"
+                    />
+                </div>
+                <div className="login-form-group">
+                    <Field as={Input} size="large"
+                        name="fimMatricula"
+                        className="form-field"
+                        placeholder="Fim da Matrícula" />
+                    <ErrorMessage
+                        component="span"
+                        name="fimMatricula"
                         className="form-error"
                     />
                 </div>
