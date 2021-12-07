@@ -20,6 +20,8 @@ function Register() {
             password: values.password,
             inicioMatricula: values.inicioMatricula,
             fimMatricula: values.fimMatricula,
+            inicioContratacao: values.inicioContratacao,
+            fimContratacao: values.fimContratacao,
             profile: values.profile,
             cpf: values.cpf,
             dataNascimento: values.dataNascimento,
@@ -68,11 +70,13 @@ function Register() {
             .date()
             .required("Campo Nascimento obrigatório"),
         inicioMatricula: yup
-            .date()
-            .required("Campo Início Matrícula obrigatório"),
+            .date(),
         fimMatricula: yup
-            .date()
-            .required("Campo Fim Matrícula obrigatório"),
+            .date(),
+        inicioContratacao: yup
+            .date(),
+        fimContratacao: yup
+            .date(),
         cep: yup
             .string()
             .required("Campo CEP obrigatório"),
@@ -156,6 +160,7 @@ function Register() {
                     />
                 </div>
 
+
                 <div className="login-form-group">
                     <Field as={Input} size="large"
                         name="confirmPassword"
@@ -187,6 +192,28 @@ function Register() {
                     <ErrorMessage
                         component="span"
                         name="fimMatricula"
+                        className="form-error"
+                    />
+                </div>
+                <div className="login-form-group">
+                    <Field as={Input} size="large"
+                        name="inicioContratacao"
+                        className="form-field"
+                        placeholder="Início do contrato de trabalho" />
+                    <ErrorMessage
+                        component="span"
+                        name="inicioContratacao"
+                        className="form-error"
+                    />
+                </div>
+                <div className="login-form-group">
+                    <Field as={Input} size="large"
+                        name="fimContratacao"
+                        className="form-field"
+                        placeholder="Fim do contrato de trabalho" />
+                    <ErrorMessage
+                        component="span"
+                        name="fimContratacao"
                         className="form-error"
                     />
                 </div>
