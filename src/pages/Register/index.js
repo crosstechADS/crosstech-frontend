@@ -199,7 +199,7 @@ function Register() {
                     <Field as={Input} size="large"
                         name="inicioContratacao"
                         className="form-field"
-                        placeholder="Início do contrato de trabalho" />
+                        placeholder="Inicio do contrato de trabalho" />
                     <ErrorMessage
                         component="span"
                         name="inicioContratacao"
