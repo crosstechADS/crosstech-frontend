@@ -97,18 +97,34 @@ function Register() {
             .required("Campo Bairro obrigatório")
     });
 
-    /*const options = [
-        { key: 'g', text: 'Gerente', value: 'gerente' },
-        { key: 'r', text: 'Recepcionista', value: 'recepcionista' },
-        { key: 'p', text: 'Professor', value: 'professor' },
-        { key: 'a', text: 'Aluno', value: 'aluno' }
-    ]*/
+    //função para auto preenchimento de tabelas de acordo com cep inserido pelo usuário
+    function onBlurCep(ev, setFieldValue){
+        const {value} = ev.target;
+
+        //formatando string recebida para formato aceito pela API
+        const cep = value?.replace(/[^0-9]/g, '');
+
+        //corta a execução da função caso cep não tenha a qauntidade necessária de caracteres
+        if(cep?.length !== 8){
+            return;
+        }
+
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+            .then((res) => res.json())
+            .then((data) => {
+                setFieldValue('cidade', data.localidade);
+                setFieldValue('rua', data.logradouro);
+                setFieldValue('uf', data.uf);
+                setFieldValue('bairro', data.bairro);
+            });
+    }
 
     return <Authentication>
         <h1>Cadastro</h1>
         <Formik initialValues={{}}
             onSubmit={handleClickRegister}
             validationSchema={validationCadastro}>
+            {({setFieldValue}) => (
             <Form className="login-form">
 
                 <div className="login-form-group">
@@ -245,7 +261,8 @@ function Register() {
                     <Field as={Input} size="large"
                         name="cep"
                         className="form-field"
-                        placeholder="CEP" />
+                        placeholder="CEP"
+                        onBlur={(ev) => onBlurCep(ev, setFieldValue)} />
                     <ErrorMessage
                         component="span"
                         name="cep"
@@ -316,7 +333,7 @@ function Register() {
                 <Button className="btn-login" size="large" primary type="submit">Cadastrar</Button>
                 <Link to="/login" >Voltar</Link>
             </Form>
-
+            )}
         </Formik>
     </Authentication>
 }
