@@ -24,14 +24,25 @@ function Login() {
             password: values.password
         }).then((Response) => {
             const isError = !Response.data.msg.includes("sucesso");
-            notify.show(Response.data.msg, isError ? "error" : "success");
             if (isError) {
                 history.push("/login");
             }
             else {
-                history.push("/home");
+                
+                const tokenCriado = Response.data.token;
+                Axios.post(`${process.env.REACT_APP_BACKEND_URL}/home`, {
+                    token: tokenCriado
+                }).then((Response) => {
+                    const isError = !Response.data.msg.includes("válido");
+                    notify.show(Response.data.msg, isError ? "error" : "sucess");
+                    if (isError) {
+                        history.push("/login");
+                    }
+                    else{
+                        history.push("/home");
+                    }
+                })
             }
-
         });
 
     };
