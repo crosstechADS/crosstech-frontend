@@ -8,12 +8,17 @@ import { notify } from "react-notify-toast";
 import { Redirect } from "react-router";
 import ExerciciosAuthentication from "../ExerciciosAuthentication/ExerciciosAuthentication";
 import { Link, useHistory } from "react-router-dom";
-
-
+import { CgCornerDownLeft } from "react-icons/cg";
 
 
 function ExerciciosRegister() {
     const history = useHistory();
+
+    const routeChange = () =>{
+        let path = `/exercicios`;
+        history.push(path);
+    } 
+
     //ação do botao cadastrar
     const handleClickRegister = (values) => {
         Axios.post(`${process.env.REACT_APP_BACKEND_URL}/exerciciosregister`, {
@@ -90,7 +95,7 @@ function ExerciciosRegister() {
                 </div>
 
                 <Button className="btn-login" size="large" primary type="submit">Cadastrar Exercício</Button>
-                <Link to="/exercicios" >Voltar</Link>
+                <Button size="large" className="btn-voltar" onClick={routeChange}>Voltar<CgCornerDownLeft/></Button>
             </Form>
 
         </Formik>

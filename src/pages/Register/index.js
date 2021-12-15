@@ -8,10 +8,17 @@ import { Input, Button, Select } from "semantic-ui-react";
 import { notify } from "react-notify-toast";
 import { Redirect } from "react-router";
 import { Link, useHistory } from "react-router-dom";
+import { CgCornerDownLeft } from "react-icons/cg";
 
 
 function Register() {
     const history = useHistory();
+
+    const routeChange = () =>{
+        let path = `/login`;
+        history.push(path);
+    }   
+
     //ação do botao cadastrar
     const handleClickRegister = (values) => {
         Axios.post(`${process.env.REACT_APP_BACKEND_URL}/register`, {
@@ -33,6 +40,7 @@ function Register() {
             bairro: values.bairro
         }).then((Response) => {
             const isError = !Response.data.msg.includes("sucesso");
+            console.log(isError);
             notify.show(Response.data.msg, isError ? "error" : "success");
             if (isError) {
                 history.push("/register");
@@ -331,7 +339,7 @@ function Register() {
                 </div>
 
                 <Button className="btn-login" size="large" primary type="submit">Cadastrar</Button>
-                <Link to="/login" >Voltar</Link>
+                <Button size="large" className="btn-voltar" onClick={routeChange}>Voltar<CgCornerDownLeft/></Button>
             </Form>
             )}
         </Formik>
