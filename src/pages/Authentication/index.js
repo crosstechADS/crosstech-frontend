@@ -12,8 +12,7 @@ function Authentication({ children }) {
         <div>
             <Grid verticalAlign='middle' centered textAlign='center'>
                 <Grid.Row className="auth-container">
-                    <Grid.Column className="background" only="tablet" tablet={4} computer={8}>
-                    </Grid.Column>
+
                     <Grid.Column mobile={16} tablet={12} computer={8} >
                         <div className="logo"> <img src={logo} width="150" height="150" /> </div>
                         {
