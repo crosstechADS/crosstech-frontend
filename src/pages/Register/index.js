@@ -289,67 +289,66 @@ function Register() {
                             />
                         </div>
                     </div>
-                    <div class="label"><h3>Informações de contrato</h3></div>
-                    <div className="login-form-group">
-                        <Field as={Input} size="large"
-                            name="profile"
-                            className="form-field"
-                            placeholder="Tipo Perfil"
-                        />
-                        <ErrorMessage
-                            component="span"
-                            name="profile"
-                            className="form-error"
-                        />
+                    <div class="label"><h3>Informações de contrato</h3>
+                        <div className="login-form-group">
+                            <Field as={Input} size="large"
+                                name="profile"
+                                className="form-field"
+                                placeholder="Tipo Perfil"
+                            />
+                            <ErrorMessage
+                                component="span"
+                                name="profile"
+                                className="form-error"
+                            />
+                        </div>
+
+                        <div className="login-form-group">
+                            <Field as={Input} size="large"
+                                name="inicioMatricula"
+                                className="form-field"
+                                placeholder="Início da Matrícula" />
+                            <ErrorMessage
+                                component="span"
+                                name="inicioMatricula"
+                                className="form-error"
+                            />
+                        </div>
+                        <div className="login-form-group">
+                            <Field as={Input} size="large"
+                                name="fimMatricula"
+                                className="form-field"
+                                placeholder="Fim da Matrícula" />
+                            <ErrorMessage
+                                component="span"
+                                name="fimMatricula"
+                                className="form-error"
+                            />
+                        </div>
+                        <div className="login-form-group">
+                            <Field as={Input} size="large"
+                                name="inicioContratacao"
+                                className="form-field"
+                                placeholder="Inicio do contrato de trabalho" />
+                            <ErrorMessage
+                                component="span"
+                                name="inicioContratacao"
+                                className="form-error"
+                            />
+                        </div>
+                        <div className="login-form-group">
+                            <Field as={Input} size="large"
+                                name="fimContratacao"
+                                className="form-field"
+                                placeholder="Fim do contrato de trabalho" />
+                            <ErrorMessage
+                                component="span"
+                                name="fimContratacao"
+                                className="form-error"
+                            />
+                        </div>
                     </div>
 
-
-
-
-                    <div className="login-form-group">
-                        <Field as={Input} size="large"
-                            name="inicioMatricula"
-                            className="form-field"
-                            placeholder="Início da Matrícula" />
-                        <ErrorMessage
-                            component="span"
-                            name="inicioMatricula"
-                            className="form-error"
-                        />
-                    </div>
-                    <div className="login-form-group">
-                        <Field as={Input} size="large"
-                            name="fimMatricula"
-                            className="form-field"
-                            placeholder="Fim da Matrícula" />
-                        <ErrorMessage
-                            component="span"
-                            name="fimMatricula"
-                            className="form-error"
-                        />
-                    </div>
-                    <div className="login-form-group">
-                        <Field as={Input} size="large"
-                            name="inicioContratacao"
-                            className="form-field"
-                            placeholder="Inicio do contrato de trabalho" />
-                        <ErrorMessage
-                            component="span"
-                            name="inicioContratacao"
-                            className="form-error"
-                        />
-                    </div>
-                    <div className="login-form-group">
-                        <Field as={Input} size="large"
-                            name="fimContratacao"
-                            className="form-field"
-                            placeholder="Fim do contrato de trabalho" />
-                        <ErrorMessage
-                            component="span"
-                            name="fimContratacao"
-                            className="form-error"
-                        />
-                    </div>
 
 
 
