@@ -5,6 +5,8 @@
   font-family: 'PT Sans', sans-serif;
 }
 
+
+
 .container{
   width: 20%;
   height: max-content;
@@ -24,6 +26,12 @@
 h1{
   margin: 0;
   text-align: center;
+}
+
+.label{
+  align-items: center;
+  text-align: center;
+  margin-top: 10px;
 }
 
 .background{

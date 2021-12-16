@@ -141,31 +141,155 @@ function Register() {
             validationSchema={validationCadastro}>
             {({ setFieldValue }) => (
                 <Form className="login-form">
+                    <div>
+                        <label class="label"><h3>Informações pessoais</h3></label>
+                        <div className="login-form-group">
+                            <Field as={Input} size="large"
+                                name="nome"
+                                className="form-field"
+                                placeholder="Nome" />
+                            <ErrorMessage
+                                component="span"
+                                name="nome"
+                                className="form-error"
+                            />
+                        </div>
+                        <div className="login-form-group">
+                            <Field as={Input} size="large"
+                                name="email"
+                                className="form-field"
+                                placeholder="Email" />
+                            <ErrorMessage
+                                component="span"
+                                name="email"
+                                className="form-error"
+                            />
+                        </div>
+                        <div className="login-form-group">
+                            <Field as={Input} size="large"
+                                name="password"
+                                type="password"
+                                className="form-field"
+                                placeholder="Senha" />
+                            <ErrorMessage
+                                component="span"
+                                name="password"
+                                className="form-error"
+                            />
+                        </div>
 
-                    <div className="login-form-group">
-                        <Field as={Input} size="large"
-                            name="nome"
-                            className="form-field"
-                            placeholder="Nome" />
-                        <ErrorMessage
-                            component="span"
-                            name="nome"
-                            className="form-error"
-                        />
+
+                        <div className="login-form-group">
+                            <Field as={Input} size="large"
+                                name="confirmPassword"
+                                type="password"
+                                className="form-field"
+                                placeholder="Confirme sua senha" />
+                            <ErrorMessage
+                                component="span"
+                                name="confirmPassword"
+                                className="form-error"
+                            />
+                        </div>
+                        <div className="login-form-group">
+                            <Field as={Input} size="large"
+                                name="cpf"
+                                className="form-field"
+                                placeholder="CPF" />
+                            <ErrorMessage
+                                component="span"
+                                name="cpf"
+                                className="form-error"
+                            />
+                        </div>
+
+                        <div className="login-form-group">
+                            <Field as={Input} size="large"
+                                name="dataNascimento"
+                                className="form-field"
+                                placeholder="Data de nascimento" />
+                            <ErrorMessage
+                                component="span"
+                                name="dataNascimento"
+                                className="form-error"
+                            />
+                        </div>
                     </div>
+                    <div className="label"><h3>Informações de endereço</h3>
+                        <div className="login-form-group">
+                            <Field as={Input} size="large"
+                                name="cep"
+                                className="form-field"
+                                placeholder="CEP"
+                                onBlur={(ev) => onBlurCep(ev, setFieldValue)} />
+                            <ErrorMessage
+                                component="span"
+                                name="cep"
+                                className="form-error"
+                            />
+                        </div>
 
-                    <div className="login-form-group">
-                        <Field as={Input} size="large"
-                            name="email"
-                            className="form-field"
-                            placeholder="Email" />
-                        <ErrorMessage
-                            component="span"
-                            name="email"
-                            className="form-error"
-                        />
+                        <div className="login-form-group">
+                            <Field as={Input} size="large"
+                                name="cidade"
+                                className="form-field"
+                                placeholder="Cidade" />
+                            <ErrorMessage
+                                component="span"
+                                name="cidade"
+                                className="form-error"
+                            />
+                        </div>
+
+                        <div className="login-form-group">
+                            <Field as={Input} size="large"
+                                name="uf"
+                                className="form-field"
+                                placeholder="UF" />
+                            <ErrorMessage
+                                component="span"
+                                name="uf"
+                                className="form-error"
+                            />
+                        </div>
+
+                        <div className="login-form-group">
+                            <Field as={Input} size="large"
+                                name="rua"
+                                className="form-field"
+                                placeholder="Rua" />
+                            <ErrorMessage
+                                component="span"
+                                name="rua"
+                                className="form-error"
+                            />
+                        </div>
+
+                        <div className="login-form-group">
+                            <Field as={Input} size="large"
+                                name="numeroLogradouro"
+                                className="form-field"
+                                placeholder="Nº do logradouro" />
+                            <ErrorMessage
+                                component="span"
+                                name="numeroLogradouro"
+                                className="form-error"
+                            />
+                        </div>
+
+                        <div className="login-form-group">
+                            <Field as={Input} size="large"
+                                name="bairro"
+                                className="form-field"
+                                placeholder="Bairro" />
+                            <ErrorMessage
+                                component="span"
+                                name="bairro"
+                                className="form-error"
+                            />
+                        </div>
                     </div>
-
+                    <div class="label"><h3>Informações de contrato</h3></div>
                     <div className="login-form-group">
                         <Field as={Input} size="large"
                             name="profile"
@@ -179,32 +303,9 @@ function Register() {
                         />
                     </div>
 
-                    <div className="login-form-group">
-                        <Field as={Input} size="large"
-                            name="password"
-                            type="password"
-                            className="form-field"
-                            placeholder="Senha" />
-                        <ErrorMessage
-                            component="span"
-                            name="password"
-                            className="form-error"
-                        />
-                    </div>
 
 
-                    <div className="login-form-group">
-                        <Field as={Input} size="large"
-                            name="confirmPassword"
-                            type="password"
-                            className="form-field"
-                            placeholder="Confirme sua senha" />
-                        <ErrorMessage
-                            component="span"
-                            name="confirmPassword"
-                            className="form-error"
-                        />
-                    </div>
+
                     <div className="login-form-group">
                         <Field as={Input} size="large"
                             name="inicioMatricula"
@@ -249,102 +350,9 @@ function Register() {
                             className="form-error"
                         />
                     </div>
-                    <div className="login-form-group">
-                        <Field as={Input} size="large"
-                            name="cpf"
-                            className="form-field"
-                            placeholder="CPF" />
-                        <ErrorMessage
-                            component="span"
-                            name="cpf"
-                            className="form-error"
-                        />
-                    </div>
 
-                    <div className="login-form-group">
-                        <Field as={Input} size="large"
-                            name="dataNascimento"
-                            className="form-field"
-                            placeholder="Data de nascimento" />
-                        <ErrorMessage
-                            component="span"
-                            name="dataNascimento"
-                            className="form-error"
-                        />
-                    </div>
 
-                    <div className="login-form-group">
-                        <Field as={Input} size="large"
-                            name="cep"
-                            className="form-field"
-                            placeholder="CEP"
-                            onBlur={(ev) => onBlurCep(ev, setFieldValue)} />
-                        <ErrorMessage
-                            component="span"
-                            name="cep"
-                            className="form-error"
-                        />
-                    </div>
 
-                    <div className="login-form-group">
-                        <Field as={Input} size="large"
-                            name="cidade"
-                            className="form-field"
-                            placeholder="Cidade" />
-                        <ErrorMessage
-                            component="span"
-                            name="cidade"
-                            className="form-error"
-                        />
-                    </div>
-
-                    <div className="login-form-group">
-                        <Field as={Input} size="large"
-                            name="uf"
-                            className="form-field"
-                            placeholder="UF" />
-                        <ErrorMessage
-                            component="span"
-                            name="uf"
-                            className="form-error"
-                        />
-                    </div>
-
-                    <div className="login-form-group">
-                        <Field as={Input} size="large"
-                            name="rua"
-                            className="form-field"
-                            placeholder="Rua" />
-                        <ErrorMessage
-                            component="span"
-                            name="rua"
-                            className="form-error"
-                        />
-                    </div>
-
-                    <div className="login-form-group">
-                        <Field as={Input} size="large"
-                            name="numeroLogradouro"
-                            className="form-field"
-                            placeholder="Nº do logradouro" />
-                        <ErrorMessage
-                            component="span"
-                            name="numeroLogradouro"
-                            className="form-error"
-                        />
-                    </div>
-
-                    <div className="login-form-group">
-                        <Field as={Input} size="large"
-                            name="bairro"
-                            className="form-field"
-                            placeholder="Bairro" />
-                        <ErrorMessage
-                            component="span"
-                            name="bairro"
-                            className="form-error"
-                        />
-                    </div>
 
                     <Button className="btn-login" size="large" primary type="submit">Cadastrar</Button>
                     <Button size="large" className="btn-voltar" onClick={routeChange}>Voltar<CgCornerDownLeft /></Button>
