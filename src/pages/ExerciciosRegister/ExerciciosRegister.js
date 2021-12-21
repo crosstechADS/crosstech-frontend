@@ -28,6 +28,7 @@ function ExerciciosRegister() {
 
         }).then((Response) => {
             const isError = !Response.data.msg.includes("sucesso");
+            console.log(isError);
             notify.show(Response.data.msg, isError ? "error" : "success");
             if (isError) {
                 history.push("/exerciciosregister");

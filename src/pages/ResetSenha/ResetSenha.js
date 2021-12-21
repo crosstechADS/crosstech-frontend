@@ -1,4 +1,4 @@
-import "./index.css"
+import "./ResetSenha.css"
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
@@ -8,46 +8,37 @@ import Authentication from '../Authentication';
 import { Input, Button } from "semantic-ui-react";
 import { notify } from 'react-notify-toast';
 import { Link, useHistory } from "react-router-dom";
+import { CgCornerDownLeft } from "react-icons/cg";
 
 
 
 
-function Login() {
+function ResetSenha() {
 
     const history = useHistory();
 
-    //ação do botão login
-    const handleClickLogin = (values) => {
-        Axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, {
-            nome: values.nome,
+    const routeChange = () =>{ 
+        let path = `/login`;
+        history.push(path);
+    } 
+
+    //ação do botão mudar senha
+    const handleClickReset = (values) => {
+        Axios.post(`${process.env.REACT_APP_BACKEND_URL}/resetSenha`, {
             email: values.email,
             password: values.password
         }).then((Response) => {
             const isError = !Response.data.msg.includes("sucesso");
             if (isError) {
-                history.push("/login");
+                history.push("/resetsenha");
             }
             else {
-                const tokenCriado = Response.data.token;
-                Axios.post(`${process.env.REACT_APP_BACKEND_URL}/home`, {
-                    token: tokenCriado
-                }).then((Response) => {
-                    const isError = !Response.data.msg.includes("válido");
-                    notify.show(Response.data.msg, isError ? "error" : "sucess");
-                    if (isError) {
-                        history.push("/login");
-                    }
-                    else{
-                        history.push("/home");
-                    }
-                })
-            }
-        });
-
-    };
+                history.push("/login");
+            }})
+        }
 
     //utilizando o yup para fazer a validação dos campos email e senha (min 8 caracteres), ambos preenchimento obrigatório
-    const validationLogin = yup.object().shape({
+    const validationSenha = yup.object().shape({
         email: yup
             .string()
             .email("Formato inválido.")
@@ -62,12 +53,12 @@ function Login() {
 
     return (
         <Authentication>
-            <h1>Login</h1>
+            <h1>Mudança de Senha</h1>
             <Formik initialValues={{}}
-                onSubmit={handleClickLogin}
-                validationSchema={validationLogin}>
+                onSubmit={handleClickReset}
+                validationSchema={validationSenha}>
                 <Form className="login-form">
-                    <div className="login-form-group">
+                <div className="login-form-group">
                         <Field as={Input} size="large" name="email" className="form-field" placeholder="E-mail" />
                         <ErrorMessage
                             component="span"
@@ -83,15 +74,14 @@ function Login() {
                             className="form-error"
                         />
                     </div>
-                    <Button className="btn-login" size="large" primary type="submit">Entrar</Button>
-                    <Link to="/resetsenha">Esqueci minha senha</Link>
-                    <Link to="/register" > Registre-se</Link>
+                    <Button className="btn-senha" size="large" primary type="submit">Mudar Senha</Button>
+                    <Button size="large" className="btn-voltar" onClick={routeChange}>Voltar<CgCornerDownLeft/></Button>
                 </Form>
             </Formik>
 
         </Authentication>
 
     );
-}
 
-export default Login;
+    }
+export default ResetSenha;

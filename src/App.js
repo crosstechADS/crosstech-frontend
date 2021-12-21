@@ -11,14 +11,13 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Exercicios from './pages/Exercicios/Exercicios';
-import ExerciciosView from './pages/ExerciciosView/ExerciciosView';
 import ExerciciosRegister from './pages/ExerciciosRegister/ExerciciosRegister';
 import Treino from './pages/Treino/Treino';
 import TreinoRegister from './pages/TreinoRegister/TreinoRegister';
 import Notifications from 'react-notify-toast';
 import Navbar from './components/Navbar';
 import HomeBg from './components/HomeBg';
-import TreinoView from './pages/TreinoView/TreinoView';
+import ResetSenha from './pages/ResetSenha/ResetSenha';
 import Exercicio from './components/Exercicio';
 
 
@@ -39,6 +38,10 @@ function App() {
           <Login />
         </Route>
 
+        <Route path="/resetsenha">
+          <ResetSenha />
+        </Route>
+
         <Route path="/register">
           <Register />
         </Route>
@@ -52,11 +55,6 @@ function App() {
         <Route path="/exercicios">
           <Navbar />
           <Exercicios />
-        </Route>
-
-        <Route path="/exerciciosview">
-          <Navbar />
-          <ExerciciosView />
         </Route>
 
         <Route path="/exerciciosregister">
@@ -73,15 +71,6 @@ function App() {
           <Navbar />
           <TreinoRegister />
         </Route>
-
-        <Route path="/treinoview">
-          <Navbar />
-          <TreinoView />
-          <Exercicio />
-          <Exercicio />
-          <Exercicio />
-        </Route>
-
 
       </Switch>
       </Router>
