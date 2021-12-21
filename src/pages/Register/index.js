@@ -11,6 +11,7 @@ import { Link, useHistory } from "react-router-dom";
 import { CgCornerDownLeft } from "react-icons/cg";
 
 
+
 function Register() {
     const history = useHistory();
 
@@ -206,6 +207,7 @@ function Register() {
                         <div className="login-form-group">
                             <Field as={Input} size="large"
                                 name="dataNascimento"
+                                type="date"
                                 className="form-field"
                                 placeholder="Data de nascimento" />
                             <ErrorMessage
@@ -306,6 +308,7 @@ function Register() {
                         <div className="login-form-group">
                             <Field as={Input} size="large"
                                 name="inicioMatricula"
+                                type="date"
                                 className="form-field"
                                 placeholder="Início da Matrícula" />
                             <ErrorMessage
@@ -317,6 +320,7 @@ function Register() {
                         <div className="login-form-group">
                             <Field as={Input} size="large"
                                 name="fimMatricula"
+                                type="date"
                                 className="form-field"
                                 placeholder="Fim da Matrícula" />
                             <ErrorMessage
@@ -328,6 +332,7 @@ function Register() {
                         <div className="login-form-group">
                             <Field as={Input} size="large"
                                 name="inicioContratacao"
+                                type="date"
                                 className="form-field"
                                 placeholder="Inicio do contrato de trabalho" />
                             <ErrorMessage
@@ -339,6 +344,7 @@ function Register() {
                         <div className="login-form-group">
                             <Field as={Input} size="large"
                                 name="fimContratacao"
+                                type="date"
                                 className="form-field"
                                 placeholder="Fim do contrato de trabalho" />
                             <ErrorMessage
