@@ -142,7 +142,7 @@ function Register() {
             validationSchema={validationCadastro}>
             {({ setFieldValue }) => (
                 <Form className="login-form">
-                    <div>
+                    <div className="label">
                         <label class="label"><h3>Informações pessoais</h3></label>
                         <div className="login-form-group">
                             <Field as={Input} size="large"
@@ -203,7 +203,7 @@ function Register() {
                                 className="form-error"
                             />
                         </div>
-
+                        <label>Data de Nascimento</label>
                         <div className="login-form-group">
                             <Field as={Input} size="large"
                                 name="dataNascimento"
@@ -304,7 +304,7 @@ function Register() {
                                 className="form-error"
                             />
                         </div>
-
+                        <label>Início da Matrícula</label>
                         <div className="login-form-group">
                             <Field as={Input} size="large"
                                 name="inicioMatricula"
@@ -317,7 +317,9 @@ function Register() {
                                 className="form-error"
                             />
                         </div>
+                        <label>Fim da Matrícula</label>
                         <div className="login-form-group">
+                            
                             <Field as={Input} size="large"
                                 name="fimMatricula"
                                 type="date"
@@ -329,6 +331,7 @@ function Register() {
                                 className="form-error"
                             />
                         </div>
+                        <label>Início do Contrato</label>
                         <div className="login-form-group">
                             <Field as={Input} size="large"
                                 name="inicioContratacao"
@@ -341,6 +344,7 @@ function Register() {
                                 className="form-error"
                             />
                         </div>
+                        <label>Fim do Contrato</label>
                         <div className="login-form-group">
                             <Field as={Input} size="large"
                                 name="fimContratacao"
