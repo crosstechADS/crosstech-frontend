@@ -8,10 +8,10 @@ import {
 import '../../App.css'
 import { Button, Segment } from 'semantic-ui-react';
 import './Exercicios.css'
-import ExerciciosCards from '../../components/ExerciciosCards';
-import CardItem from '../../components/CardItem';
+import ExerciciosCards from "../../components/ExerciciosCards";
 import { Link, useHistory } from "react-router-dom";
 import Container from '../../components/Container'
+import Axios from "axios";
 
 function Exercicios() {
   let history = useHistory();
@@ -23,35 +23,29 @@ function Exercicios() {
   const [exercicios, setExercicios] = useState([]);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/exercicioSelect`, {
-      method: 'GET',
-      headers:{ 
-        'Content-Type': 'application/json'
-      },
-    }).then(resp => resp.json())
-    .then((data) => {
-      console.log(data);
-      setExercicios(data);
-      console.log(exercicios);
-    })
-    .catch(err => console.log(err))
-  }, [])
+    Axios.get(`${process.env.REACT_APP_BACKEND_URL}/exercicioSelect`)
+      .then((response) => {
+        setExercicios(response.data);
+      }  
+      )
+    }
+    );
 
   return (
     <div className="exercicios-container">
       <Button onClick={redirect} content='Criar Exercicio' basic />
-      <Container>
-        {exercicios.length > 0 && exercicios.map((exercicio) => (
-          <ExerciciosCards 
-          ID_EXERCICIO = {exercicio.ID_EXERCICIO}
-          DS_EXERCICIO = {exercicio.DS_EXERCICIO}
-          OBS_EXERCICIO = {exercicio.OBS_EXERCICIO}
-          DT_INCLUSAO = {exercicio.DT_INCLUSAO}
-          key = {exercicio.ID_EXERCICIO}/>
-        ))}
-      </Container>
+
+      <h1>Exercícios</h1>
+      {typeof exercicios !== "undefined" && exercicios.map((value) => {
+        return <ExerciciosCards key={value.ID_EXERCICIO} 
+        listCard={exercicios} setListCard={setExercicios}
+        ID_EXERCICIO = {value.ID_EXERCICIO}
+        DS_EXERCICIO = {value.DS_EXERCICIO}
+        OBS_EXERCICIO = {value.OBS_EXERCICIO}
+        DT_INCLUSAO = {value.DT_INCLUSAO}></ExerciciosCards>
+      })}
     </div>
-  )
+  );
 }
 
 export default Exercicios
