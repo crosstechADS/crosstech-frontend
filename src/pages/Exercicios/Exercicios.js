@@ -32,20 +32,23 @@ function Exercicios() {
     );
 
   return (
-    <div className="exercicios-container">
-      <Button onClick={redirect} content='Criar Exercicio' basic />
-
+    <div>
       <h1>Exercícios</h1>
-      {typeof exercicios !== "undefined" && exercicios.map((value) => {
-        return <ExerciciosCards key={value.ID_EXERCICIO} 
-        listCard={exercicios} setListCard={setExercicios}
-        ID_EXERCICIO = {value.ID_EXERCICIO}
-        DS_EXERCICIO = {value.DS_EXERCICIO}
-        OBS_EXERCICIO = {value.OBS_EXERCICIO}
-        DT_INCLUSAO = {value.DT_INCLUSAO}></ExerciciosCards>
-      })}
+      <Button className="exercicios-button" onClick={redirect} content='Criar Exercicio' basic />
+      
+      <div className="exercicios-container">
+        {typeof exercicios !== "undefined" && exercicios.map((value) => {
+          return <ExerciciosCards key={value.ID_EXERCICIO} 
+          listCard={exercicios} setListCard={setExercicios}
+          ID_EXERCICIO = {value.ID_EXERCICIO}
+          DS_EXERCICIO = {value.DS_EXERCICIO}
+          OBS_EXERCICIO = {value.OBS_EXERCICIO}
+          DT_INCLUSAO = {value.DT_INCLUSAO}></ExerciciosCards>
+        })}
+
+      </div>
     </div>
-  );
+  )
 }
 
 export default Exercicios

@@ -6,17 +6,15 @@ import {BsPencil, BsFillTrashFill} from 'react-icons/bs';
 
 export default function ExerciciosCards(props){
   return(
-    <div className='exercicio_card'>
-      <h4>{props.DS_EXERCICIO}</h4>
-      <p>
-        <span>Detalhes: </span>{props.OBS_EXERCICIO}
-      </p>
-      <p>
-        <span>Data de inclusão: </span>{props.DT_INCLUSAO}
-      </p>
+    <div className='card'>
+      <div className="card_body">
+      <h2 className="card_title">{props.DS_EXERCICIO}</h2>
+      <p className="card_description">{props.OBS_EXERCICIO}</p>
+      <p className="card_description">{props.DT_INCLUSAO}</p>
       <div className='exercicio_card_actions'>
-        <button><BsPencil /> Editar</button>
-        <button><BsFillTrashFill/> Excluir</button>
+        <button className="card_btn"><BsPencil /> Editar</button>
+        <button className="card_btn"><BsFillTrashFill/> Excluir</button>
+      </div>
       </div>
     </div>
   );

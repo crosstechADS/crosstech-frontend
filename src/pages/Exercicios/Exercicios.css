@@ -1,3 +1,31 @@
-.exercicios-container {
-    margin: 50px 200px;
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+}
+
+h1{
+    padding: 10px;
+}
+
+Button{
+    width: 100%;
+}
+
+.exercicios-container{
+    margin: 2rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    justify-content: center;
+}
+
+@media screen and (min-width:600px){
+    .exercicios-container{
+        grid-template-columns: repeat(auto-fit, minmax(14rem, 16rem));
+    }
+
+    Button{
+        width: auto;
+    }
 }
