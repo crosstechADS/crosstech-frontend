@@ -28,8 +28,7 @@ function Exercicios() {
         setExercicios(response.data);
       }  
       )
-    }
-    );
+    }, []);
 
   return (
     <div>
