@@ -1,6 +1,6 @@
 import "./style.css";
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage} from "formik";
 import * as yup from "yup";
 import Axios from "axios";
 import Authentication from '../Authentication';
@@ -26,10 +26,8 @@ function Register() {
             nome: values.nome,
             email: values.email,
             password: values.password,
-            inicioMatricula: values.inicioMatricula,
-            fimMatricula: values.fimMatricula,
-            inicioContratacao: values.inicioContratacao,
-            fimContratacao: values.fimContratacao,
+            dataInclusao: values.dataInclusao,
+            dataExclusao: values.dataExclusao,
             profile: values.profile,
             cpf: values.cpf,
             dataNascimento: values.dataNascimento,
@@ -291,6 +289,7 @@ function Register() {
                             />
                         </div>
                     </div>
+
                     <div class="label"><h3>Informações de contrato</h3>
                         <div className="login-form-group">
                             <Field as={Input} size="large"
@@ -304,63 +303,36 @@ function Register() {
                                 className="form-error"
                             />
                         </div>
-                        <label>Início da Matrícula</label>
+                        
+                        <label>Data de Inclusão</label>
                         <div className="login-form-group">
                             <Field as={Input} size="large"
-                                name="inicioMatricula"
+                                name="dataInclusao"
                                 type="date"
                                 className="form-field"
-                                placeholder="Início da Matrícula" />
+                                placeholder="Data de Inclusão" />
                             <ErrorMessage
                                 component="span"
-                                name="inicioMatricula"
+                                name="dataInclusao"
                                 className="form-error"
                             />
                         </div>
-                        <label>Fim da Matrícula</label>
+
+                        <label>Data de Exclusão</label>
                         <div className="login-form-group">
                             
                             <Field as={Input} size="large"
-                                name="fimMatricula"
+                                name="dataExclusao"
                                 type="date"
                                 className="form-field"
-                                placeholder="Fim da Matrícula" />
+                                placeholder="Data de Exclusão" />
                             <ErrorMessage
                                 component="span"
-                                name="fimMatricula"
-                                className="form-error"
-                            />
-                        </div>
-                        <label>Início do Contrato</label>
-                        <div className="login-form-group">
-                            <Field as={Input} size="large"
-                                name="inicioContratacao"
-                                type="date"
-                                className="form-field"
-                                placeholder="Inicio do contrato de trabalho" />
-                            <ErrorMessage
-                                component="span"
-                                name="inicioContratacao"
-                                className="form-error"
-                            />
-                        </div>
-                        <label>Fim do Contrato</label>
-                        <div className="login-form-group">
-                            <Field as={Input} size="large"
-                                name="fimContratacao"
-                                type="date"
-                                className="form-field"
-                                placeholder="Fim do contrato de trabalho" />
-                            <ErrorMessage
-                                component="span"
-                                name="fimContratacao"
+                                name="dataExclusao"
                                 className="form-error"
                             />
                         </div>
                     </div>
-
-
-
 
 
                     <Button className="btn-login" size="large" primary type="submit">Cadastrar</Button>
