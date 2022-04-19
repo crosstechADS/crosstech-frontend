@@ -12,6 +12,7 @@ import ExerciciosCards from "../../components/ExerciciosCards";
 import { Link, useHistory } from "react-router-dom";
 import Container from '../../components/Container'
 import Axios from "axios";
+import {Input, Icon} from 'semantic-ui-react'
 
 function Exercicios() {
   let history = useHistory();
@@ -19,6 +20,8 @@ function Exercicios() {
   const redirect = () => {
     history.push('../exerciciosregister')
   }
+
+  const [searchItem, setSearchItem] = useState("");
 
   const [exercicios, setExercicios] = useState([]);
 
@@ -33,10 +36,27 @@ function Exercicios() {
   return (
     <div>
       <h1>Exercícios</h1>
-      <Button className="exercicios-button" onClick={redirect} content='Criar Exercicio' basic />
-      
+      <div className='exercicios-action'>
+        <Button className="exercicios-button" size='large'
+          onClick={redirect} 
+          content='Criar Exercicio' basic />
+        <Input
+          type="text" size='large'
+          className='exercicios-search ui'
+          icon={<Icon name='search' circular link />}
+          placeholder="Procurar exercício"
+          onChange={(event) => {setSearchItem(event.target.value);}}>
+        </Input>
+      </div>
+
       <div className="exercicios-container">
-        {typeof exercicios !== "undefined" && exercicios.map((value) => {
+        {typeof exercicios !== "undefined" && exercicios.filter((value) => {
+          if(searchItem == ""){
+            return value;
+          } else if (value.DS_EXERCICIO.toLowerCase().includes(searchItem.toLowerCase())){
+            return value;
+          }
+        }).map((value) => {
           return <ExerciciosCards key={value.ID_EXERCICIO} 
           listCard={exercicios} setListCard={setExercicios}
           ID_EXERCICIO = {value.ID_EXERCICIO}

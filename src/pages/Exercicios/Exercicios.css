@@ -9,7 +9,7 @@ h1{
 }
 
 Button{
-    width: 100%;
+    width: auto;
 }
 
 .exercicios-container{
@@ -20,6 +20,20 @@ Button{
     justify-content: center;
 }
 
+.exercicios-action{
+    justify-content: center;
+    display: grid;
+}
+
+.exercicios-button{
+    padding: 10px;
+}
+
+.exercicios-search{
+    width: auto;
+}
+
+
 @media screen and (min-width:600px){
     .exercicios-container{
         grid-template-columns: repeat(auto-fit, minmax(14rem, 16rem));
@@ -28,4 +42,9 @@ Button{
     Button{
         width: auto;
     }
+    .exercicios-action{
+        display: flex;
+        justify-content: first baseline;
+    }
+
 }
