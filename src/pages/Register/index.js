@@ -1,13 +1,12 @@
 import "./style.css";
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage} from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import Axios from "axios";
 import Authentication from '../Authentication';
-import { Input, Button, Select } from "semantic-ui-react";
+import { Input, Button } from "semantic-ui-react";
 import { notify } from "react-notify-toast";
-import { Redirect } from "react-router";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { CgCornerDownLeft } from "react-icons/cg";
 
 
@@ -76,14 +75,6 @@ function Register() {
         dataNascimento: yup
             .date()
             .required("Campo Nascimento obrigatório"),
-        inicioMatricula: yup
-            .date(),
-        fimMatricula: yup
-            .date(),
-        inicioContratacao: yup
-            .date(),
-        fimContratacao: yup
-            .date(),
         cep: yup
             .string()
             .required("Campo CEP obrigatório"),
@@ -138,8 +129,8 @@ function Register() {
         <Formik initialValues={{}}
             onSubmit={handleClickRegister}
             validationSchema={validationCadastro}>
-            {({ setFieldValue }) => (
-                <Form className="login-form">
+            {({ setFieldValue, handleSubmit }) => (
+                <Form onSubmit={handleSubmit}>
                     <div className="label">
                         <label class="label"><h3>Informações pessoais</h3></label>
                         <div className="login-form-group">
@@ -288,9 +279,6 @@ function Register() {
                                 className="form-error"
                             />
                         </div>
-                    </div>
-
-                    <div class="label"><h3>Informações de contrato</h3>
                         <div className="login-form-group">
                             <Field as={Input} size="large"
                                 name="profile"
@@ -303,37 +291,7 @@ function Register() {
                                 className="form-error"
                             />
                         </div>
-                        
-                        <label>Data de Inclusão</label>
-                        <div className="login-form-group">
-                            <Field as={Input} size="large"
-                                name="dataInclusao"
-                                type="date"
-                                className="form-field"
-                                placeholder="Data de Inclusão" />
-                            <ErrorMessage
-                                component="span"
-                                name="dataInclusao"
-                                className="form-error"
-                            />
-                        </div>
-
-                        <label>Data de Exclusão</label>
-                        <div className="login-form-group">
-                            
-                            <Field as={Input} size="large"
-                                name="dataExclusao"
-                                type="date"
-                                className="form-field"
-                                placeholder="Data de Exclusão" />
-                            <ErrorMessage
-                                component="span"
-                                name="dataExclusao"
-                                className="form-error"
-                            />
-                        </div>
                     </div>
-
 
                     <Button className="btn-login" size="large" primary type="submit">Cadastrar</Button>
                     <Button size="large" className="btn-voltar" onClick={routeChange}>Voltar<CgCornerDownLeft /></Button>
