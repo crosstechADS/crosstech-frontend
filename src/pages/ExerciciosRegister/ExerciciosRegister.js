@@ -1,9 +1,9 @@
 import "./ExerciciosRegister.css";
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import Axios from "axios";
-import { Input, Button, TextArea, Select} from "semantic-ui-react";
+import { Input, Button, TextArea, Select } from "semantic-ui-react";
 import { notify } from "react-notify-toast";
 import { Redirect } from "react-router";
 import ExerciciosAuthentication from "../ExerciciosAuthentication/ExerciciosAuthentication";
@@ -13,11 +13,12 @@ import { CgCornerDownLeft } from "react-icons/cg";
 
 function ExerciciosRegister() {
     const history = useHistory();
+    const [fileValue, setFileValue] = useState(null);
 
-    const routeChange = () =>{
+    const routeChange = () => {
         let path = `/exercicios`;
         history.push(path);
-    } 
+    }
 
     //ação do botao cadastrar
     const handleClickRegister = (values) => {
@@ -26,14 +27,21 @@ function ExerciciosRegister() {
             exercicioObs: values.exercicioObs,
             exercicioTipo: values.exercicioTipo
 
-        }).then((Response) => {
-            const isError = !Response.data.msg.includes("sucesso");
+        }).then(async (response) => {
+            const isError = !response.data.msg.includes("sucesso");
             console.log(isError);
-            notify.show(Response.data.msg, isError ? "error" : "success");
+            console.log('file: ', fileValue)
+            notify.show(response.data.msg, isError ? "error" : "success");
             if (isError) {
                 history.push("/exerciciosregister");
             }
             else {
+                const idExercicio = response.data.record.id;
+                const formData = new FormData();
+
+                formData.append('file', fileValue, fileValue.name)
+
+                await Axios.post(`${process.env.REACT_APP_BACKEND_URL}/exerciciosregister/${idExercicio}/midia`, formData)
                 history.push("/exercicios");
             }
         });
@@ -51,7 +59,7 @@ function ExerciciosRegister() {
         { key: 15, text: 'Funcional', value: 15 },
         { key: 25, text: 'Pilates', value: 25 },
       ]*/
-    
+
     return <ExerciciosAuthentication>
         <h1>Cadastro de Exercício</h1>
         <Formik initialValues={{}}
@@ -87,7 +95,7 @@ function ExerciciosRegister() {
                     <Field as={Input} size="large"
                         name="exercicioTipo"
                         className="form-field"
-                        placeholder="Tipo de exercício"/>
+                        placeholder="Tipo de exercício" />
                     <ErrorMessage
                         component="span"
                         name="exercicioTipo"
@@ -95,8 +103,14 @@ function ExerciciosRegister() {
                     />
                 </div>
 
+                <div className="login-form-group">
+                    <input id="file" name="file" type="file" onChange={(event) => {
+                        setFileValue(event.currentTarget.files[0]);
+                    }} />
+                </div>
+
                 <Button className="btn-login" size="large" primary type="submit">Cadastrar Exercício</Button>
-                <Button size="large" className="btn-voltar" onClick={routeChange}>Voltar<CgCornerDownLeft/></Button>
+                <Button size="large" className="btn-voltar" onClick={routeChange}>Voltar<CgCornerDownLeft /></Button>
             </Form>
 
         </Formik>
