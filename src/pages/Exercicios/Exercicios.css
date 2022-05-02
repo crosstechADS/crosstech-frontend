@@ -8,10 +8,6 @@ h1{
     padding: 10px;
 }
 
-Button{
-    width: auto;
-}
-
 .exercicios-container{
     margin: 2rem;
     display: grid;
@@ -21,8 +17,9 @@ Button{
 }
 
 .exercicios-action{
-    justify-content: center;
-    display: grid;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2em;
 }
 
 .exercicios-button{
@@ -39,12 +36,9 @@ Button{
         grid-template-columns: repeat(auto-fit, minmax(14rem, 16rem));
     }
 
-    Button{
-        width: auto;
-    }
     .exercicios-action{
-        display: flex;
-        justify-content: first baseline;
+        margin-left: 4em;
+        margin-right: 4em;
     }
 
 }
