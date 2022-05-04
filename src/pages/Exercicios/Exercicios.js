@@ -54,19 +54,16 @@ function Exercicios() {
       </div>
 
       <div className="exercicios-container">
-        {typeof exercicios !== "undefined" && exercicios.filter((value) => {
-          if(searchItem == ""){
+      {typeof exercicios !== "undefined" && exercicios.filter((value) => {
+          if (searchItem == "") {
             return value;
-          } else if (value.DS_EXERCICIO.toLowerCase().includes(searchItem.toLowerCase())){
+          } else if (value.DS_EXERCICIO.toLowerCase().includes(searchItem.toLowerCase())) {
             return value;
           }
         }).map((value) => {
-          return <ExerciciosCards key={value.ID_EXERCICIO} 
-          listCard={exercicios} setListCard={setExercicios}
-          ID_EXERCICIO = {value.ID_EXERCICIO}
-          DS_EXERCICIO = {value.DS_EXERCICIO}
-          OBS_EXERCICIO = {value.OBS_EXERCICIO}
-          DT_INCLUSAO = {value.DT_INCLUSAO}></ExerciciosCards>
+          return <ExerciciosCards key={value.ID_EXERCICIO}
+            listCard={exercicios} setListCard={setExercicios}
+            exercicio={value} />
         })}
         {!removeLoading && <Loading />}
 
