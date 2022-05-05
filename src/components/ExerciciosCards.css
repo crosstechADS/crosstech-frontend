@@ -5,12 +5,17 @@ h1{
 .card{
     box-shadow: 0 0 4px 5px rgba(0, 0, 0, 0.61);
     border-radius: 9px;
-    min-width: 28rem;
+    min-width: 14rem;
     display: flex;
+    flex-direction: column;
+    text-align: center;
+        
 }
 
 .card_img{
-    padding: 0;
+    width: 100%;
+    height: auto;
+    border-radius: 9px;
 }
 
 .card_body{
