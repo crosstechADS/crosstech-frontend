@@ -3,7 +3,7 @@ h1{
 }
 
 .card{
-    box-shadow: 0 0 10px 5px gray;
+    box-shadow: 0 0 4px 5px rgba(0, 0, 0, 0.61);
     border-radius: 9px;
     min-width: 28rem;
     display: flex;
