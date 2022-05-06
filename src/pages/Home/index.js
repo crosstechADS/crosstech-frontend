@@ -9,6 +9,7 @@ import '../../App.css'
 import Navbar from '../../components/Navbar';
 import Treino from '../Treino/Treino';
 import Exercicios from '../Exercicios/Exercicios'
+import Alunos from '../Alunos/Alunos';
 import './index.css'
 
 // import { Container } from './styles';

@@ -18,6 +18,7 @@ import Notifications from 'react-notify-toast';
 import Navbar from './components/Navbar';
 import HomeBg from './components/HomeBg';
 import ResetSenha from './pages/ResetSenha/ResetSenha';
+import Alunos from './pages/Alunos/Alunos';
 import Exercicio from './components/Exercicio';
 
 
@@ -70,6 +71,11 @@ function App() {
         <Route path="/treinoregister">
           <Navbar />
           <TreinoRegister />
+        </Route>
+
+        <Route path="/alunos">
+          <Navbar />
+          <Alunos />
         </Route>
 
       </Switch>
