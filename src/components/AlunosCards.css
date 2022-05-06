@@ -1,0 +1,80 @@
+h1{
+  text-align: center;
+}
+
+.card{
+  box-shadow: 0 0 4px 5px rgba(0, 0, 0, 0.61);
+  border-radius: 9px;
+  min-width: 14rem;
+  max-width: 20rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+
+.card_body{
+  margin: 1rem;
+  flex-grow: 1;
+}
+
+.card_name{
+  line-height: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.card_cpf{
+  line-height: 1.2rem;
+}
+
+.card_btn{
+  border: 1px solid gray;
+  background-color: transparent;
+  font-size: 1rem;
+  font-weight: bold;
+  width: 100%;
+  padding-top: 1rem;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.aluno_card_actions{
+  margin-top: 1.2em;
+  display: flex;
+  align-items: center;
+}
+
+.aluno_card_actions a,
+.aluno_card_actions button{
+  background-color: transparent;
+  color: #222;
+  width: 100%;
+  font-size: 1rem;
+  padding: .6em 1em;
+  margin-right: 1em;
+  cursor: pointer;
+  border-top: 1px solid #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s;
+}
+
+.aluno_card_actions svg{
+  margin-right: .5em;
+}
+
+.aluno_card_actions a:hover,
+.aluno_card_actions button:hover{
+  background-color: #222;
+  color: #FFF;
+}
+
+@media screen and (min-width:600px){
+  .card{
+      flex-direction: column;
+      text-align: center;
+      min-width: 14rem;
+  }
+
+}

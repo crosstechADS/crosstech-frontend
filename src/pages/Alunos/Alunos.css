@@ -1,0 +1,15 @@
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+}
+
+.alunos-action{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+
+.alunos-search{
+  width: 50rem;
+}
