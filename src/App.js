@@ -9,16 +9,16 @@ import {
 } from "react-router-dom";
 import Home from './pages/Home';
 import Login from './pages/Login';
-import Register from './pages/Register';
+import Register from './pages/Register'; 
 import Exercicios from './pages/Exercicios/Exercicios';
+import Exercicio from './pages/Exercicio/Exercicio.js';
 import ExerciciosRegister from './pages/ExerciciosRegister/ExerciciosRegister';
 import Treino from './pages/Treino/Treino';
 import TreinoRegister from './pages/TreinoRegister/TreinoRegister';
 import Notifications from 'react-notify-toast';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar';  
 import HomeBg from './components/HomeBg';
 import ResetSenha from './pages/ResetSenha/ResetSenha';
-import Exercicio from './components/Exercicio';
 
 
 // import { Container } from './styles';
@@ -60,6 +60,11 @@ function App() {
         <Route path="/exerciciosregister">
           <Navbar />
           <ExerciciosRegister />
+        </Route>
+
+        <Route path="/exercicio/:id">
+          <Navbar />
+          <Exercicio />
         </Route>
 
         <Route path="/treino">
