@@ -1,5 +1,5 @@
 import styles from './Exercicio.css'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams, useHistory} from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import Axios from "axios";
 import Loading from '../../components/Loading';
@@ -7,16 +7,22 @@ import Container from '../../components/Container';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Input, Button, TextArea, Select } from "semantic-ui-react";
 import { CgCornerDownLeft } from "react-icons/cg";
+import { notify } from "react-notify-toast";
+import * as yup from "yup";
 
 function Exercicio() {
+    const { id } = useParams();
+
     const history = useHistory();
 
     const routeChange = () => {
-        let path = `/exercicios`;
-        history.push(path);
+        history.push("/exercicios");
     }
 
-    const { id } = useParams();
+    const routeMaintain = () => {
+        history.push(`/exercicio/${id}`);
+    }
+
 
     const [removeLoading, setRemoveLoading] = useState(false);
     const [exercicio, setExercicio] = useState([]);
@@ -34,23 +40,58 @@ function Exercicio() {
     }, [id]);
 
     const [fileValue, setFileValue] = useState(null);
+    const [idExercicio, setIdExercicio] = useState("");
+    const [idMidia, setIdMidia] = useState("");
     const [nomeExercicio, setNomeExercicio] = useState("");
     const [obsExercicio, setObsExercicio] = useState("");
     const [tipoExercicio, setTipoExercicio] = useState("");
     const [dataInclusao, setDataInclusao] = useState("");
+    
 
     function toggleExercicioForm() {
         setShowExercicioForm(!showExercicioForm);
         {exercicio.map((value) => {
+            setIdExercicio(value.ID_EXERCICIO);
             setNomeExercicio(value.DS_EXERCICIO);
             setObsExercicio(value.OBS_EXERCICIO);
             setTipoExercicio(value.DS_TIPO_EXERCICIO);
             setFileValue(value.DS_MIDIA_URL);
             setDataInclusao(value.DT_INCLUSAO);
+            setIdMidia(value.ID_MIDIA_EXERCICIO);
         })}
     }
 
-    function editExercicio(){}
+    function editExercicio(){
+        Axios.post(`${process.env.REACT_APP_BACKEND_URL}/updateExercicio`, {
+            ID_EXERCICIO: idExercicio,
+            DS_EXERCICIO: nomeExercicio,
+            OBS_EXERCICIO: obsExercicio,
+            exercicioTipo: tipoExercicio,
+            DT_INCLUSAO: dataInclusao,
+            ID_MIDIA_EXERCICIO: idMidia
+        }).then(async (response) => {
+            const isError = !response.data.msg.includes("sucesso");
+            if (isError) {
+                routeMaintain();                
+            }else{
+                routeChange();
+                const idExercicio = response.data.record.id;
+                const formData = new FormData();
+
+                formData.append('file', fileValue, fileValue.name);
+
+                await Axios.post(`${process.env.REACT_APP_BACKEND_URL}/exerciciosregister/${idExercicio}/midia`, formData);
+                
+            }
+        })
+    }
+
+    const validationCadastro = yup.object().shape({
+        exercicio: yup
+            .string()
+            .required("Campo Nome do Exercicio obrigatório")
+    });
+
 
     return (
         <div>
@@ -80,7 +121,8 @@ function Exercicio() {
                                     </div>
                                 ) : (
                                     <div className='exercicio-detalhes'>
-                                        <Formik>
+                                        <Formik initialValues={{}}
+                                        validationSchema={validationCadastro}>
                                             <Form>
                                                 <div className="edit-input">
                                                     <label>Nome do Exercício</label>
@@ -134,7 +176,7 @@ function Exercicio() {
                                                     }} />
                                                 </div>
 
-                                                <Button className="btn-login" size="large" primary type="submit">Confirmar Edição</Button>                                                    
+                                                <Button className="btn-login" size="large" onClick={editExercicio}>Confirmar Edição</Button>                                                    
                                             </Form>
                                         </Formik>
                                     </div>

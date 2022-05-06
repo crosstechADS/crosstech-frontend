@@ -20,7 +20,6 @@ import Navbar from './components/Navbar';
 import HomeBg from './components/HomeBg';
 import ResetSenha from './pages/ResetSenha/ResetSenha';
 import Alunos from './pages/Alunos/Alunos';
-import Exercicio from './components/Exercicio';
 
 
 // import { Container } from './styles';
