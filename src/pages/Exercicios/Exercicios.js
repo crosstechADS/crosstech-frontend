@@ -32,6 +32,7 @@ function Exercicios() {
     Axios.get(`${process.env.REACT_APP_BACKEND_URL}/exercicioSelect`)
       .then((response) => {
         setExercicios(response.data);
+        setRemoveLoading(true);
       }  
       )
     }, []);
