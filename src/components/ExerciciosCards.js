@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import { Container } from "semantic-ui-react";
 import "./ExerciciosCards.css";
-import { BsPencil, BsFillTrashFill } from 'react-icons/bs';
+import {AiOutlinePlus} from 'react-icons/ai';
 
 export default function ExerciciosCards(props) {
   const { ID_EXERCICIO, DS_EXERCICIO, OBS_EXERCICIO, DS_MIDIA_URL, DS_TIPO_EXERCICIO } = props.exercicio;
@@ -14,8 +14,7 @@ export default function ExerciciosCards(props) {
         <h3 className="card_subtitle">{DS_TIPO_EXERCICIO}</h3>
         <p className="card_description">{OBS_EXERCICIO}</p>
         <div className='exercicio_card_actions'>
-          <Link to={`/exercicio/${ID_EXERCICIO}`} className="card_btn"><BsPencil /> Editar</Link>
-          <button className="card_btn"><BsFillTrashFill /> Excluir</button>
+          <Link to={`/exercicio/${ID_EXERCICIO}`} className="card_btn"><AiOutlinePlus /> Detalhes</Link>
         </div>
       </div>
     </div>

@@ -60,6 +60,10 @@ function Exercicios() {
           } else if (value.DS_EXERCICIO.toLowerCase().includes(searchItem.toLowerCase())) {
             return value;
           }
+        }).filter((value) => {
+          if(value.DT_EXCLUSAO === null){
+            return value;
+          }
         }).map((value) => {
           return <ExerciciosCards key={value.ID_EXERCICIO}
             listCard={exercicios} setListCard={setExercicios}

@@ -68,6 +68,11 @@
     font-weight: bold;
 }
 
+.update-form-actions {
+    padding-top: 10px;
+    justify-content: space-between;
+}
+
 @media screen and (min-width: 600px){
     .exercicio{
         flex-direction: column;
