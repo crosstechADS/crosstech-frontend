@@ -32,12 +32,12 @@ function Login() {
                 Axios.post(`${process.env.REACT_APP_BACKEND_URL}/home`, {
                     token: tokenCriado
                 }).then((Response) => {
-                    const isError = !Response.data.msg.includes("válido");
+                    const isError = !Response.data.msg.includes("Autenticado");
                     notify.show(Response.data.msg, isError ? "error" : "sucess");
                     if (isError) {
                         history.push("/login");
                     }
-                    else{
+                    else {
                         history.push("/home");
                     }
                 })
