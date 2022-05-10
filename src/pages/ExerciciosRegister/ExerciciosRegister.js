@@ -1,9 +1,9 @@
 import "./ExerciciosRegister.css";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import Axios from "axios";
-import { Input, Button, TextArea, Select } from "semantic-ui-react";
+import { Input, Button, TextArea, Dropdown } from "semantic-ui-react";
 import { notify } from "react-notify-toast";
 import { Redirect } from "react-router";
 import ExerciciosAuthentication from "../ExerciciosAuthentication/ExerciciosAuthentication";
@@ -14,6 +14,21 @@ import { CgCornerDownLeft } from "react-icons/cg";
 function ExerciciosRegister() {
     const history = useHistory();
     const [fileValue, setFileValue] = useState(null);
+    const [tipoExercicio, setTipoExercicio] = useState([]);
+    const [tipo, setTipo] = useState('');
+
+    useEffect(() => {
+        Axios.get(`${process.env.REACT_APP_BACKEND_URL}/selectTipoExercicio`)
+        .then((response) => {
+            setTipoExercicio(response.data);
+        })
+    }, []);
+
+    const exercicioOptions = tipoExercicio.map((value) => ({
+        key: value.DS_TIPO_EXERCICIO,
+        text: value.DS_TIPO_EXERCICIO,
+        value: value.ID_TIPO_EXERCICIO
+    }));
 
     const routeChange = () => {
         let path = `/exercicios`;
@@ -25,10 +40,11 @@ function ExerciciosRegister() {
         Axios.post(`${process.env.REACT_APP_BACKEND_URL}/exerciciosregister`, {
             exercicio: values.exercicio,
             exercicioObs: values.exercicioObs,
-            exercicioTipo: values.exercicioTipo
+            exercicioTipo: tipo
 
         }).then(async (response) => {
             const isError = !response.data.msg.includes("sucesso");
+            console.log(tipo)
             console.log(isError);
             console.log('file: ', fileValue)
             notify.show(response.data.msg, isError ? "error" : "success");
@@ -54,11 +70,13 @@ function ExerciciosRegister() {
             .required("Campo Nome do Exercicio obrigatório")
     });
 
-    /*const options = [
-        { key: 5, text: 'Aerobica', value: 5 },
-        { key: 15, text: 'Funcional', value: 15 },
-        { key: 25, text: 'Pilates', value: 25 },
-      ]*/
+
+    
+    // const tipoOptions = [
+    //     { key: 5, text: 'Aerobica', value: 5 },
+    //     { key: 15, text: 'Funcional', value: 15 },
+    //     { key: 25, text: 'Pilates', value: 25 },
+    //   ]
 
     return <ExerciciosAuthentication>
         <h1>Cadastro de Exercício</h1>
@@ -91,17 +109,7 @@ function ExerciciosRegister() {
                     />
                 </div>
 
-                <div className="login-form-group">
-                    <Field as={Input} size="large"
-                        name="exercicioTipo"
-                        className="form-field"
-                        placeholder="Tipo de exercício" />
-                    <ErrorMessage
-                        component="span"
-                        name="exercicioTipo"
-                        className="form-error"
-                    />
-                </div>
+                <Dropdown name="exercicioTipo" value={tipo} placeholder="Tipo de exercício" seach selection options={exercicioOptions} onChange={(e, data) => setTipo(data.value)} />
 
                 <div className="login-form-group">
                     <input id="file" name="file" type="file" onChange={(event) => {
