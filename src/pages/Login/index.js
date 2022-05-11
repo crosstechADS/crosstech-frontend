@@ -10,8 +10,6 @@ import { notify } from 'react-notify-toast';
 import { Link, useHistory } from "react-router-dom";
 
 
-
-
 function Login() {
 
     const history = useHistory();
@@ -29,10 +27,10 @@ function Login() {
             }
             else {
                 const tokenCriado = Response.data.token;
-                localStorage.setItem("auth", Response.data.auth);
-                localStorage.setItem("token", tokenCriado);
-                localStorage.setItem("tipoPerfil", Response.data.perfil);
-                localStorage.setItem("email", Response.data.Email);
+                sessionStorage.setItem("auth", Response.data.auth);
+                sessionStorage.setItem("token", tokenCriado);
+                sessionStorage.setItem("tipoPerfil", Response.data.perfil);
+                sessionStorage.setItem("email", Response.data.Email);
                 Axios.post(`${process.env.REACT_APP_BACKEND_URL}/home`, {
                     token: tokenCriado
                 }).then((Response) => {
