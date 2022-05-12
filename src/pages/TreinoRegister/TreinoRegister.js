@@ -1,9 +1,9 @@
 import "./TreinoRegister.css";
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import Axios from "axios";
-import { Input, Button } from "semantic-ui-react";
+import { Input, Button, Dropdown } from "semantic-ui-react";
 import { notify } from "react-notify-toast";
 import { Redirect } from "react-router";
 import TreinoAuthentication from "../TreinoAuthentication/TreinoAuthentication";
@@ -18,6 +18,19 @@ function TreinoRegister() {
         let path = `/treino`;
         history.push(path);
     } 
+
+    useEffect(() => {
+        Axios.get(`${process.env.REACT_APP_BACKEND_URL}/alunosSelect`)
+        .then((response) => {
+            setAlunos(response.data);
+        })
+    }, []);
+
+    const [alunos, setAlunos] = useState([]);
+
+    const [aluno, setAluno] = useState("");
+
+    const alunoOptions = []
 
     //ação do botao cadastrar
     const handleClickRegister = (values) => {
@@ -76,17 +89,14 @@ function TreinoRegister() {
                     />
                 </div>
 
-                <div className="login-form-group">
-                    <Field as={Input} size="large"
-                        name="email"
-                        className="form-field"
-                        placeholder="Email" />
-                    <ErrorMessage
-                        component="span"
-                        name="email"
-                        className="form-error"
-                    />
-                </div>
+                <Dropdown 
+                    name="aluno" 
+                    value={aluno} 
+                    placeholder="Alunos" 
+                    search
+                    selection
+                    options={alunoOptions} 
+                    onChange={(e, data) => setAluno(data.value)} />
 
                 <Button className="btn-login" size="large" primary type="submit">Cadastrar Treino</Button>
                 <Button size="large" className="btn-voltar" onClick={routeChange}>Voltar<CgCornerDownLeft/></Button>

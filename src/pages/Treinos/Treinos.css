@@ -1,0 +1,44 @@
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+}
+
+h1{
+    padding: 10px;
+}
+
+.treinos-container{
+    margin: 2rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    justify-content: center;
+}
+
+.treinos-action{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2em;
+}
+
+.treinos-button{
+    padding: 10px;
+}
+
+.treinos-search{
+    width: auto;
+}
+
+
+@media screen and (min-width:600px){
+    .treinos-container{
+        grid-template-columns: repeat(auto-fit, minmax(14rem, 16rem));
+    }
+
+    .treinos-action{
+        margin-left: 4em;
+        margin-right: 4em;
+    }
+
+}

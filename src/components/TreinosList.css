@@ -1,0 +1,88 @@
+h1{
+    text-align: center;
+}
+
+.card{
+    box-shadow: 0 0 4px 5px rgba(0, 0, 0, 0.61);
+    border-radius: 9px;
+    min-width: 14rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    
+}
+
+.card_img{
+    width: 100%;
+    height: auto;
+    border-radius: 9px;
+}
+
+.card_body{
+    margin: 1rem;
+    flex-grow: 1;
+}
+
+.card_title{
+    line-height: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.card_description{
+    line-height: 1.2rem;
+}
+
+.card_btn{
+    border: 1px solid gray;
+    background-color: transparent;
+    font-size: 1rem;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+.treino_card_actions{
+    margin-top: 1.2em;
+    display: flex;
+    align-items: center;
+}
+
+.treino_card_actions a,
+.treino_card_actions button{
+    background-color: transparent;
+    color: #222;
+    width: 100%;
+    font-size: 1rem;
+    padding: .6em 1em;
+    margin-right: 0.2em;
+    cursor: pointer;
+    border-top: 1px solid #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+}
+
+.treino_card_actions svg{
+    margin-right: .5em;
+}
+
+.treino_card_actions a:hover,
+.treino_card_actions button:hover{
+    background-color: #222;
+    color: #FFF;
+}
+
+@media screen and (min-width:600px){
+    .card{
+        flex-direction: column;
+        text-align: center;
+        min-width: 14rem;
+    }
+
+    .card_img{
+        width: 100%;
+        height: 12rem;
+    }
+}
