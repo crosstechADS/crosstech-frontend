@@ -13,7 +13,7 @@ import Register from './pages/Register';
 import Exercicios from './pages/Exercicios/Exercicios';
 import Exercicio from './pages/Exercicio/Exercicio.js';
 import ExerciciosRegister from './pages/ExerciciosRegister/ExerciciosRegister';
-import Treino from './pages/Treino/Treino';
+import Treinos from './pages/Treinos/Treinos';
 import TreinoRegister from './pages/TreinoRegister/TreinoRegister';
 import Notifications from 'react-notify-toast';
 import Navbar from './components/Navbar';  
@@ -25,6 +25,12 @@ import Alunos from './pages/Alunos/Alunos';
 // import { Container } from './styles';
 
 function App() {
+
+  const token = sessionStorage.getItem('token');
+  const perfil = sessionStorage.getItem('tipoPerfil');
+  const auth = sessionStorage.getItem("auth");
+  const email = sessionStorage.getItem("email");
+
   return (
     <div>
       <Notifications options={{ zIndex: 200, top: '150px' }} /><Router><Switch>
@@ -48,38 +54,38 @@ function App() {
         </Route>
 
         <Route path="/home">
-          <Home />
-          <Navbar />
+          <Home token={token} auth={auth}/>
+          <Navbar perfil={perfil}/>
           <HomeBg />
         </Route>
 
         <Route path="/exercicios">
-          <Navbar />
-          <Exercicios />
+          <Navbar perfil={perfil}/>
+          <Exercicios perfil={perfil}/>
         </Route>
 
         <Route path="/exerciciosregister">
-          <Navbar />
+          <Navbar perfil={perfil}/>
           <ExerciciosRegister />
         </Route>
 
         <Route path="/exercicio/:id">
-          <Navbar />
-          <Exercicio />
+          <Navbar perfil={perfil}/>
+          <Exercicio perfil={perfil}/>
         </Route>
 
-        <Route path="/treino">
-          <Navbar />
-          <Treino />
+        <Route path="/treinos">
+          <Navbar perfil={perfil}/>
+          <Treinos /> 
         </Route>
 
         <Route path="/treinoregister">
-          <Navbar />
+          <Navbar perfil={perfil}/>
           <TreinoRegister />
         </Route>
 
         <Route path="/alunos">
-          <Navbar />
+          <Navbar perfil={perfil}/>
           <Alunos />
         </Route>
 

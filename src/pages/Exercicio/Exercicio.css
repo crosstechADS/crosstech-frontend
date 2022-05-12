@@ -73,6 +73,13 @@
     justify-content: space-between;
 }
 
+.exercicio-midia{    
+    width: auto;
+    height: 500px;
+    padding-left: auto;
+    margin: auto;
+}
+
 @media screen and (min-width: 600px){
     .exercicio{
         flex-direction: column;

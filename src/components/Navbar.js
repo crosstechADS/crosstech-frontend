@@ -4,7 +4,7 @@ import { Button } from './Button';
 import './Navbar.css';
 import Home from '../pages/Home';
 
-function Navbar() {
+function Navbar({perfil}) {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
@@ -18,6 +18,12 @@ function Navbar() {
       setButton(true)
     }
   };
+
+  const logoutBtn = () => {
+    closeMobileMenu();
+    localStorage.clear();
+    window.location.pathname = '/';
+  }
 
   useEffect(() => {
     showButton()
@@ -41,10 +47,12 @@ function Navbar() {
                     Home
                   </Link>
                 </li> */}
+                
                 <li className="nav-item">
+                {perfil !== "aluno" && 
                   <Link to="/alunos" className="nav-links" onClick={closeMobileMenu}>
                     Alunos
-                  </Link>
+                  </Link>}
                 </li>
                 <li className="nav-item">
                   <Link to="/exercicios" className="nav-links" onClick={closeMobileMenu}>
@@ -52,17 +60,18 @@ function Navbar() {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/treino" className="nav-links" onClick={closeMobileMenu}>
+                  <Link to="/treinos" className="nav-links" onClick={closeMobileMenu}>
                     Treinos
                   </Link>
                 </li>
+
                 <li className="nav-item">
-                  <Link to="/" className="nav-links-mobile" onClick={closeMobileMenu}>
+                  <Link to="/" className="nav-links-mobile" onClick={logoutBtn}>
                     Sair
                   </Link>
                 </li>
               </ul>
-              {button && <Button buttonStyle='btn--outline'>Sair</Button>}
+              {button && <Button buttonStyle='btn--outline' onClick={logoutBtn}>Sair</Button>}
             </div>
           </nav>
         </>

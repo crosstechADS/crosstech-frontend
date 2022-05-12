@@ -15,7 +15,7 @@ import Axios from "axios";
 import {Input, Icon} from 'semantic-ui-react'
 import Loading from '../../components/Loading'
 
-function Exercicios() {
+function Exercicios({perfil}) {
   let history = useHistory();
 
   const redirect = () => {
@@ -41,9 +41,10 @@ function Exercicios() {
     <div>
       <h1>Exercícios</h1>
       <div className='exercicios-action'>
+        {perfil !== "aluno" && 
         <Button className="exercicios-button" size='large'
           onClick={redirect} 
-          content='Criar Exercicio' basic />
+          content='Criar Exercicio' basic />}
         <Input
           type="text" size='large'
           className='exercicios-search ui'

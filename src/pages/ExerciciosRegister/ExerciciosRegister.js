@@ -109,7 +109,14 @@ function ExerciciosRegister() {
                     />
                 </div>
 
-                <Dropdown name="exercicioTipo" value={tipo} placeholder="Tipo de exercício" seach selection options={exercicioOptions} onChange={(e, data) => setTipo(data.value)} />
+                <Dropdown 
+                    name="exercicioTipo" 
+                    value={tipo} 
+                    placeholder="Tipo de exercício" 
+                    search
+                    selection
+                    options={exercicioOptions} 
+                    onChange={(e, data) => setTipo(data.value)} />
 
                 <div className="login-form-group">
                     <input id="file" name="file" type="file" onChange={(event) => {

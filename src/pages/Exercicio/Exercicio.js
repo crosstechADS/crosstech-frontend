@@ -10,7 +10,7 @@ import { CgCornerDownLeft } from "react-icons/cg";
 import { notify } from "react-notify-toast";
 import * as yup from "yup";
 
-function Exercicio() {
+function Exercicio({perfil}) {
     const { id } = useParams();
 
     const history = useHistory();
@@ -125,6 +125,7 @@ function Exercicio() {
                                 <Button size="large" className="btn-voltar" onClick={routeChange}>Voltar<CgCornerDownLeft /></Button>
                                 {!showExercicioForm ? (
                                     <div className='exercicio-detalhes'>
+                                        <img className='exercicio-midia' src={data.DS_MIDIA_URL}></img>
                                         <p>
                                             <span>ID: </span>{data.ID_EXERCICIO}
                                         </p>
@@ -221,9 +222,10 @@ function Exercicio() {
                                         </Formik>
                                     </div>
                                 )}
+                                {perfil !== "aluno" &&
                                 <button onClick={toggleExercicioForm} className='btn'>
                                     {!showExercicioForm ? 'Editar Exercicio' : 'Fechar'}
-                                </button>
+                                </button>}
 
                             </div>
                         </Container>
