@@ -5,12 +5,12 @@ import Axios from "axios";
 import Loading from '../../components/Loading';
 import Container from '../../components/Container';
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { Input, Button, TextArea, Select, Modal, Icon, Header } from "semantic-ui-react";
+import { Input, Button, TextArea, Select, Modal, Icon, Header, Dropdown} from "semantic-ui-react";
 import { CgCornerDownLeft } from "react-icons/cg";
 import { notify } from "react-notify-toast";
 import * as yup from "yup";
 
-function Treino({perfil}) {
+function Treino({ perfil }) {
     const { id } = useParams();
 
     const history = useHistory();
@@ -21,11 +21,16 @@ function Treino({perfil}) {
 
     const [removeLoading, setRemoveLoading] = useState(false);
     const [treino, setTreino] = useState([]);
+    const [alunos, setAlunos] = useState([]);
     const [showTreinoForm, setShowTreinoForm] = useState(false);
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
         setTimeout(() => {
+            Axios.get(`${process.env.REACT_APP_BACKEND_URL}/alunosSelect`)
+                .then((response) => {
+                    setAlunos(response.data);
+                }).catch((err) => console.log);
             Axios.get(`${process.env.REACT_APP_BACKEND_URL}/treinoEspecifico/${id}`)
                 .then((response) => {
                     setTreino(response.data);
@@ -34,6 +39,12 @@ function Treino({perfil}) {
                 .catch((err) => console.log);
         }, 5000)
     }, [id]);
+
+    const alunoOptions = alunos.map((value) => ({
+        key: value.DS_NOME,
+        text: value.DS_NOME,
+        value: value.ID_USUARIO
+    }));
 
     const [idTreino, setIdTreino] = useState("");
     const [nomeTreino, setNomeTreino] = useState("");
@@ -50,17 +61,18 @@ function Treino({perfil}) {
                 setNomeTreino(value.DS_TREINO);
                 setObsTreino(value.OBS_TREINO);
                 setDataInclusao(value.DT_INCLUSAO);
-                setAluno(value.DS_NOME);
+                setAluno(value.ID_USUARIO);
             })
         }
     }
 
     function editTreino() {
         Axios.post(`${process.env.REACT_APP_BACKEND_URL}/updateTreino`, {
-            ID_Treino: idTreino,
+            ID_TREINO: idTreino,
             DS_TREINO: nomeTreino,
             OBS_TREINO: obsTreino,
             DT_INCLUSAO: dataInclusao,
+            ID_USUARIO: aluno
         }).then(async (response) => {
             const isError = !response.data.msg.includes("sucesso");
             notify.show(response.data.msg, isError ? "error" : "success");
@@ -72,12 +84,13 @@ function Treino({perfil}) {
         })
     }
 
-    function deleteTreino(){
-        Axios.post(`${process.env.REACT_APP_BACKEND_URL}/treinoDelete`, {
-            ID_Treino: idTreino,
+    function deleteTreino() {
+        Axios.post(`${process.env.REACT_APP_BACKEND_URL}/deleteTreino`, {
+            ID_TREINO: idTreino,
             DS_TREINO: nomeTreino,
             OBS_TREINO: obsTreino,
             DT_INCLUSAO: dataInclusao,
+            ID_USUARIO: aluno
         }).then((response) => {
             const isError = !response.data.msg.includes("sucesso");
             notify.show(response.data.msg, isError ? "error" : "success");
@@ -117,6 +130,9 @@ function Treino({perfil}) {
                                         </p>
                                         <p>
                                             <span>Descrição: </span>{data.OBS_TREINO}
+                                        </p>
+                                        <p>
+                                            <span>Treino atribuído a </span>{data.DS_NOME}
                                         </p>
                                         <p>
                                             <span>Data de inclusão: </span>{data.DT_INCLUSAO}
@@ -159,12 +175,14 @@ function Treino({perfil}) {
 
                                                 <label>Aluno</label>
                                                 <div className="update-form-group">
-                                                    <Field as={Input} size="large"
+                                                    <Dropdown
                                                         name="aluno"
-                                                        className="form-field"
+                                                        value={aluno}
                                                         placeholder="Nome do Aluno"
-                                                        onChange={(event) => setAluno(event.target.value)}
-                                                        value={aluno} />
+                                                        search
+                                                        selection
+                                                        options={alunoOptions}
+                                                        onChange={(e, data) => setAluno(data.value)} />
                                                     <ErrorMessage
                                                         component="span"
                                                         name="aluno"
@@ -186,10 +204,10 @@ function Treino({perfil}) {
                                                         </Modal.Content>
                                                         <Modal.Actions>
                                                             <Button onClick={() => setOpen(false)}>
-                                                            <Icon name='remove' /> Cancelar
+                                                                <Icon name='remove' /> Cancelar
                                                             </Button>
                                                             <Button color='red' onClick={deleteTreino}>
-                                                            <Icon name='checkmark' /> Deletar
+                                                                <Icon name='checkmark' /> Deletar
                                                             </Button>
                                                         </Modal.Actions>
                                                     </Modal>
@@ -199,9 +217,9 @@ function Treino({perfil}) {
                                     </div>
                                 )}
                                 {perfil !== "aluno" &&
-                                <button onClick={toggleTreinoForm} className='btn'>
-                                    {!showTreinoForm ? 'Editar Treino' : 'Fechar'}
-                                </button>}
+                                    <button onClick={toggleTreinoForm} className='btn'>
+                                        {!showTreinoForm ? 'Editar Treino' : 'Fechar'}
+                                    </button>}
 
                             </div>
                         </Container>

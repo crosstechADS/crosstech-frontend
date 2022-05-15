@@ -70,14 +70,6 @@ function ExerciciosRegister() {
             .required("Campo Nome do Exercicio obrigatório")
     });
 
-
-    
-    // const tipoOptions = [
-    //     { key: 5, text: 'Aerobica', value: 5 },
-    //     { key: 15, text: 'Funcional', value: 15 },
-    //     { key: 25, text: 'Pilates', value: 25 },
-    //   ]
-
     return <ExerciciosAuthentication>
         <h1>Cadastro de Exercício</h1>
         <Formik initialValues={{}}
