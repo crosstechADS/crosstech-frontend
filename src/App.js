@@ -14,13 +14,13 @@ import Exercicios from './pages/Exercicios/Exercicios';
 import Exercicio from './pages/Exercicio/Exercicio.js';
 import ExerciciosRegister from './pages/ExerciciosRegister/ExerciciosRegister';
 import Treinos from './pages/Treinos/Treinos';
+import Treino from './pages/Treino/Treino';
 import TreinoRegister from './pages/TreinoRegister/TreinoRegister';
 import Notifications from 'react-notify-toast';
 import Navbar from './components/Navbar';  
 import HomeBg from './components/HomeBg';
 import ResetSenha from './pages/ResetSenha/ResetSenha';
 import Alunos from './pages/Alunos/Alunos';
-
 
 // import { Container } from './styles';
 
@@ -34,7 +34,6 @@ function App() {
   return (
     <div>
       <Notifications options={{ zIndex: 200, top: '150px' }} /><Router><Switch>
-
 
         <Route path="/" exact strict>
           {/* <Home /> */}
@@ -66,7 +65,7 @@ function App() {
 
         <Route path="/exerciciosregister">
           <Navbar perfil={perfil}/>
-          <ExerciciosRegister />
+          <ExerciciosRegister />  
         </Route>
 
         <Route path="/exercicio/:id">
@@ -77,6 +76,11 @@ function App() {
         <Route path="/treinos">
           <Navbar perfil={perfil}/>
           <Treinos /> 
+        </Route>
+
+        <Route path="/treino/:id">
+          <Navbar perfil={perfil} />
+          <Treino perfil={perfil}/>
         </Route>
 
         <Route path="/treinoregister">
@@ -91,7 +95,8 @@ function App() {
 
       </Switch>
       </Router>
-    </div>);
+    </div>
+    );
 }
 
 export default App;

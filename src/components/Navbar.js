@@ -21,7 +21,7 @@ function Navbar({perfil}) {
 
   const logoutBtn = () => {
     closeMobileMenu();
-    localStorage.clear();
+    sessionStorage.clear();
     window.location.pathname = '/';
   }
 
