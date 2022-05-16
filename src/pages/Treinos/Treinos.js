@@ -12,6 +12,7 @@ import './Treinos.css'
 import { useEffect, useState } from 'react';
 import Axios from 'axios';
 import TreinosList from '../../components/TreinosList'
+import Loading from '../../components/Loading';
 
 function Treinos() {
   let history = useHistory();
@@ -20,12 +21,14 @@ function Treinos() {
     history.push('../treinoregister')
   }
 
+  const [removeLoading, setRemoveLoading] = useState(false);
   const [treinos, setTreinos] = useState([]);
   const [searchItem, setSearchItem] = useState("");
 
   useEffect(() => {
     Axios.get(`${process.env.REACT_APP_BACKEND_URL}/treinosSelect`).then((response) => {
       setTreinos(response.data);
+      setRemoveLoading(true);
     })
   }, []);
 
@@ -60,9 +63,8 @@ function Treinos() {
             listCard={treinos} setListCard={setTreinos}
             treino={value} />
         })}
+        {!removeLoading && <Loading />}
       </div>
-
-
     </div>
   )
 }
