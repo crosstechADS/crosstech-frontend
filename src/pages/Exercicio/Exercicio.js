@@ -5,12 +5,12 @@ import Axios from "axios";
 import Loading from '../../components/Loading';
 import Container from '../../components/Container';
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { Input, Button, TextArea, Select, Modal, Icon, Header } from "semantic-ui-react";
+import { Input, Button, TextArea, Select, Modal, Icon, Header, Dropdown} from "semantic-ui-react";
 import { CgCornerDownLeft } from "react-icons/cg";
 import { notify } from "react-notify-toast";
 import * as yup from "yup";
 
-function Exercicio({perfil}) {
+function Exercicio({ perfil }) {
     const { id } = useParams();
 
     const history = useHistory();
@@ -21,6 +21,7 @@ function Exercicio({perfil}) {
 
     const [removeLoading, setRemoveLoading] = useState(false);
     const [exercicio, setExercicio] = useState([]);
+    const [tiposExercicio, setTiposExercicio] = useState([]);
     const [showExercicioForm, setShowExercicioForm] = useState(false);
     const [open, setOpen] = useState(false);
 
@@ -32,15 +33,26 @@ function Exercicio({perfil}) {
                     setRemoveLoading(true);
                 })
                 .catch((err) => console.log);
+            Axios.get(`${process.env.REACT_APP_BACKEND_URL}/selectTipoExercicio`)
+                .then((response) => {
+                    setTiposExercicio(response.data);
+                })
+                .catch((err) => console.log);
         }, 5000)
-    }, [id]);
+    }, [id]);//
+
+    const tipoOptions = tiposExercicio.map((value) => ({
+        key: value.DS_TIPO_EXERCICIO,
+        text: value.DS_TIPO_EXERCICIO,
+        value: value.ID_TIPO_EXERCICIO
+    }));
 
     const [fileValue, setFileValue] = useState(null);
     const [idExercicio, setIdExercicio] = useState("");
     const [idMidia, setIdMidia] = useState("");
     const [nomeExercicio, setNomeExercicio] = useState("");
     const [obsExercicio, setObsExercicio] = useState("");
-    const [tipoExercicio, setTipoExercicio] = useState("");
+    const [tipoExercicio, setTipoExercicio] = useState('');
     const [dataInclusao, setDataInclusao] = useState("");
 
 
@@ -51,7 +63,7 @@ function Exercicio({perfil}) {
                 setIdExercicio(value.ID_EXERCICIO);
                 setNomeExercicio(value.DS_EXERCICIO);
                 setObsExercicio(value.OBS_EXERCICIO);
-                setTipoExercicio(value.DS_TIPO_EXERCICIO);
+                setTipoExercicio(value.ID_TIPO_EXERCICIO);
                 setFileValue(value.DS_MIDIA_URL);
                 setDataInclusao(value.DT_INCLUSAO);
                 setIdMidia(value.ID_MIDIA_EXERCICIO);
@@ -68,25 +80,23 @@ function Exercicio({perfil}) {
             DT_INCLUSAO: dataInclusao,
             ID_MIDIA_EXERCICIO: idMidia
         }).then(async (response) => {
+            setShowExercicioForm(!showExercicioForm);
             const isError = !response.data.msg.includes("sucesso");
             notify.show(response.data.msg, isError ? "error" : "success");
             if (isError) {
                 history.push(`/exercicio/${id}`);
             } else {
-                history.push(`/exercicios`);
                 const idExercicio = response.data.record.id;
                 const formData = new FormData();
 
                 formData.append('file', fileValue, fileValue.name);
 
-
                 await Axios.post(`${process.env.REACT_APP_BACKEND_URL}/exerciciosregister/${idExercicio}/midia`, formData);
-
             }
         })
     }
 
-    function deleteExercicio(){
+    function deleteExercicio() {
         Axios.post(`${process.env.REACT_APP_BACKEND_URL}/exercicioDelete`, {
             ID_EXERCICIO: idExercicio,
             DS_EXERCICIO: nomeExercicio,
@@ -176,17 +186,14 @@ function Exercicio({perfil}) {
 
                                                 <label>Tipo do Exercício</label>
                                                 <div className="update-form-group">
-                                                    <Field as={Input} size="large"
+                                                    <Dropdown
                                                         name="exercicioTipo"
-                                                        className="form-field"
+                                                        value={tipoExercicio}
                                                         placeholder="Tipo de exercício"
-                                                        onChange={(event) => setTipoExercicio(event.target.value)}
-                                                        value={tipoExercicio} />
-                                                    <ErrorMessage
-                                                        component="span"
-                                                        name="exercicioTipo"
-                                                        className="form-error"
-                                                    />
+                                                        search
+                                                        selection
+                                                        options={tipoOptions}
+                                                        onChange={(e, data) => setTipoExercicio(data.value)} />
                                                 </div>
 
                                                 <label>Mídia do Exercício</label>
@@ -210,10 +217,10 @@ function Exercicio({perfil}) {
                                                         </Modal.Content>
                                                         <Modal.Actions>
                                                             <Button onClick={() => setOpen(false)}>
-                                                            <Icon name='remove' /> Cancelar
+                                                                <Icon name='remove' /> Cancelar
                                                             </Button>
                                                             <Button color='red' onClick={deleteExercicio}>
-                                                            <Icon name='checkmark' /> Deletar
+                                                                <Icon name='checkmark' /> Deletar
                                                             </Button>
                                                         </Modal.Actions>
                                                     </Modal>
@@ -223,9 +230,9 @@ function Exercicio({perfil}) {
                                     </div>
                                 )}
                                 {perfil !== "aluno" &&
-                                <button onClick={toggleExercicioForm} className='btn'>
-                                    {!showExercicioForm ? 'Editar Exercicio' : 'Fechar'}
-                                </button>}
+                                    <button onClick={toggleExercicioForm} className='btn'>
+                                        {!showExercicioForm ? 'Editar Exercicio' : 'Fechar'}
+                                    </button>}
 
                             </div>
                         </Container>
