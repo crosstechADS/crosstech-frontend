@@ -10,12 +10,11 @@ import TreinoAuthentication from "../TreinoAuthentication/TreinoAuthentication";
 import { Link, useHistory } from "react-router-dom";
 import { CgCornerDownLeft } from "react-icons/cg";
 
-
 function TreinoRegister() {
     const history = useHistory();
 
     const routeChange = () =>{
-        let path = `/treino`;
+        let path = `/treinos`;
         history.push(path);
     } 
 
@@ -30,15 +29,18 @@ function TreinoRegister() {
 
     const [aluno, setAluno] = useState("");
 
-    const alunoOptions = []
+    const alunoOptions = alunos.map((value) => ({
+        key: value.DS_NOME,
+        text: value.DS_NOME,
+        value: value.ID_USUARIO
+    }));
 
     //ação do botao cadastrar
     const handleClickRegister = (values) => {
         Axios.post(`${process.env.REACT_APP_BACKEND_URL}/treinoregister`, {
             treino: values.treino,
             treinoObs: values.treinoObs,
-            email: values.email
-
+            usuarioId: aluno,
         }).then((Response) => {
             const isError = !Response.data.msg.includes("sucesso");
             notify.show(Response.data.msg, isError ? "error" : "success");
@@ -46,7 +48,7 @@ function TreinoRegister() {
                 history.push("/treinoregister");
             }
             else {
-                history.push("/treino");
+                history.push("/treinos");
             }
         });
     };
