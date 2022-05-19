@@ -14,6 +14,8 @@ import Container from '../../components/Container'
 import Axios from "axios";
 import {Input, Icon} from 'semantic-ui-react'
 import Loading from '../../components/Loading'
+import ExerciciosItem from '../../components/ExerciciosItem';
+import 'semantic-ui-css/semantic.css';
 
 function Exercicios({perfil}) {
   let history = useHistory();
@@ -66,9 +68,10 @@ function Exercicios({perfil}) {
             return value;
           }
         }).map((value) => {
-          return <ExerciciosCards key={value.ID_EXERCICIO}
+          return <ExerciciosItem key={value.ID_EXERCICIO}
             listCard={exercicios} setListCard={setExercicios}
             exercicio={value} />
+            
         })}
         {!removeLoading && <Loading />}
 
