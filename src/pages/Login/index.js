@@ -8,6 +8,7 @@ import Authentication from '../Authentication';
 import { Input, Button } from "semantic-ui-react";
 import { notify } from 'react-notify-toast';
 import { Link, useHistory } from "react-router-dom";
+import { Axios } from "axios";
 
 
 function Login() {
@@ -16,7 +17,7 @@ function Login() {
 
     //ação do botão login
     const handleClickLogin = (values) => {
-        Api.post(`/login`, {
+        Axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, {
             nome: values.nome,
             email: values.email,
             password: values.password
