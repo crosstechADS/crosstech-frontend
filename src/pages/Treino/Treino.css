@@ -50,7 +50,6 @@
 }
 
 .treino-detalhes{
-    background-color: rgb(250, 250, 250);
     padding-top: 10px;
     margin-left: 2rem;
     margin-right: 2rem;
@@ -73,11 +72,22 @@
     justify-content: space-between;
 }
 
+.treino-container,
+.exercicio-container{
+    border-bottom: 1px solid #7a7a7a;
+    margin-bottom: 1.2em;
+    padding-bottom:1.2em;
+}
+
 @media screen and (min-width: 600px){
     .treino{
         flex-direction: column;
         min-width: 14rem;
     }   
+
+    .treino Button{
+        width: max-content;
+    }
 
     .treino-container{
         padding-left: 20px;

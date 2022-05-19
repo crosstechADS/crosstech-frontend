@@ -5,7 +5,7 @@ import Axios from "axios";
 import Loading from '../../components/Loading';
 import Container from '../../components/Container';
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { Input, Button, TextArea, Select, Modal, Icon, Header, Dropdown} from "semantic-ui-react";
+import { Input, Button, TextArea, Select, Modal, Icon, Header, Dropdown } from "semantic-ui-react";
 import { CgCornerDownLeft } from "react-icons/cg";
 import { notify } from "react-notify-toast";
 import * as yup from "yup";
@@ -22,7 +22,9 @@ function Treino({ perfil }) {
     const [removeLoading, setRemoveLoading] = useState(false);
     const [treino, setTreino] = useState([]);
     const [alunos, setAlunos] = useState([]);
+    const [exercicios, setExercicios] = useState([]);
     const [showTreinoForm, setShowTreinoForm] = useState(false);
+    const [showExercicioForm, setShowExercicioForm] = useState(false);
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
@@ -31,6 +33,10 @@ function Treino({ perfil }) {
                 .then((response) => {
                     setAlunos(response.data);
                 }).catch((err) => console.log);
+            Axios.get(`${process.env.REACT_APP_BACKEND_URL}/exercicioSelect`)
+                .then((response) => {
+                    setExercicios(response.data);
+                }).catch((err) => console.log);
             Axios.get(`${process.env.REACT_APP_BACKEND_URL}/treinoEspecifico/${id}`)
                 .then((response) => {
                     setTreino(response.data);
@@ -38,7 +44,7 @@ function Treino({ perfil }) {
                 })
                 .catch((err) => console.log);
         }, 5000)
-    }, [id]);
+    }, []);
 
     const alunoOptions = alunos.map((value) => ({
         key: value.DS_NOME,
@@ -46,11 +52,22 @@ function Treino({ perfil }) {
         value: value.ID_USUARIO
     }));
 
+    const exercicioOptions = exercicios.map((value) => ({
+        key: value.DS_EXERCICIO,
+        text: value.DS_EXERCICIO,
+        value: value.ID_EXERCICIO
+    }));
+
+    //variaveis de treino
     const [idTreino, setIdTreino] = useState("");
     const [nomeTreino, setNomeTreino] = useState("");
     const [obsTreino, setObsTreino] = useState("");
     const [aluno, setAluno] = useState("");
     const [dataInclusao, setDataInclusao] = useState("");
+
+    //variaveis de treino_exercicio
+    const [descTreino, setDescTreino] = useState("");
+    const [exercicio, setExercicio] = useState("");
 
 
     function toggleTreinoForm() {
@@ -66,6 +83,15 @@ function Treino({ perfil }) {
         }
     }
 
+    function toggleExercicioForm() {
+        setShowExercicioForm(!showExercicioForm);
+        {
+            treino.map((value) => {
+                setIdTreino(value.ID_TREINO);
+            })
+        }
+    }
+
     function editTreino() {
         Axios.post(`${process.env.REACT_APP_BACKEND_URL}/updateTreino`, {
             ID_TREINO: idTreino,
@@ -74,12 +100,11 @@ function Treino({ perfil }) {
             DT_INCLUSAO: dataInclusao,
             ID_USUARIO: aluno
         }).then(async (response) => {
+            setShowTreinoForm(!showTreinoForm);
             const isError = !response.data.msg.includes("sucesso");
             notify.show(response.data.msg, isError ? "error" : "success");
             if (isError) {
                 history.push(`/treino/${id}`);
-            } else {
-                history.push(`/treinos`);
             }
         })
     }
@@ -104,6 +129,20 @@ function Treino({ perfil }) {
         })
     }
 
+    function addExercicio(){
+        Axios.post(`${process.env.REACT_APP_BACKEND_URL}/exercicioTreinoRegister`, {
+            OBS_EXERCICIO_TREINO: descTreino,
+            ID_TREINO: idTreino,
+            ID_EXERCICIO: exercicio,
+        }).then((response) => {
+            const isError = !response.data.msg.includes("sucesso");
+            notify.show(response.data.msg, isError ? "error" : "success");
+            if (isError) {
+                history.push(`/treino/${id}`);
+            }
+        });
+    }
+
     const validationCadastro = yup.object().shape({
         treino: yup
             .string()
@@ -116,10 +155,14 @@ function Treino({ perfil }) {
             {treino.map((data) => {
                 return (
                     <div className='treino'>
+                        <Button size="large" className="btn-voltar" onClick={routeChange}>Voltar<CgCornerDownLeft /></Button>
                         <Container customClass='column'>
                             <div className='treino-container'>
                                 <h1>{data.DS_TREINO}</h1>
-                                <Button size="large" className="btn-voltar" onClick={routeChange}>Voltar<CgCornerDownLeft /></Button>
+                                {perfil !== "aluno" &&
+                                    <button onClick={toggleTreinoForm} className='btn'>
+                                        {!showTreinoForm ? 'Editar Treino' : 'Fechar'}
+                                    </button>}
                                 {!showTreinoForm ? (
                                     <div className='treino-detalhes'>
                                         <p>
@@ -216,11 +259,59 @@ function Treino({ perfil }) {
                                         </Formik>
                                     </div>
                                 )}
-                                {perfil !== "aluno" &&
-                                    <button onClick={toggleTreinoForm} className='btn'>
-                                        {!showTreinoForm ? 'Editar Treino' : 'Fechar'}
-                                    </button>}
 
+                            </div>
+                            <div className='exercicio-container'>
+                                <h1>Exercícios</h1>
+                                {perfil !== "aluno" &&
+                                    <button onClick={toggleExercicioForm} className='btn'>
+                                        {!showExercicioForm ? 'Adicionar exercício' : 'Fechar'}
+                                    </button>}
+                                <div className='exercicio-detalhes'>
+                                    {!showExercicioForm ? (
+                                        <div className='treino-detalhes'>
+                                        </div>
+                                    ) : (
+                                        <div className='treino-detalhes'>
+                                            <Formik initialValues={{}}
+                                                validationSchema={validationCadastro}>
+                                                <Form>
+                                                    <div className="update-form-group">
+                                                        <label>Descrição do Exercício</label>
+
+                                                        <Field required as={Input} size="large"
+                                                            name="descTreino"
+                                                            className="form-field"
+                                                            placeholder="Descrição do Exercício"
+                                                            onChange={(event) => setDescTreino(event.target.value)}
+                                                            value={descTreino} />
+                                                    </div>
+
+                                                    <label>Exercício</label>
+                                                    <div className="update-form-group">
+                                                        <Dropdown
+                                                            name="exercicio"
+                                                            value={exercicio}
+                                                            placeholder="Exercicio"
+                                                            search
+                                                            selection
+                                                            options={exercicioOptions}
+                                                            onChange={(e, data) => setExercicio(data.value)} />
+                                                        <ErrorMessage
+                                                            component="span"
+                                                            name="exercicio"
+                                                            className="form-error"
+                                                        />
+                                                    </div>
+
+                                                    <div className='update-form-actions'>
+                                                        <Button className="btn-update" size="large" onClick={addExercicio}>Confirmar Adição</Button>
+                                                    </div>
+                                                </Form>
+                                            </Formik>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </Container>
                     </div>
