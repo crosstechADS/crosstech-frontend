@@ -23,7 +23,7 @@ function Home({token, auth}) {
 
   useEffect(() => {
     if(auth !== "true"){
-      window.location.pathname = ('/');
+      history.push("/login")
     }
     Api.post(`${process.env.REACT_APP_BACKEND_URL}/home`, {
       token: token
