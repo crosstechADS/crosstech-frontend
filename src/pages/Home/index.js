@@ -25,7 +25,7 @@ function Home({token, auth}) {
     if(auth !== "true"){
       history.push("/login")
     }
-    Api.post(`${process.env.REACT_APP_BACKEND_URL}/home`, {
+    Api.post(`/home`, {
       token: token
     }).then((Response) => {
       const isError = !Response.data.msg.includes("Autenticado");
