@@ -8,6 +8,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Input, Button, TextArea, Select, Modal, Icon, Header, Dropdown } from "semantic-ui-react";
 import { CgCornerDownLeft } from "react-icons/cg";
 import { notify } from "react-notify-toast";
+import ExerciciosItem from "../../components/ExerciciosItem";
 import * as yup from "yup";
 
 function Treino({ perfil }) {
@@ -21,6 +22,7 @@ function Treino({ perfil }) {
 
     const [removeLoading, setRemoveLoading] = useState(false);
     const [treino, setTreino] = useState([]);
+    const [exetre, setExetre] = useState([]);
     const [alunos, setAlunos] = useState([]);
     const [exercicios, setExercicios] = useState([]);
     const [showTreinoForm, setShowTreinoForm] = useState(false);
@@ -36,6 +38,10 @@ function Treino({ perfil }) {
             Axios.get(`${process.env.REACT_APP_BACKEND_URL}/exercicioSelect`)
                 .then((response) => {
                     setExercicios(response.data);
+                }).catch((err) => console.log);
+                Axios.get(`${process.env.REACT_APP_BACKEND_URL}/exercicioTreinoSelect/${id}`)
+                .then((response) => {
+                    setExetre(response.data);
                 }).catch((err) => console.log);
             Axios.get(`${process.env.REACT_APP_BACKEND_URL}/treinoEspecifico/${id}`)
                 .then((response) => {
@@ -270,6 +276,16 @@ function Treino({ perfil }) {
                                 <div className='exercicio-detalhes'>
                                     {!showExercicioForm ? (
                                         <div className='treino-detalhes'>
+                                            {exetre.map((data) => {
+                                                return(
+                                                    <div>
+                                                        <h3>{data.OBS_EXERCICIO_TREINO}</h3>
+                                                        <ExerciciosItem key={data.ID_EXERCICIO}
+                                                        listCard={exercicios} setListCard={setExercicios}
+                                                        exercicio={data} />
+                                                    </div>
+                                                )
+                                            })}
                                         </div>
                                     ) : (
                                         <div className='treino-detalhes'>
