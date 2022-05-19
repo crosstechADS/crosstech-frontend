@@ -2,7 +2,7 @@ import "./ExerciciosRegister.css";
 import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
-import Axios from "axios";
+import Api from '../../config/Api';
 import { Input, Button, TextArea, Dropdown } from "semantic-ui-react";
 import { notify } from "react-notify-toast";
 import { Redirect } from "react-router";
@@ -18,7 +18,7 @@ function ExerciciosRegister() {
     const [tipo, setTipo] = useState('');
 
     useEffect(() => {
-        Axios.get(`${process.env.REACT_APP_BACKEND_URL}/selectTipoExercicio`)
+        Api.get(`/selectTipoExercicio`)
         .then((response) => {
             setTipoExercicio(response.data);
         })
@@ -37,7 +37,7 @@ function ExerciciosRegister() {
 
     //ação do botao cadastrar
     const handleClickRegister = (values) => {
-        Axios.post(`${process.env.REACT_APP_BACKEND_URL}/exerciciosregister`, {
+        Api.post(`/exerciciosregister`, {
             exercicio: values.exercicio,
             exercicioObs: values.exercicioObs,
             exercicioTipo: tipo
@@ -57,7 +57,7 @@ function ExerciciosRegister() {
 
                 formData.append('file', fileValue, fileValue.name)
 
-                await Axios.post(`${process.env.REACT_APP_BACKEND_URL}/exerciciosregister/${idExercicio}/midia`, formData)
+                await Api.post(`/exerciciosregister/${idExercicio}/midia`, formData)
                 history.push("/exercicios");
             }
         });

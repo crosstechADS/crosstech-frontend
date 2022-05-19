@@ -10,7 +10,7 @@ import '../../App.css'
 import { Button, Segment, Icon, Input } from 'semantic-ui-react';
 import './Treinos.css'
 import { useEffect, useState } from 'react';
-import Axios from 'axios';
+import Api from '../../config/Api';
 import TreinosList from '../../components/TreinosList'
 import Loading from '../../components/Loading';
 
@@ -26,7 +26,7 @@ function Treinos() {
   const [searchItem, setSearchItem] = useState("");
 
   useEffect(() => {
-    Axios.get(`${process.env.REACT_APP_BACKEND_URL}/treinosSelect`).then((response) => {
+    Api.get(`/treinosSelect`).then((response) => {
       setTreinos(response.data);
       setRemoveLoading(true);
     })

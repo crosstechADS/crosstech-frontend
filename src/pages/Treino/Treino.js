@@ -1,7 +1,7 @@
 import './Treino.css'
 import { useParams, useHistory } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import Axios from "axios";
+import Api from '../../config/Api';
 import Loading from '../../components/Loading';
 import Container from '../../components/Container';
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -31,19 +31,19 @@ function Treino({ perfil }) {
 
     useEffect(() => {
         setTimeout(() => {
-            Axios.get(`${process.env.REACT_APP_BACKEND_URL}/alunosSelect`)
+            Api.get(`/alunosSelect`)
                 .then((response) => {
                     setAlunos(response.data);
                 }).catch((err) => console.log);
-            Axios.get(`${process.env.REACT_APP_BACKEND_URL}/exercicioSelect`)
+            Api.get(`/exercicioSelect`)
                 .then((response) => {
                     setExercicios(response.data);
                 }).catch((err) => console.log);
-                Axios.get(`${process.env.REACT_APP_BACKEND_URL}/exercicioTreinoSelect/${id}`)
+                Api.get(`/exercicioTreinoSelect/${id}`)
                 .then((response) => {
                     setExetre(response.data);
                 }).catch((err) => console.log);
-            Axios.get(`${process.env.REACT_APP_BACKEND_URL}/treinoEspecifico/${id}`)
+            Api.get(`/treinoEspecifico/${id}`)
                 .then((response) => {
                     setTreino(response.data);
                     setRemoveLoading(true);
@@ -99,7 +99,7 @@ function Treino({ perfil }) {
     }
 
     function editTreino() {
-        Axios.post(`${process.env.REACT_APP_BACKEND_URL}/updateTreino`, {
+        Api.post(`/updateTreino`, {
             ID_TREINO: idTreino,
             DS_TREINO: nomeTreino,
             OBS_TREINO: obsTreino,
@@ -116,7 +116,7 @@ function Treino({ perfil }) {
     }
 
     function deleteTreino() {
-        Axios.post(`${process.env.REACT_APP_BACKEND_URL}/deleteTreino`, {
+        Api.post(`/deleteTreino`, {
             ID_TREINO: idTreino,
             DS_TREINO: nomeTreino,
             OBS_TREINO: obsTreino,
@@ -136,7 +136,7 @@ function Treino({ perfil }) {
     }
 
     function addExercicio(){
-        Axios.post(`${process.env.REACT_APP_BACKEND_URL}/exercicioTreinoRegister`, {
+        Api.post(`/exercicioTreinoRegister`, {
             OBS_EXERCICIO_TREINO: descTreino,
             ID_TREINO: idTreino,
             ID_EXERCICIO: exercicio,

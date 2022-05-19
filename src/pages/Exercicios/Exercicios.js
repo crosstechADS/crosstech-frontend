@@ -11,7 +11,7 @@ import './Exercicios.css'
 import ExerciciosCards from "../../components/ExerciciosCards";
 import { Link, useHistory } from "react-router-dom";
 import Container from '../../components/Container'
-import Axios from "axios";
+import Api from '../../config/Api';
 import {Input, Icon} from 'semantic-ui-react'
 import Loading from '../../components/Loading'
 import ExerciciosItem from '../../components/ExerciciosItem';
@@ -31,7 +31,7 @@ function Exercicios({perfil}) {
   const [exercicios, setExercicios] = useState([]);
 
   useEffect(() => {
-    Axios.get(`${process.env.REACT_APP_BACKEND_URL}/exercicioSelect`)
+    Api.get(`/exercicioSelect`)
       .then((response) => {
         setExercicios(response.data);
         setRemoveLoading(true);

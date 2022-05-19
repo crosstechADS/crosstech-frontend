@@ -2,7 +2,7 @@ import "./style.css";
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
-import Axios from "axios";
+import Api from '../../config/Api';
 import Authentication from '../Authentication';
 import { Input, Button } from "semantic-ui-react";
 import { notify } from "react-notify-toast";
@@ -21,7 +21,7 @@ function Register() {
 
     //ação do botao cadastrar
     const handleClickRegister = (values) => {
-        Axios.post(`${process.env.REACT_APP_BACKEND_URL}/register`, {
+        Api.post(`/register`, {
             nome: values.nome,
             email: values.email,
             password: values.password,

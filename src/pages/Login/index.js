@@ -2,7 +2,7 @@ import "./index.css"
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
-import Axios from "axios";
+import Api from '../../config/Api';
 import logo from '../../logo.png';
 import Authentication from '../Authentication';
 import { Input, Button } from "semantic-ui-react";
@@ -16,7 +16,7 @@ function Login() {
 
     //ação do botão login
     const handleClickLogin = (values) => {
-        Axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, {
+        Api.post(`/login`, {
             nome: values.nome,
             email: values.email,
             password: values.password
@@ -32,7 +32,7 @@ function Login() {
                 localStorage.setItem("token", tokenCriado);
                 localStorage.setItem("tipoPerfil", Response.data.perfil);
                 localStorage.setItem("email", Response.data.Email);
-                Axios.post(`${process.env.REACT_APP_BACKEND_URL}/home`, {
+                Api.post(`/home`, {
                     token: tokenCriado
                 }).then((Response) => {
                     const isError = !Response.data.msg.includes("Autenticado");

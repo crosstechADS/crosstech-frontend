@@ -12,7 +12,7 @@ import Exercicios from '../Exercicios/Exercicios'
 import Alunos from '../Alunos/Alunos';
 import './index.css'
 import { useEffect } from 'react';
-import Axios from "axios";
+import Api from '../../config/Api';
 import { useHistory } from 'react-router-dom';
 
 // import { Container } from './styles';
@@ -22,10 +22,10 @@ function Home({token, auth}) {
   let history = useHistory();
 
   useEffect(() => {
-    if(auth != "true"){
+    if(auth !== "true"){
       window.location.pathname = ('/');
     }
-    Axios.post(`${process.env.REACT_APP_BACKEND_URL}/home`, {
+    Api.post(`${process.env.REACT_APP_BACKEND_URL}/home`, {
       token: token
     }).then((Response) => {
       const isError = !Response.data.msg.includes("Autenticado");

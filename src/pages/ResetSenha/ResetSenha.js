@@ -2,7 +2,7 @@ import "./ResetSenha.css"
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
-import Axios from "axios";
+import Api from '../../config/Api';
 import logo from '../../logo.png';
 import Authentication from '../Authentication';
 import { Input, Button } from "semantic-ui-react";
@@ -24,7 +24,7 @@ function ResetSenha() {
 
     //ação do botão mudar senha
     const handleClickReset = (values) => {
-        Axios.post(`${process.env.REACT_APP_BACKEND_URL}/resetSenha`, {
+        Api.post(`/resetSenha`, {
             email: values.email,
             password: values.password
         }).then((Response) => {

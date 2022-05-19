@@ -2,7 +2,7 @@ import "./TreinoRegister.css";
 import React, {useState, useEffect} from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
-import Axios from "axios";
+import Api from '../../config/Api';
 import { Input, Button, Dropdown } from "semantic-ui-react";
 import { notify } from "react-notify-toast";
 import { Redirect } from "react-router";
@@ -19,7 +19,7 @@ function TreinoRegister() {
     } 
 
     useEffect(() => {
-        Axios.get(`${process.env.REACT_APP_BACKEND_URL}/alunosSelect`)
+        Api.get(`/alunosSelect`)
         .then((response) => {
             setAlunos(response.data);
         })
@@ -37,7 +37,7 @@ function TreinoRegister() {
 
     //ação do botao cadastrar
     const handleClickRegister = (values) => {
-        Axios.post(`${process.env.REACT_APP_BACKEND_URL}/treinoregister`, {
+        Api.post(`/treinoregister`, {
             treino: values.treino,
             treinoObs: values.treinoObs,
             usuarioId: aluno,

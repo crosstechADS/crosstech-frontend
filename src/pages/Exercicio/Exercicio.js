@@ -1,7 +1,7 @@
 import styles from './Exercicio.css'
 import { useParams, useHistory } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import Axios from "axios";
+import Api from '../../config/Api';
 import Loading from '../../components/Loading';
 import Container from '../../components/Container';
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -9,6 +9,7 @@ import { Input, Button, TextArea, Select, Modal, Icon, Header, Dropdown } from "
 import { CgCornerDownLeft } from "react-icons/cg";
 import { notify } from "react-notify-toast";
 import * as yup from "yup";
+
 
 function Exercicio({ perfil }) {
     const { id } = useParams();
@@ -27,13 +28,13 @@ function Exercicio({ perfil }) {
 
     useEffect(() => {
         setTimeout(() => {
-            Axios.get(`${process.env.REACT_APP_BACKEND_URL}/exercicioEspecifico/${id}`)
+            Api.get(`/exercicioEspecifico/${id}`)
                 .then((response) => {
                     setExercicio(response.data);
                     setRemoveLoading(true);
                 })
                 .catch((err) => console.log);
-            Axios.get(`${process.env.REACT_APP_BACKEND_URL}/selectTipoExercicio`)
+            Api.get(`/selectTipoExercicio`)
                 .then((response) => {
                     setTiposExercicio(response.data);
                 })
@@ -72,7 +73,7 @@ function Exercicio({ perfil }) {
     }
 
     function editExercicio() {
-        Axios.post(`${process.env.REACT_APP_BACKEND_URL}/updateExercicio`, {
+        Api.post(`/updateExercicio`, {
             ID_EXERCICIO: idExercicio,
             DS_EXERCICIO: nomeExercicio,
             OBS_EXERCICIO: obsExercicio,
@@ -91,13 +92,13 @@ function Exercicio({ perfil }) {
 
                 formData.append('file', fileValue, fileValue.name);
 
-                await Axios.post(`${process.env.REACT_APP_BACKEND_URL}/exerciciosregister/${idExercicio}/midia`, formData);
+                await Api.post(`/exerciciosregister/${idExercicio}/midia`, formData);
             }
         })
     }
 
     function deleteExercicio() {
-        Axios.post(`${process.env.REACT_APP_BACKEND_URL}/exercicioDelete`, {
+        Api.post(`/exercicioDelete`, {
             ID_EXERCICIO: idExercicio,
             DS_EXERCICIO: nomeExercicio,
             OBS_EXERCICIO: obsExercicio,
