@@ -2,6 +2,10 @@ h1{
     text-align: center;
 }
 
+.treino-item{
+    border-bottom: 1px solid #7a7a7a;
+}
+
 .card{
     box-shadow: 0 0 4px 5px rgba(0, 0, 0, 0.61);
     border-radius: 9px;
