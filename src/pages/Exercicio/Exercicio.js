@@ -5,7 +5,7 @@ import Axios from "axios";
 import Loading from '../../components/Loading';
 import Container from '../../components/Container';
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { Input, Button, TextArea, Select, Modal, Icon, Header, Dropdown} from "semantic-ui-react";
+import { Input, Button, TextArea, Select, Modal, Icon, Header, Dropdown } from "semantic-ui-react";
 import { CgCornerDownLeft } from "react-icons/cg";
 import { notify } from "react-notify-toast";
 import * as yup from "yup";
@@ -129,7 +129,7 @@ function Exercicio({ perfil }) {
             {exercicio.map((data) => {
                 return (
                     <div className='exercicio'>
-                    <Button size="large" className="btn-voltar" onClick={routeChange}>Voltar<CgCornerDownLeft /></Button>
+                        <Button size="large" className="btn-voltar" onClick={routeChange}>Voltar<CgCornerDownLeft /></Button>
                         <Container customClass='column'>
                             <div className='exercicio-container'>
                                 <h1>Exercício: {data.DS_EXERCICIO}</h1>
@@ -141,16 +141,10 @@ function Exercicio({ perfil }) {
                                     <div className='exercicio-detalhes'>
                                         <img className='exercicio-midia' src={data.DS_MIDIA_URL}></img>
                                         <p>
-                                            <span>ID: </span>{data.ID_EXERCICIO}
-                                        </p>
-                                        <p>
                                             <span>Nome: </span>{data.DS_EXERCICIO}
                                         </p>
                                         <p>
                                             <span>Descrição: </span>{data.OBS_EXERCICIO}
-                                        </p>
-                                        <p>
-                                            <span>Data de inclusão: </span>{data.DT_INCLUSAO}
                                         </p>
                                     </div>
                                 ) : (
@@ -235,7 +229,7 @@ function Exercicio({ perfil }) {
                                 )}
                             </div>
                         </Container>
-                        
+
                     </div>
                 )
             })}
