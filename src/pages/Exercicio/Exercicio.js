@@ -129,10 +129,14 @@ function Exercicio({ perfil }) {
             {exercicio.map((data) => {
                 return (
                     <div className='exercicio'>
+                    <Button size="large" className="btn-voltar" onClick={routeChange}>Voltar<CgCornerDownLeft /></Button>
                         <Container customClass='column'>
                             <div className='exercicio-container'>
                                 <h1>Exercício: {data.DS_EXERCICIO}</h1>
-                                <Button size="large" className="btn-voltar" onClick={routeChange}>Voltar<CgCornerDownLeft /></Button>
+                                {perfil !== "aluno" &&
+                                    <button onClick={toggleExercicioForm} className='btn'>
+                                        {!showExercicioForm ? 'Editar Exercicio' : 'Fechar'}
+                                    </button>}
                                 {!showExercicioForm ? (
                                     <div className='exercicio-detalhes'>
                                         <img className='exercicio-midia' src={data.DS_MIDIA_URL}></img>
@@ -229,13 +233,9 @@ function Exercicio({ perfil }) {
                                         </Formik>
                                     </div>
                                 )}
-                                {perfil !== "aluno" &&
-                                    <button onClick={toggleExercicioForm} className='btn'>
-                                        {!showExercicioForm ? 'Editar Exercicio' : 'Fechar'}
-                                    </button>}
-
                             </div>
                         </Container>
+                        
                     </div>
                 )
             })}
