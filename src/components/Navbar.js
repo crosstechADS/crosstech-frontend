@@ -4,7 +4,7 @@ import { Button } from './Button';
 import './Navbar.css';
 import Home from '../pages/Home';
 
-function Navbar({perfil}) {
+function Navbar({ perfil }) {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
@@ -12,7 +12,7 @@ function Navbar({perfil}) {
   const closeMobileMenu = () => setClick(false);
 
   const showButton = () => {
-    if(window.innerWidth <= 960){
+    if (window.innerWidth <= 960) {
       setButton(false)
     } else {
       setButton(true)
@@ -21,7 +21,7 @@ function Navbar({perfil}) {
 
   const logoutBtn = () => {
     closeMobileMenu();
-    sessionStorage.clear();
+    localStorage.clear();
     window.location.pathname = '/';
   }
 
@@ -31,51 +31,51 @@ function Navbar({perfil}) {
 
   window.addEventListener('resize', showButton);
 
-    return (
-        <>
-          <nav className="navbar">
-            <div className="navbar-container">
-              <Link to="/home" className="navbar-logo" onClick={closeMobileMenu}>
-                CROSSTECH
-              </Link>
-              <div className="menu-icon" onClick={handleClick}>
-                <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
-              </div>
-              <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-                {/* <li className="nav-item">
+  return (
+    <>
+      <nav className="navbar">
+        <div className="navbar-container">
+          <Link to="/home" className="navbar-logo" onClick={closeMobileMenu}>
+            CROSSTECH
+          </Link>
+          <div className="menu-icon" onClick={handleClick}>
+            <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
+          </div>
+          <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+            {/* <li className="nav-item">
                   <Link to="/home" path="/home" className="nav-links" onClick={closeMobileMenu}>
                     Home
                   </Link>
                 </li> */}
-                
-                <li className="nav-item">
-                {perfil !== "aluno" && 
-                  <Link to="/alunos" className="nav-links" onClick={closeMobileMenu}>
-                    Alunos
-                  </Link>}
-                </li>
-                <li className="nav-item">
-                  <Link to="/exercicios" className="nav-links" onClick={closeMobileMenu}>
-                    Exercicios
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/treinos" className="nav-links" onClick={closeMobileMenu}>
-                    Treinos
-                  </Link>
-                </li>
 
-                <li className="nav-item">
-                  <Link to="/" className="nav-links-mobile" onClick={logoutBtn}>
-                    Sair
-                  </Link>
-                </li>
-              </ul>
-              {button && <Button buttonStyle='btn--outline' onClick={logoutBtn}>Sair</Button>}
-            </div>
-          </nav>
-        </>
-    )
+            <li className="nav-item">
+              {perfil !== "aluno" &&
+                <Link to="/alunos" className="nav-links" onClick={closeMobileMenu}>
+                  Alunos
+                </Link>}
+            </li>
+            <li className="nav-item">
+              <Link to="/exercicios" className="nav-links" onClick={closeMobileMenu}>
+                Exercicios
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/treinos" className="nav-links" onClick={closeMobileMenu}>
+                Treinos
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link to="/" className="nav-links-mobile" onClick={logoutBtn}>
+                Sair
+              </Link>
+            </li>
+          </ul>
+          {button && <Button buttonStyle='btn--outline' onClick={logoutBtn}>Sair</Button>}
+        </div>
+      </nav>
+    </>
+  )
 }
 
 export default Navbar

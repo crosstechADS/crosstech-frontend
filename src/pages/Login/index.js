@@ -26,11 +26,12 @@ function Login() {
                 history.push("/login");
             }
             else {
+                console.log('token: ', Response.data)
                 const tokenCriado = Response.data.token;
-                sessionStorage.setItem("auth", Response.data.auth);
-                sessionStorage.setItem("token", tokenCriado);
-                sessionStorage.setItem("tipoPerfil", Response.data.perfil);
-                sessionStorage.setItem("email", Response.data.Email);
+                localStorage.setItem("auth", Response.data.auth);
+                localStorage.setItem("token", tokenCriado);
+                localStorage.setItem("tipoPerfil", Response.data.perfil);
+                localStorage.setItem("email", Response.data.Email);
                 Axios.post(`${process.env.REACT_APP_BACKEND_URL}/home`, {
                     token: tokenCriado
                 }).then((Response) => {
