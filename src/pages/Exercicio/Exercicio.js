@@ -141,9 +141,6 @@ function Exercicio({ perfil }) {
                                     <div className='exercicio-detalhes'>
                                         <img className='exercicio-midia' src={data.DS_MIDIA_URL}></img>
                                         <p>
-                                            <span>ID: </span>{data.ID_EXERCICIO}
-                                        </p>
-                                        <p>
                                             <span>Nome: </span>{data.DS_EXERCICIO}
                                         </p>
                                         <p>
