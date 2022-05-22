@@ -8,7 +8,7 @@ import Authentication from '../Authentication';
 import { Input, Button } from "semantic-ui-react";
 import { notify } from 'react-notify-toast';
 import { Link, useHistory } from "react-router-dom";
-import { Axios } from "axios";
+import Axios from "axios";
 
 
 function Login() {
