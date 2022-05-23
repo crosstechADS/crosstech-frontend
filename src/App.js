@@ -21,6 +21,8 @@ import Navbar from './components/Navbar';
 import HomeBg from './components/HomeBg';
 import ResetSenha from './pages/ResetSenha/ResetSenha';
 import Alunos from './pages/Alunos/Alunos';
+import AlunoHome from './pages/ViewAluno/AlunoHome/AlunoHome';
+import AlunoTreino from './pages/ViewAluno/AlunoTreino/AlunoTreino'
 
 // import { Container } from './styles';
 
@@ -91,6 +93,16 @@ function App() {
         <Route path="/alunos">
           <Navbar perfil={perfil} />
           <Alunos />
+        </Route>
+
+        <Route path="/alunohome">
+          <Navbar perfil={perfil} />
+          <AlunoHome email={email} />
+        </Route>
+
+        <Route path='/alunotreino'>
+          <Navbar perfil={perfil} />
+          <AlunoTreino email={email}/>
         </Route>
 
       </Switch>
