@@ -100,7 +100,7 @@ function App() {
           <AlunoHome email={email} />
         </Route>
 
-        <Route path='/alunotreino'>
+        <Route path='/alunotreino/:id'>
           <Navbar perfil={perfil} />
           <AlunoTreino email={email}/>
         </Route>

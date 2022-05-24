@@ -1,9 +1,30 @@
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap");
+.aluno-treino {
+  padding: 15px;
+  color: #fafafa;
+  background-color: rgb(41, 40, 40);
+  align-items: center;
+  text-align: center;
+}
 
-.treinos {
-  margin: 0;
-  font-family: "Quicksand", sans-serif;
+.aluno-treino-detalhe p{
+  font-size: 20px;
+  color:rgb(201, 201, 201)
+}
+
+.aluno-treino-exercicio {
+  background-color: #fafafa;
   color: black;
+  margin-bottom: 10px;
+  border-radius: 17px;
+}
+
+.aluno-treino-exercicio p{
+  font-size: 18px;
+}
+
+.aluno-exercicio-img{
+  border-radius: 17px;
+  width: 100%;
 }
 
 .stopwatch {
