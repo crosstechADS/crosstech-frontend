@@ -7,6 +7,7 @@ import Loading from '../../../components/Loading';
 import { useParams } from 'react-router-dom';
 import { Button, Form, Header, Icon, Image, Input, Modal } from 'semantic-ui-react';
 import { Field, Formik } from 'formik';
+import notify from 'react-notify-toast';
 
 function AlunoTreinos({ email }) {
     const { id } = useParams();
@@ -60,8 +61,24 @@ function ExercicioTreino(props) {
     const [peso, setPeso] = useState('');
 
     const realizarExercicio = () => {
-        setSecondOpen(false);
-        setFirstOpen(false);
+        Api.post(`/AlunoTreinoRegister`, {
+            NR_REPETICAO: nrRepeticao,
+            KG_EXERCICIO: peso,
+            ID_EXERCICIO_TREINO: ID_EXERCICIO_TREINO,
+            MINUTOS_EXERCICIO: timer
+        }).then((response) => {
+            const isError = !response.data.msg.includes("sucesso");
+            notify.show(response.data.msg, isError ? "error" : "success");
+            if (isError) {
+                console.log("Erro de treino do aluno");
+                //history.push(`/exercicio`);
+            } else {
+                setSecondOpen(false);
+                setFirstOpen(false);
+                //history.push(`/exercicios`);
+                console.log("Sucesso de treino do aluno");
+            }
+        })
 
     }
 
