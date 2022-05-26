@@ -67,8 +67,9 @@ function ExercicioTreino(props) {
             ID_EXERCICIO_TREINO: ID_EXERCICIO_TREINO,
             MINUTOS_EXERCICIO: timer
         }).then((response) => {
-            const isError = !response.data.msg.includes("sucesso");
-            notify.show(response.data.msg, isError ? "error" : "success");
+            const isError = !response.msg.includes("sucesso");
+            notify.show(response.msg, isError ? "error" : "success");
+            console.log("cheguei aqui");
             if (isError) {
                 console.log("Erro de treino do aluno");
                 //history.push(`/exercicio`);
