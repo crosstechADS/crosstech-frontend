@@ -22,9 +22,6 @@ function Home({token, auth}) {
   let history = useHistory();
 
   useEffect(() => {
-    if(auth !== "true"){
-      history.push("/login")
-    }
     Api.post(`/home`, {
       token: token
     }).then((Response) => {
