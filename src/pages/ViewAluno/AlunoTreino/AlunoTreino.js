@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './AlunoTreino.css';
 import useTimer from '../../../hooks/useTimer';
-import { formatTime } from '../../../utils/formatTime'
+import formatTime from '../../../utils/formatTime.js'
 import Api from '../../../config/Api';
 import Loading from '../../../components/Loading';
 import { useParams } from 'react-router-dom';
@@ -69,15 +69,12 @@ function ExercicioTreino(props) {
         }).then((response) => {
             const isError = !response.data.msg.includes("sucesso");
             notify.show(response.data.msg, isError ? "error" : "success");
-            console.log("cheguei aqui");
             if (isError) {
-                console.log("Erro de treino do aluno");
                 //history.push(`/exercicio`);
             } else {
                 setSecondOpen(false);
                 setFirstOpen(false);
                 //history.push(`/exercicios`);
-                console.log("Sucesso de treino do aluno");
             }
         })
 
@@ -98,7 +95,23 @@ function ExercicioTreino(props) {
                     <Image size='large' src={DS_MIDIA_URL} />
                     <Header>{OBS_EXERCICIO_TREINO}</Header>
                     <Modal.Description>
-                        {/* adicionar cronometro */}
+                        <div className='stopwatch'>
+                            <h3>Cronômetro</h3>
+                            <div className='stopwatch-card'>
+                                <p>{formatTime(timer)}</p>
+                                <div className='buttons'>
+                                    {
+                                        !isActive && !isPaused ?
+                                            <button onClick={handleStart}>Começar</button>
+                                            : (
+                                                isPaused ? <button onClick={handlePause}>Parar</button>
+                                                    : <button onClick={handleResume}>Resumir</button>
+                                            )
+                                    }
+                                    <button onClick={handleReset} disabled={!isActive}>Resetar</button>
+                                </div>
+                            </div>
+                        </div>
                     </Modal.Description>
                 </Modal.Content>
                 <Modal.Actions>
