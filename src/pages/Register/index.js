@@ -8,10 +8,11 @@ import { Input, Button } from "semantic-ui-react";
 import { notify } from "react-notify-toast";
 import { useHistory } from "react-router-dom";
 import { CgCornerDownLeft } from "react-icons/cg";
-
+import { useTranslation } from 'react-i18next';
 
 
 function Register() {
+    const { t } = useTranslation();
     const history = useHistory();
 
     const routeChange = () => {
@@ -53,46 +54,46 @@ function Register() {
     const validationCadastro = yup.object().shape({
         nome: yup
             .string()
-            .required("Campo Nome obrigatório"),
+            .required(t("Campo Nome obrigatório")),
         email: yup
             .string()
-            .email("Formato inválido.")
-            .required("Campo E-mail obrigatório"),
+            .email(t("Formato inválido."))
+            .required(t("Campo E-mail obrigatório")),
         profile: yup
             .string()
-            .min(1, "Formato inválido.")
-            .required("Campo Tipo perfil obrigatório"),
+            .min(1, t("Formato inválido."))
+            .required(t("Campo Tipo perfil obrigatório")),
         password: yup
             .string()
-            .min(8, "Formato de senha inválido")
-            .required("Campo Senha obrigatório."),
+            .min(8, t("Formato de senha inválido"))
+            .required(t("Campo Senha obrigatório")),
         confirmPassword: yup
             .string()
-            .oneOf([yup.ref("password"), null], "A combinação de senhas não bate."),
+            .oneOf([yup.ref("password"), null], t("A combinação de senhas não bate.")),
         cpf: yup
             .string()
-            .required("Campo CPF obrigatório"),
+            .required(t("Campo CPF obrigatório")),
         dataNascimento: yup
             .date()
-            .required("Campo Nascimento obrigatório"),
+            .required(t("Campo Nascimento obrigatório")),
         cep: yup
             .string()
-            .required("Campo CEP obrigatório"),
+            .required(t("Campo CEP obrigatório")),
         cidade: yup
             .string()
-            .required("Campo Cidade obrigatório"),
+            .required(t("Campo Cidade obrigatório")),
         uf: yup
             .string()
-            .required("Campo UF obrigatório"),
+            .required(t("Campo UF obrigatório")),
         rua: yup
             .string()
-            .required("Campo Rua obrigatório"),
+            .required(t("Campo Rua obrigatório")),
         numeroLogradouro: yup
             .string()
-            .required("Campo Nº do logradouro obrigatório"),
+            .required(t("Campo Nº do logradouro obrigatório")),
         bairro: yup
             .string()
-            .required("Campo Bairro obrigatório")
+            .required(t("Campo Bairro obrigatório"))
     });
 
     //função para auto preenchimento de tabelas de acordo com cep inserido pelo usuário
@@ -125,19 +126,19 @@ function Register() {
     ]
 
     return <Authentication>
-        <h1>Cadastro</h1>
+        <h1>{t("Cadastro")}</h1>
         <Formik initialValues={{}}
             onSubmit={handleClickRegister}
             validationSchema={validationCadastro}>
             {({ setFieldValue, handleSubmit }) => (
                 <Form onSubmit={handleSubmit}>
                     <div className="label">
-                        <label class="label"><h3>Informações pessoais</h3></label>
+                        <label class="label"><h3>{t("Informações pessoais")}</h3></label>
                         <div className="login-form-group">
                             <Field as={Input} size="large"
                                 name="nome"
                                 className="form-field"
-                                placeholder="Nome" />
+                                placeholder={t("Nome")} />
                             <ErrorMessage
                                 component="span"
                                 name="nome"
@@ -160,7 +161,7 @@ function Register() {
                                 name="password"
                                 type="password"
                                 className="form-field"
-                                placeholder="Senha" />
+                                placeholder={t("Senha")} />
                             <ErrorMessage
                                 component="span"
                                 name="password"
@@ -174,7 +175,7 @@ function Register() {
                                 name="confirmPassword"
                                 type="password"
                                 className="form-field"
-                                placeholder="Confirme sua senha" />
+                                placeholder={t("Confirme sua senha")} />
                             <ErrorMessage
                                 component="span"
                                 name="confirmPassword"
@@ -192,13 +193,13 @@ function Register() {
                                 className="form-error"
                             />
                         </div>
-                        <label>Data de Nascimento</label>
+                        <label>{t("Data de Nascimento")}</label>
                         <div className="login-form-group">
                             <Field as={Input} size="large"
                                 name="dataNascimento"
                                 type="date"
                                 className="form-field"
-                                placeholder="Data de nascimento" />
+                                placeholder={t("Data de nascimento")} />
                             <ErrorMessage
                                 component="span"
                                 name="dataNascimento"
@@ -206,12 +207,12 @@ function Register() {
                             />
                         </div>
                     </div>
-                    <div className="label"><h3>Informações de endereço</h3>
+                    <div className="label"><h3>{t("Informações de endereço")}</h3>
                         <div className="login-form-group">
                             <Field as={Input} size="large"
                                 name="cep"
                                 className="form-field"
-                                placeholder="CEP"
+                                placeholder={t("CEP")}
                                 onBlur={(ev) => onBlurCep(ev, setFieldValue)} />
                             <ErrorMessage
                                 component="span"
@@ -224,7 +225,7 @@ function Register() {
                             <Field as={Input} size="large"
                                 name="cidade"
                                 className="form-field"
-                                placeholder="Cidade" />
+                                placeholder={t("Cidade")} />
                             <ErrorMessage
                                 component="span"
                                 name="cidade"
@@ -236,7 +237,7 @@ function Register() {
                             <Field as={Input} size="large"
                                 name="uf"
                                 className="form-field"
-                                placeholder="UF" />
+                                placeholder={t("UF")} />
                             <ErrorMessage
                                 component="span"
                                 name="uf"
@@ -248,7 +249,7 @@ function Register() {
                             <Field as={Input} size="large"
                                 name="rua"
                                 className="form-field"
-                                placeholder="Rua" />
+                                placeholder={t("Rua")} />
                             <ErrorMessage
                                 component="span"
                                 name="rua"
@@ -260,7 +261,7 @@ function Register() {
                             <Field as={Input} size="large"
                                 name="numeroLogradouro"
                                 className="form-field"
-                                placeholder="Nº do logradouro" />
+                                placeholder={t("Nº do logradouro")} />
                             <ErrorMessage
                                 component="span"
                                 name="numeroLogradouro"
@@ -272,7 +273,7 @@ function Register() {
                             <Field as={Input} size="large"
                                 name="bairro"
                                 className="form-field"
-                                placeholder="Bairro" />
+                                placeholder={t("Bairro")} />
                             <ErrorMessage
                                 component="span"
                                 name="bairro"
@@ -283,7 +284,7 @@ function Register() {
                             <Field as={Input} size="large"
                                 name="profile"
                                 className="form-field"
-                                placeholder="Tipo Perfil"
+                                placeholder={t("Tipo Perfil")}
                             />
                             <ErrorMessage
                                 component="span"
@@ -293,8 +294,8 @@ function Register() {
                         </div>
                     </div>
 
-                    <Button className="btn-login" size="large" primary type="submit">Cadastrar</Button>
-                    <Button size="large" className="btn-voltar" onClick={routeChange}>Voltar<CgCornerDownLeft /></Button>
+                    <Button className="btn-login" size="large" primary type="submit">{t("Cadastrar")}</Button>
+                    <Button size="large" className="btn-voltar" onClick={routeChange}>{t("Voltar")}<CgCornerDownLeft /></Button>
                 </Form>
             )}
         </Formik>
