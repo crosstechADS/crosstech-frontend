@@ -56,12 +56,12 @@ function Login() {
     const validationLogin = yup.object().shape({
         email: yup
             .string()
-            .email("Formato inválido.")
-            .required("Campo E-mail obrigatório"),
+            .email(t("Formato inválido."))
+            .required(t("Campo E-mail obrigatório")),
         password: yup
             .string()
-            .min(8, "Formato de senha inválido")
-            .required("Campo Senha obrigatório."),
+            .min(8, t("Formato de senha inválido"))
+            .required(t("Campo Senha obrigatório.")),
     });
 
 
@@ -82,17 +82,17 @@ function Login() {
                         />
                     </div>
                     <div className="login-form-group">
-                        <Field as={Input} size="large" name="password" type="password" className="form-field" placeholder="Senha" />
+                        <Field as={Input} size="large" name="password" type="password" className="form-field" placeholder={t("Senha")} />
                         <ErrorMessage
                             component="span"
                             name="password"
                             className="form-error"
                         />
                     </div>
-                    <Button className="btn-login" size="large" primary type="submit">Entrar</Button>
-                    <Link to="/resetsenha">Esqueci minha senha</Link>
-                    <Link to="/register" > Registre-se</Link>
-                </Form>
+                    <Button className="btn-login" size="large" primary type="submit">{t("Entrar")}</Button>
+                    <Link to="/resetsenha">{t("Esqueci minha senha")}</Link>
+                    <Link to="/register">{t("Registre-se")}</Link>
+                </Form> 
             </Formik>
 
         </Authentication>

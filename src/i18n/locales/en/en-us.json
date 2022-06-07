@@ -1,5 +1,14 @@
 {
     "translation": {
-        "Login": "Login"
+        "Login": "Login",
+        "Formato inválido": "Invalid format",
+        "Campo E-mail obrigatório": "The e-mail field is required",
+        "Formato de senha inválido": "Invalid password format",
+        "Campo Senha obrigatório": "The password field is required",
+        "Senha": "Password",
+        "Entrar": "Sign In",
+        "Esqueci minha senha": "Forgot my password",
+        "Registre-se": "Sign up"
+
     }
 }
