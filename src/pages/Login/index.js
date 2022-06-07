@@ -9,11 +9,13 @@ import { Input, Button } from "semantic-ui-react";
 import { notify } from 'react-notify-toast';
 import { Link, useHistory } from "react-router-dom";
 import Axios from "axios";
+import { useTranslation } from 'react-i18next';
 
 
 function Login() {
 
     const history = useHistory();
+    const { t } = useTranslation();
 
     //ação do botão login
     const handleClickLogin = (values) => {
@@ -66,7 +68,7 @@ function Login() {
 
     return (
         <Authentication>
-            <h1>Login</h1>
+            <h1>{t('Login')}</h1>
             <Formik initialValues={{}}
                 onSubmit={handleClickLogin}
                 validationSchema={validationLogin}>
