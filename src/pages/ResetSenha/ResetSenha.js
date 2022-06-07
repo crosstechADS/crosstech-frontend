@@ -9,6 +9,7 @@ import { Input, Button } from "semantic-ui-react";
 import { notify } from 'react-notify-toast';
 import { Link, useHistory } from "react-router-dom";
 import { CgCornerDownLeft } from "react-icons/cg";
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -16,6 +17,7 @@ import { CgCornerDownLeft } from "react-icons/cg";
 function ResetSenha() {
 
     const history = useHistory();
+    const { t } = useTranslation();
 
     const routeChange = () =>{ 
         let path = `/login`;
@@ -41,19 +43,19 @@ function ResetSenha() {
     const validationSenha = yup.object().shape({
         email: yup
             .string()
-            .email("Formato inválido.")
-            .required("Campo E-mail obrigatório"),
+            .email(t("Formato inválido."))
+            .required(t("Campo E-mail obrigatório")),
         password: yup
             .string()
-            .min(8, "Formato de senha inválido")
-            .required("Campo Senha obrigatório."),
+            .min(8, t("Formato de senha inválido"))
+            .required(t("Campo Senha obrigatório.")),
     });
 
 
 
     return (
         <Authentication>
-            <h1>Mudança de Senha</h1>
+            <h1>{t('Mudança de Senha')}</h1>
             <Formik initialValues={{}}
                 onSubmit={handleClickReset}
                 validationSchema={validationSenha}>

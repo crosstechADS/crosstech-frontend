@@ -13,9 +13,11 @@ import { useEffect, useState } from 'react';
 import Api from '../../config/Api';
 import TreinosList from '../../components/TreinosList'
 import Loading from '../../components/Loading';
+import { useTranslation } from 'react-i18next';
 
 function Treinos() {
   let history = useHistory();
+  const { t } = useTranslation();
 
   const redirect = () => {
     history.push('../treinoregister')
@@ -34,15 +36,15 @@ function Treinos() {
 
   return (
     <div>
-      <h1>Treinos</h1>
+      <h1>{t('Treinos')}</h1>
       <div className='treinos-action'>
-        <Button className='treinos-button' onClick={redirect} content='Criar Treino' basic size='large' />
+        <Button className='treinos-button' onClick={redirect} content={t('Criar Treino')} basic size='large' />
 
         <Input
           type="text" size='large'
           className='treinos-search ui'
           icon={<Icon name='search' circular link />}
-          placeholder="Procurar exercício"
+          placeholder={t("Procurar exercício")}
           onChange={(event) => { setSearchItem(event.target.value); }}>
         </Input>
       </div>

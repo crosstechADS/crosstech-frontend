@@ -9,6 +9,7 @@ import { Redirect } from "react-router";
 import ExerciciosAuthentication from "../ExerciciosAuthentication/ExerciciosAuthentication";
 import { Link, useHistory } from "react-router-dom";
 import { CgCornerDownLeft } from "react-icons/cg";
+import { useTranslation } from 'react-i18next';
 
 
 function ExerciciosRegister() {
@@ -16,6 +17,7 @@ function ExerciciosRegister() {
     const [fileValue, setFileValue] = useState(null);
     const [tipoExercicio, setTipoExercicio] = useState([]);
     const [tipo, setTipo] = useState('');
+    const { t } = useTranslation();
 
     useEffect(() => {
         Api.get(`/selectTipoExercicio`)
@@ -71,7 +73,7 @@ function ExerciciosRegister() {
     });
 
     return <ExerciciosAuthentication>
-        <h1>Cadastro de Exercício</h1>
+        <h1>{t('Cadastro de Exercício')}</h1>
         <Formik initialValues={{}}
             onSubmit={handleClickRegister}
             validationSchema={validationCadastro}>
@@ -81,7 +83,7 @@ function ExerciciosRegister() {
                     <Field required as={Input} size="large"
                         name="exercicio"
                         className="form-field"
-                        placeholder="Nome do Exercício" />
+                        placeholder={t("Nome do Exercício")} />
                     <ErrorMessage
                         component="span"
                         name="exercicio"
@@ -93,7 +95,7 @@ function ExerciciosRegister() {
                     <Field as={Input} size="large"
                         name="exercicioObs"
                         className="form-field"
-                        placeholder="Observação Adicional" />
+                        placeholder={t("Observação Adicional")} />
                     <ErrorMessage
                         component="span"
                         name="exercicioObs"
@@ -104,7 +106,7 @@ function ExerciciosRegister() {
                 <Dropdown 
                     name="exercicioTipo" 
                     value={tipo} 
-                    placeholder="Tipo de exercício" 
+                    placeholder={t("Tipo de exercício")} 
                     search
                     selection
                     options={exercicioOptions} 
@@ -116,8 +118,8 @@ function ExerciciosRegister() {
                     }} />
                 </div>
 
-                <Button className="btn-login" size="large" primary type="submit">Cadastrar Exercício</Button>
-                <Button size="large" className="btn-voltar" onClick={routeChange}>Voltar<CgCornerDownLeft /></Button>
+                <Button className="btn-login" size="large" primary type="submit">{t('Cadastrar Exercício')}</Button>
+                <Button size="large" className="btn-voltar" onClick={routeChange}>{t('Voltar')}<CgCornerDownLeft /></Button>
             </Form>
 
         </Formik>

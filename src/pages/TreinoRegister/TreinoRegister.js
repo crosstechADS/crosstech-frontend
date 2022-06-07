@@ -9,9 +9,11 @@ import { Redirect } from "react-router";
 import TreinoAuthentication from "../TreinoAuthentication/TreinoAuthentication";
 import { Link, useHistory } from "react-router-dom";
 import { CgCornerDownLeft } from "react-icons/cg";
+import { useTranslation } from 'react-i18next';
 
 function TreinoRegister() {
     const history = useHistory();
+    const { t } = useTranslation();
 
     const routeChange = () =>{
         let path = `/treinos`;
@@ -61,7 +63,7 @@ function TreinoRegister() {
     });
 
     return <TreinoAuthentication>
-        <h1>Cadastro de Treino</h1>
+        <h1>{t('Cadastro de Treino')}</h1>
         <Formik initialValues={{}}
             onSubmit={handleClickRegister}
             validationSchema={validationCadastro}>
@@ -71,7 +73,7 @@ function TreinoRegister() {
                     <Field as={Input} size="large"
                         name="treino"
                         className="form-field"
-                        placeholder="Nome do Treino" />
+                        placeholder={t("Nome do Treino")} />
                     <ErrorMessage
                         component="span"
                         name="treino"
@@ -83,7 +85,7 @@ function TreinoRegister() {
                     <Field as={Input} size="large"
                         name="treinoObs"
                         className="form-field"
-                        placeholder="Observação Adicional" />
+                        placeholder={t("Observação Adicional")} />
                     <ErrorMessage
                         component="span"
                         name="treinoObs"
@@ -94,14 +96,14 @@ function TreinoRegister() {
                 <Dropdown 
                     name="aluno" 
                     value={aluno} 
-                    placeholder="Alunos" 
+                    placeholder={t("Alunos" )}
                     search
                     selection
                     options={alunoOptions} 
                     onChange={(e, data) => setAluno(data.value)} />
 
-                <Button className="btn-login" size="large" primary type="submit">Cadastrar Treino</Button>
-                <Button size="large" className="btn-voltar" onClick={routeChange}>Voltar<CgCornerDownLeft/></Button>
+                <Button className="btn-login" size="large" primary type="submit">{t('Cadastrar Treino')}</Button>
+                <Button size="large" className="btn-voltar" onClick={routeChange}>{t('Voltar')}<CgCornerDownLeft/></Button>
             </Form>
 
         </Formik>

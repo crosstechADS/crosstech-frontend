@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { Button, Form, Header, Icon, Image, Input, Modal } from 'semantic-ui-react';
 import { Field, Formik } from 'formik';
 import { notify } from "react-notify-toast";
+import { useTranslation } from 'react-i18next';
 
 function AlunoTreinos({ email }) {
     const { id } = useParams();
@@ -15,6 +16,7 @@ function AlunoTreinos({ email }) {
     const [treino, setTreino] = useState([]);
     const [exetre, setExetre] = useState([]);
     const [removeLoading, setRemoveLoading] = useState(false);
+    const { t } = useTranslation();
 
 
     useEffect(() => {
@@ -89,35 +91,35 @@ function ExercicioTreino(props) {
                 onClose={() => setFirstOpen(false)}
                 onOpen={() => setFirstOpen(true)}
                 open={firstOpen}
-                trigger={<Button color='black'>Realizar exercício</Button>}>
+                trigger={<Button color='black'>{t('Realizar exercício')}</Button>}>
                 <Modal.Header>{DS_EXERCICIO}</Modal.Header>
                 <Modal.Content image>
                     <Image size='large' src={DS_MIDIA_URL} />
                     <Header>{OBS_EXERCICIO_TREINO}</Header>
                     <Modal.Description>
                         <div className='stopwatch'>
-                            <h3>Cronômetro</h3>
+                            <h3>{t('Cronômetro')}</h3>
                             <div className='stopwatch-card'>
                                 <p>{formatTime(timer)}</p>
                                 <div className='buttons'>
                                     {
                                         !isActive && !isPaused ?
-                                            <button onClick={handleStart}>Começar</button>
+                                            <button onClick={handleStart}>{t('Começar')}</button>
                                             : (
-                                                isPaused ? <button onClick={handlePause}>Parar</button>
-                                                    : <button onClick={handleResume}>Resumir</button>
+                                                isPaused ? <button onClick={handlePause}>{t('Parar')}</button>
+                                                    : <button onClick={handleResume}>{t('Resumir')}</button>
                                             )
                                     }
-                                    <button onClick={handleReset} disabled={!isActive}>Resetar</button>
+                                    <button onClick={handleReset} disabled={!isActive}>{t('Resetar')}</button>
                                 </div>
                             </div>
                         </div>
                     </Modal.Description>
                 </Modal.Content>
                 <Modal.Actions>
-                    <Button color='black' onClick={() => setFirstOpen(false)}>Cancelar</Button>
+                    <Button color='black' onClick={() => setFirstOpen(false)}>{t('Cancelar')}</Button>
                     <Button onClick={() => setSecondOpen(true)} primary color='green'>
-                        Continuar <Icon name='right chevron' />
+                        {t('Continuar')} <Icon name='right chevron' />
                     </Button>
                 </Modal.Actions>
                 <Modal
@@ -129,20 +131,20 @@ function ExercicioTreino(props) {
                             <Formik initialValues={{}}>
                                 <Form>
                                     <div className='aluno-exercicio-form'>
-                                        <label>Número de repetições</label>
+                                        <label>{t('Número de repetições')}</label>
                                         <Field as={Input} size='large'
                                             name='repeticoes'
                                             className='form-field'
-                                            placeholder='Número de repetições'
+                                            placeholder={t('Número de repetições')}
                                             onChange={(event) => setNrRepeticao(event.target.value)}
                                             value={nrRepeticao} />
                                     </div>
                                     <div className='aluno-exercicio-form'>
-                                        <label>Peso utilizado</label>
+                                        <label>{t('Peso utilizado')}</label>
                                         <Field as={Input} size='large'
                                             name='pesagem'
                                             className='form-field'
-                                            placeholder='Peso utilizado'
+                                            placeholder={t('Peso utilizado')}
                                             onChange={(event) => setPeso(event.target.value)}
                                             value={peso} />
                                     </div>
@@ -151,9 +153,9 @@ function ExercicioTreino(props) {
                         </Modal.Description>
                     </Modal.Content>
                     <Modal.Actions>
-                        <Button color='black' onClick={() => setSecondOpen(false)}>Cancelar</Button>
+                        <Button color='black' onClick={() => setSecondOpen(false)}>{t('Cancelar')}</Button>
                         <Button onClick={realizarExercicio} primary color='green'>
-                            Finalizar <Icon name='right chevron' />
+                            {t('Finalizar')} <Icon name='right chevron' />
                         </Button>
                     </Modal.Actions>
                 </Modal>

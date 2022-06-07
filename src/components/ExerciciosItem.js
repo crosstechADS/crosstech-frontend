@@ -3,10 +3,11 @@ import { Link, useHistory } from 'react-router-dom';
 import { Container, Button, Icon, Image, Item, Label } from "semantic-ui-react";
 import { AiOutlinePlus } from 'react-icons/ai';
 import "./ExerciciosItem.css"
+import { useTranslation } from 'react-i18next';
 
 export default function ExerciciosItem(props) {
     let history = useHistory();
-
+    const { t } = useTranslation();
     const redirect = () => {
         history.push(`/exercicio/${ID_EXERCICIO}`);
     }
@@ -22,7 +23,7 @@ export default function ExerciciosItem(props) {
                         <Item.Header>{DS_EXERCICIO}</Item.Header>
                         <Item.Description>{OBS_EXERCICIO}</Item.Description>
                         <Item.Extra>
-                            <Button primary floated="right" onClick={redirect}>Detalhes <Icon name="right chevron" /></Button>
+                            <Button primary floated="right" onClick={redirect}>{t('Detalhes')} <Icon name="right chevron" /></Button>
                             <Label>{DS_TIPO_EXERCICIO}</Label>
                         </Item.Extra>
                     </Item.Content>

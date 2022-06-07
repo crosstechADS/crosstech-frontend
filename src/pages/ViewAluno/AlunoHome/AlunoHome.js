@@ -3,10 +3,12 @@ import { useHistory } from 'react-router-dom';
 import './AlunoHome.css'
 import Api from '../../../config/Api';
 import Loading from '../../../components/Loading';
+import { useTranslation } from 'react-i18next';
 
 function AlunoHome({ email }) {
     const [treinos, setTreinos] = useState([]);
     const [removeLoading, setRemoveLoading] = useState(false);
+    const { t } = useTranslation();
 
     useEffect(() => {
         Api.post('/treinoSelect', {
@@ -20,7 +22,7 @@ function AlunoHome({ email }) {
     return (
         <div>
             <div className='aluno-home'>
-                <h2>Treinos</h2>
+                <h2>{t('Treinos')}</h2>
 
                 {treinos.map((data) => {
 
@@ -52,7 +54,7 @@ function Treinos(props) {
         <div className='treino'>
             <h2>{DS_TREINO}</h2>
             <p>{OBS_TREINO}</p>
-            <button className='aluno-home-btn' onClick={redirect}>Realizar treino</button>
+            <button className='aluno-home-btn' onClick={redirect}>{t('Realizar treino')}</button>
         </div>
     )
 }
