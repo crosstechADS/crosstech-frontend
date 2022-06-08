@@ -18,7 +18,14 @@ function Alunos() {
 
   const [searchItem, setSearchItem] = useState("");
   const [alunos, setAlunos] = useState([]);
+  const [itensPerPage, setItensPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(0);
   const { t } = useTranslation();
+
+  const pages = Math.ceil(alunos.length / itensPerPage);
+  const startIndex = currentPage * itensPerPage;
+  const endIndex = startIndex + itensPerPage;
+  const currentItens = alunos.slice(startIndex, endIndex);
 
   useEffect(() => {
     Api.get(`/alunosSelect`)
@@ -40,17 +47,30 @@ function Alunos() {
           onChange={(event) => { setSearchItem(event.target.value); }}>
         </Input>
       </div>
-      <div className="alunos-container">
-        {typeof alunos !== "undefined" && alunos.filter((value) => {
+      <div>
+        <select value={itensPerPage} onChange={(e) => setItensPerPage(Number(e.target.value))}>
+          <option value={5}>5</option>
+          <option value={10}>10</option>
+          <option value={15}>15</option>
+          <option value={20}>20</option>
+        </select>
+      </div>
+      {/*<div className="alunos-container">
+        {typeof alunos !== "undefined" && alunos.filter((value) => { 
           if (searchItem == "") {
             return value;
           } else if (value.DS_NOME.toLowerCase().includes(searchItem.toLowerCase())) {
             return value;
           }
-        }).map((value) => {
-          return <AlunosCards key={value.ID_USUARIO}
-            listCard={alunos} setListCard={setAlunos}
-            alunos={value} />
+        }) */}
+        {currentItens.map((value) => {
+        return <div className='item'>
+          <span>{value.DS_NOME}</span> - <span className='cpf'>{value.DS_CPF}</span>
+        </div>
+      })}
+      <div>
+        {Array.from(Array(pages), (alunos, index) => {
+          return <button value={index} onClick={(e) => setCurrentPage(Number(e.target.value))} className='pageButton'>{index +1}</button>
         })}
       </div>
     </div>

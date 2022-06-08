@@ -13,3 +13,26 @@
 .alunos-search{
   width: 50rem;
 }
+
+.item {
+  width: 500px;
+  padding: 1em;
+  border: 1px solid black;
+  justify-content: space-around;
+}
+
+.pageButton {
+  border: 1px solid black;
+}
+
+.alunos-container {
+  display: flexbox;
+  justify-content: center;
+  align-self: center;
+  margin: auto;
+}
+
+.cpf {
+  align-content: flex-end;
+  text-align: right;
+}
