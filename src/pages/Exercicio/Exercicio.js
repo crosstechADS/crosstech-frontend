@@ -9,12 +9,14 @@ import { Input, Button, TextArea, Select, Modal, Icon, Header, Dropdown } from "
 import { CgCornerDownLeft } from "react-icons/cg";
 import { notify } from "react-notify-toast";
 import * as yup from "yup";
+import { useTranslation } from 'react-i18next';
 
 
 function Exercicio({ perfil }) {
     const { id } = useParams();
 
     const history = useHistory();
+    const { t } = useTranslation();
 
     const routeChange = () => {
         history.push("/exercicios");

@@ -54,7 +54,7 @@ function Treinos(props) {
         <div className='treino'>
             <h2>{DS_TREINO}</h2>
             <p>{OBS_TREINO}</p>
-            <button className='aluno-home-btn' onClick={redirect}>{t('Realizar treino')}</button>
+            <button className='aluno-home-btn' onClick={redirect}>'Realizar treino'</button>
         </div>
     )
 }
