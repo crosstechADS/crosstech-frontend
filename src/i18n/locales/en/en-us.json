@@ -77,6 +77,10 @@
         "Cadastro de Exercício": "Exercise Register",
         "Nome do Exercício": "Exercise Name",
         "Tipo de exercício": "Exercise type",
-        "Cadastrar Exercício": "Register Exercise"
+        "Cadastrar Exercício": "Register Exercise",
+        "Tipo do Exercicício": "Exercise type",
+        "Mídia do Exercício": "Exercise Midia",
+        "Tem certeza que quer deletar esse exercício?": "Are you sure you wanna delete this exercise",
+        "Procurar aluno": "Search student"
     }
 }

@@ -130,10 +130,10 @@ function Exercicio({ perfil }) {
             {exercicio.map((data) => {
                 return (
                     <div className='exercicio'>
-                        <Button size="large" className="btn-voltar" onClick={routeChange}>Voltar<CgCornerDownLeft /></Button>
+                        <Button size="large" className="btn-voltar" onClick={routeChange}>{t('Voltar')}<CgCornerDownLeft /></Button>
                         <Container customClass='column'>
                             <div className='exercicio-container'>
-                                <h1>Exercício: {data.DS_EXERCICIO}</h1>
+                                <h1>{t('Exercício')}: {data.DS_EXERCICIO}</h1>
                                 {perfil !== "aluno" &&
                                     <button onClick={toggleExercicioForm} className='btn'>
                                         {!showExercicioForm ? 'Editar Exercicio' : 'Fechar'}
@@ -142,10 +142,10 @@ function Exercicio({ perfil }) {
                                     <div className='exercicio-detalhes'>
                                         <img className='exercicio-midia' src={data.DS_MIDIA_URL}></img>
                                         <p>
-                                            <span>Nome: </span>{data.DS_EXERCICIO}
+                                            <span>{t('Nome')}: </span>{data.DS_EXERCICIO}
                                         </p>
                                         <p>
-                                            <span>Descrição: </span>{data.OBS_EXERCICIO}
+                                            <span>{t('Descrição')}: </span>{data.OBS_EXERCICIO}
                                         </p>
                                     </div>
                                 ) : (
@@ -154,12 +154,12 @@ function Exercicio({ perfil }) {
                                             validationSchema={validationCadastro}>
                                             <Form>
                                                 <div className="update-form-group">
-                                                    <label>Nome do Exercício</label>
+                                                    <label>{t('Nome do Exercício')}</label>
 
                                                     <Field required as={Input} size="large"
                                                         name="exercicio"
                                                         className="form-field"
-                                                        placeholder="Nome do Exercício"
+                                                        placeholder={t("Nome do Exercício")}
                                                         onChange={(event) => setNomeExercicio(event.target.value)}
                                                         value={nomeExercicio} />
                                                     <ErrorMessage
@@ -169,11 +169,11 @@ function Exercicio({ perfil }) {
                                                     />
                                                 </div>
                                                 <div className="update-form-group">
-                                                    <label>Descrição do Exercício</label>
+                                                    <label>{t('Descrição do Exercício')}</label>
                                                     <Field required as={Input} size="large"
                                                         name="exercicioObs"
                                                         className="form-field"
-                                                        placeholder="Descrição do Exercício"
+                                                        placeholder={t("Descrição do Exercício")}
                                                         onChange={(event) => setObsExercicio(event.target.value)}
                                                         value={obsExercicio} />
                                                     <ErrorMessage
@@ -183,19 +183,19 @@ function Exercicio({ perfil }) {
                                                     />
                                                 </div>
 
-                                                <label>Tipo do Exercício</label>
+                                                <label>{t('Tipo do Exercício')}</label>
                                                 <div className="update-form-group">
                                                     <Dropdown
                                                         name="exercicioTipo"
                                                         value={tipoExercicio}
-                                                        placeholder="Tipo de exercício"
+                                                        placeholder={t("Tipo de exercício")}
                                                         search
                                                         selection
                                                         options={tipoOptions}
                                                         onChange={(e, data) => setTipoExercicio(data.value)} />
                                                 </div>
 
-                                                <label>Mídia do Exercício</label>
+                                                <label>{t('Mídia do Exercício')}</label>
                                                 <div className="update-form-group">
                                                     <input id="file" name="file" type="file" onChange={(event) => {
                                                         setFileValue(event.currentTarget.files[0]);
@@ -203,23 +203,23 @@ function Exercicio({ perfil }) {
                                                 </div>
 
                                                 <div className='update-form-actions'>
-                                                    <Button className="btn-update" size="large" onClick={editExercicio}>Confirmar Edição</Button>
+                                                    <Button className="btn-update" size="large" onClick={editExercicio}>{t('Confirmar Edição')}</Button>
                                                     <Modal
                                                         closeIcon
                                                         open={open}
-                                                        trigger={<Button size="large" className='btn-update'>Deletar</Button>}
+                                                        trigger={<Button size="large" className='btn-update'>{t('Deletar')}</Button>}
                                                         onClose={() => setOpen(false)}
                                                         onOpen={() => setOpen(true)}
                                                     >
                                                         <Modal.Content>
-                                                            <h4>Tem certeza que quer deletar esse exercício?</h4>
+                                                            <h4>{t('Tem certeza que quer deletar esse exercício?')}</h4>
                                                         </Modal.Content>
                                                         <Modal.Actions>
                                                             <Button onClick={() => setOpen(false)}>
-                                                                <Icon name='remove' /> Cancelar
+                                                                <Icon name='remove' /> {t('Cancelar')}
                                                             </Button>
                                                             <Button color='red' onClick={deleteExercicio}>
-                                                                <Icon name='checkmark' /> Deletar
+                                                                <Icon name='checkmark' /> {t('Deletar')}
                                                             </Button>
                                                         </Modal.Actions>
                                                     </Modal>

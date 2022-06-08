@@ -16,10 +16,12 @@ import {Input, Icon} from 'semantic-ui-react'
 import Loading from '../../components/Loading'
 import ExerciciosItem from '../../components/ExerciciosItem';
 import 'semantic-ui-css/semantic.css';
+import { useTranslation } from 'react-i18next';
 
 function Exercicios({perfil}) {
   let history = useHistory();
 
+  const { t } = useTranslation();
   const redirect = () => {
     history.push('../exerciciosregister')
   }
@@ -41,7 +43,7 @@ function Exercicios({perfil}) {
 
   return (
     <div>
-      <h1>Exercícios</h1>
+      <h1>{t('Exercícios')}</h1>
       <div className='exercicios-action'>
         {perfil !== "aluno" && 
         <Button className="exercicios-button" size='large'
@@ -51,7 +53,7 @@ function Exercicios({perfil}) {
           type="text" size='large'
           className='exercicios-search ui'
           icon={<Icon name='search' circular link />}
-          placeholder="Procurar exercício"
+          placeholder={t("Procurar exercício")}
           onChange={(event) => {setSearchItem(event.target.value);}}>
         </Input>
       </div>

@@ -12,11 +12,13 @@ import { Link, useHistory } from "react-router-dom";
 import { Input, Icon } from 'semantic-ui-react'
 import AlunosCards from '../../components/AlunosCards';
 import Api from '../../config/Api';
+import { useTranslation } from 'react-i18next';
 
 function Alunos() {
 
   const [searchItem, setSearchItem] = useState("");
   const [alunos, setAlunos] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     Api.get(`/alunosSelect`)
@@ -28,13 +30,13 @@ function Alunos() {
 
   return (
     <div>
-      <h1>Alunos</h1>
+      <h1>t{('Alunos')}</h1>
       <div className='alunos-action'>
         <Input
           type="text" size='large'
           className='alunos-search ui'
           icon={<Icon name='search' circular link />}
-          placeholder="Procurar aluno"
+          placeholder={t("Procurar aluno")}
           onChange={(event) => { setSearchItem(event.target.value); }}>
         </Input>
       </div>
