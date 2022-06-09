@@ -37,7 +37,7 @@ function Alunos() {
 
   return (
     <div>
-      <h1>t{('Alunos')}</h1>
+      <h1>{t('Alunos')}</h1>
       <div className='alunos-action'>
         <Input
           type="text" size='large'
@@ -65,7 +65,7 @@ function Alunos() {
         }) */}
         {currentItens.map((value) => {
         return <div className='item'>
-          <span>{value.DS_NOME}</span> - <span className='cpf'>{value.DS_CPF}</span>
+          <span>{value.DS_NOME} {value.DS_CPF}</span>
         </div>
       })}
       <div>
