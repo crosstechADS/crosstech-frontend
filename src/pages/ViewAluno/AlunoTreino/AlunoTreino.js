@@ -12,11 +12,10 @@ import { useTranslation } from 'react-i18next';
 
 function AlunoTreinos({ email }) {
     const { id } = useParams();
-
+    
     const [treino, setTreino] = useState([]);
     const [exetre, setExetre] = useState([]);
     const [removeLoading, setRemoveLoading] = useState(false);
-    const { t } = useTranslation();
 
 
     useEffect(() => {
@@ -61,6 +60,7 @@ function ExercicioTreino(props) {
     const [secondOpen, setSecondOpen] = useState(false);
     const [nrRepeticao, setNrRepeticao] = useState('');
     const [peso, setPeso] = useState('');
+    const { t } = useTranslation();
 
     const realizarExercicio = () => {
         Api.post(`/AlunoTreinoRegister`, {
