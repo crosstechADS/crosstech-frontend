@@ -21,11 +21,14 @@ function Alunos() {
   const [itensPerPage, setItensPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(0);
   const { t } = useTranslation();
+  // const redirect = () => {
+  //   history.push(`/aluno/${ID_USUARIO}`);
+  // }
 
   const pages = Math.ceil(alunos.length / itensPerPage);
   const startIndex = currentPage * itensPerPage;
   const endIndex = startIndex + itensPerPage;
-  const currentItens = alunos.slice(startIndex, endIndex);
+  
 
   useEffect(() => {
     Api.get(`/alunosSelect`)
@@ -34,6 +37,8 @@ function Alunos() {
       }
       )
   }, []);
+
+  const currentItens = alunos.slice(startIndex, endIndex);
 
   return (
     <div>
@@ -47,31 +52,41 @@ function Alunos() {
           onChange={(event) => { setSearchItem(event.target.value); }}>
         </Input>
       </div>
-      <div>
-        <select value={itensPerPage} onChange={(e) => setItensPerPage(Number(e.target.value))}>
-          <option value={5}>5</option>
-          <option value={10}>10</option>
-          <option value={15}>15</option>
-          <option value={20}>20</option>
-        </select>
-      </div>
-      {/*<div className="alunos-container">
-        {typeof alunos !== "undefined" && alunos.filter((value) => { 
-          if (searchItem == "") {
-            return value;
-          } else if (value.DS_NOME.toLowerCase().includes(searchItem.toLowerCase())) {
-            return value;
-          }
-        }) */}
-        {currentItens.map((value) => {
-        return <div className='item'>
-          <span>{value.DS_NOME} {value.DS_CPF}</span>
+      <div className='item-container'>
+        <div className='item-action'>
+          <select value={itensPerPage} onChange={(e) => setItensPerPage(Number(e.target.value))}>
+            <option value={5}>5</option>
+            <option value={10}>10</option>
+            <option value={15}>15</option>
+            <option value={20}>20</option>
+          </select>
         </div>
-      })}
-      <div>
-        {Array.from(Array(pages), (alunos, index) => {
-          return <button value={index} onClick={(e) => setCurrentPage(Number(e.target.value))} className='pageButton'>{index +1}</button>
+        <div className="alunos-container">
+          {typeof currentItens !== "undefined" && currentItens.filter((value) => { 
+            if (searchItem == "") {
+              return value;
+            } else if (value.DS_NOME.toLowerCase().includes(searchItem.toLowerCase())) {
+              return value;
+            }
+          })
+          .map((value) => {
+          return <div className='item-container'>
+            <div className='item'>
+              <span >Nome: </span>
+              <span >{value.DS_NOME} - </span>
+              <span > CPF: </span>
+              <span >{value.DS_CPF}</span>
+              {/* <Button primary floated="right" onClick={redirect}>{t('Detalhes')} <Icon name="right chevron" /></Button> */}
+            </div>
+          </div>
         })}
+        
+        </div>
+        <div className='item-action'>
+          {Array.from(Array(pages), (alunos, index) => {
+            return <button value={index} onClick={(e) => setCurrentPage(Number(e.target.value))} className='pageButton'>{index +1}</button>
+          })}
+        </div>
       </div>
     </div>
   )

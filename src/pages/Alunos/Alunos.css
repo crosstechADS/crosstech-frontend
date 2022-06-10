@@ -16,13 +16,17 @@
 
 .item {
   width: 500px;
-  padding: 1em;
+  padding: 0.5em;
   border: 1px solid black;
   justify-content: space-around;
+  color: black;
+  font-weight: 100;
 }
 
 .pageButton {
   border: 1px solid black;
+  color: black;
+  margin-right: 5px;
 }
 
 .alunos-container {
@@ -32,7 +36,14 @@
   margin: auto;
 }
 
-.cpf {
-  align-content: flex-end;
-  text-align: right;
+.item-container {
+  padding: 5px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center !important;
 }
+
+.item-action {
+  width: fit-content;
+}
+
