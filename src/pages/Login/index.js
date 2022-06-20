@@ -31,9 +31,10 @@ function Login() {
             else {
                 console.log('token: ', Response.data)
                 const tokenCriado = Response.data.token;
+                const tipoPerfil = Response.data.perfil;
                 localStorage.setItem("auth", Response.data.auth);
                 localStorage.setItem("token", tokenCriado);
-                localStorage.setItem("tipoPerfil", Response.data.perfil);
+                localStorage.setItem("tipoPerfil", tipoPerfil);
                 localStorage.setItem("email", Response.data.Email);
                 Api.post(`/home`, {
                     token: tokenCriado
@@ -44,7 +45,12 @@ function Login() {
                         history.push("/login");
                     }
                     else {
-                        history.push("/home");
+                        if(tipoPerfil === "professor"){
+                            history.push("/home");
+                        }
+                        if(tipoPerfil === "aluno"){
+                            history.push('/alunohome');
+                        }
                     }
                 })
             }
