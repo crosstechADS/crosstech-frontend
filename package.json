@@ -2,11 +2,18 @@
   "name": "frontcrosstech",
   "version": "0.1.0",
   "private": true,
+  "engines":{
+    "node": "16.15.1"
+  },
   "dependencies": {
+    "@babel/core": "^7.18.5",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-react": "^7.17.12",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.23.0",
+    "babel-loader": "^8.2.5",
     "formik": "^2.2.9",
     "i18next": "^21.8.8",
     "react": "^17.0.2",
