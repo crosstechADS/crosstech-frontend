@@ -1,10 +1,10 @@
 import "./style.css";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import Api from '../../config/Api';
 import Authentication from '../Authentication';
-import { Input, Button } from "semantic-ui-react";
+import { Input, Button, Dropdown } from "semantic-ui-react";
 import { notify } from "react-notify-toast";
 import { useHistory } from "react-router-dom";
 import { CgCornerDownLeft } from "react-icons/cg";
@@ -14,11 +14,28 @@ import { useTranslation } from 'react-i18next';
 function Register() {
     const { t } = useTranslation();
     const history = useHistory();
+    const [tiposPerfil, setTiposPerfil] = useState([]);
+    const [tipo, setTipo] = useState('');
+    const [tipoNome, setTipoNome] = useState('');
 
     const routeChange = () => {
         let path = `/login`;
         history.push(path);
     }
+
+    useEffect(() => {
+        Api.get(`/tipoPerfilSelect`)
+            .then((response) => {
+                setTiposPerfil(response.data);
+            });
+    }, []);
+
+    const tipoPerfilOptions = tiposPerfil.map((value) => ({
+        key: value.DS_TIPO_PERFIL,
+        text: value.DS_TIPO_PERFIL,
+        value: value.ID_TIPO_PERFIL
+    }));
+
 
     //ação do botao cadastrar
     const handleClickRegister = (values) => {
@@ -28,7 +45,8 @@ function Register() {
             password: values.password,
             dataInclusao: values.dataInclusao,
             dataExclusao: values.dataExclusao,
-            profile: values.profile,
+            profile: tipoNome,
+            idProfile: tipo,
             cpf: values.cpf,
             dataNascimento: values.dataNascimento,
             cep: values.cep,
@@ -39,7 +57,6 @@ function Register() {
             bairro: values.bairro
         }).then((Response) => {
             const isError = !Response.data.msg.includes("sucesso");
-            console.log(isError);
             notify.show(Response.data.msg, isError ? "error" : "success");
             if (isError) {
                 history.push("/register");
@@ -59,10 +76,6 @@ function Register() {
             .string()
             .email(t("Formato inválido."))
             .required(t("Campo E-mail obrigatório")),
-        profile: yup
-            .string()
-            .min(1, t("Formato inválido."))
-            .required(t("Campo Tipo perfil obrigatório")),
         password: yup
             .string()
             .min(8, t("Formato de senha inválido"))
@@ -117,13 +130,6 @@ function Register() {
                 setFieldValue('bairro', data.bairro);
             });
     }
-
-    const options = [
-        { key: 'Gerente', text: 'Gerente', value: 'gerente' },
-        { key: 'Recepcionista', text: 'Recepcionista', value: 'Recepcionista' },
-        { key: 'Professor', text: 'Professor', value: 'Professor' },
-        { key: 'Aluno', text: 'Aluno', value: 'Aluno' }
-    ]
 
     return <Authentication>
         <h1>{t("Cadastro")}</h1>
@@ -281,16 +287,23 @@ function Register() {
                             />
                         </div>
                         <div className="login-form-group">
-                            <Field as={Input} size="large"
+                            <Dropdown
                                 name="profile"
-                                className="form-field"
-                                placeholder={t("Tipo Perfil")}
-                            />
+                                value={tipo}
+                                placeholder={t("Tipo de perfil")}
+                                search
+                                selection
+                                options={tipoPerfilOptions}
+                                onChange={(e, data) => {
+                                    setTipo(data.value);
+                                    setTipoNome(data.text);
+                                }} />
                             <ErrorMessage
                                 component="span"
                                 name="profile"
                                 className="form-error"
                             />
+
                         </div>
                     </div>
 

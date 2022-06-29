@@ -25,6 +25,7 @@ function Login() {
             password: values.password
         }).then((Response) => {
             const isError = !Response.data.msg.includes("sucesso");
+            notify.show(Response.data.msg, isError ? "error" : "sucess");
             if (isError) {
                 history.push("/login");
             }
@@ -45,10 +46,10 @@ function Login() {
                         history.push("/login");
                     }
                     else {
-                        if(tipoPerfil === "professor"){
+                        if (tipoPerfil === "professor") {
                             history.push("/home");
                         }
-                        if(tipoPerfil === "aluno"){
+                        if (tipoPerfil === "aluno") {
                             history.push('/alunohome');
                         }
                     }
@@ -98,7 +99,7 @@ function Login() {
                     <Button className="btn-login" size="large" primary type="submit">{t("Entrar")}</Button>
                     <Link to="/resetsenha">{t("Esqueci minha senha")}</Link>
                     <Link to="/register">{t("Registre-se")}</Link>
-                </Form> 
+                </Form>
             </Formik>
 
         </Authentication>
