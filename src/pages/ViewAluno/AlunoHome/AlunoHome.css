@@ -1,11 +1,16 @@
-.aluno-home, .aluno-home h1{
+.aluno-home,
+.aluno-home h1 {
     padding: 10px;
     text-align: left;
     background-color: rgb(41, 40, 40);
     color: white;
 }
 
-.treino{
+.aluno-container {
+    background-color: rgb(41, 40, 40);
+}
+
+.treino {
     background-color: rgb(255, 255, 255);
     color: #000000;
     border-radius: 17px;
@@ -14,24 +19,37 @@
     margin-bottom: 10px;
 }
 
-.treino p{
-    font-size: 18px; 
+.treino p {
+    font-size: 18px;
     color: rgb(83, 83, 83);
 }
 
-.aluno-home-btn{
+.aluno-home-btn {
     font-size: 15px;
     border-radius: 17px;
     background-color: rgb(41, 40, 40);
     color: #fafafa;
 }
 
-.aluno-home-btn:hover{
+.aluno-home-btn:hover {
     transition: 0.5s;
     color: rgb(41, 40, 40);
     background-color: #fafafa;
 }
 
-.grafico{
+.grafico {
     width: 100%;
+}
+
+@media screen and (min-width: 600px) {
+    .aluno-home {
+        margin: 0px 230px;
+        padding: 0px 24px;
+        text-align: center;
+    }
+
+    .aluno-home h2 {
+        padding-top: 15px
+    }
+
 }

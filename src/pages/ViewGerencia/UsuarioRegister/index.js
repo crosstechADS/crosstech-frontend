@@ -18,7 +18,7 @@ function Register() {
     const [tipo, setTipo] = useState('');
 
     const routeChange = () => {
-        let path = `/login`;
+        let path = `/gerenciahome`;
         history.push(path);
     }
 

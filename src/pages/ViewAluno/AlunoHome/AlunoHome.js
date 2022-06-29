@@ -39,7 +39,7 @@ function AlunoHome({ email }) {
     }, []);
 
     return (
-        <div>
+        <div className='aluno-container'>
             <div className='aluno-home'>
                 <h2>{t('Treinos')}</h2>
 
@@ -54,24 +54,24 @@ function AlunoHome({ email }) {
                 <div className='grafico'>
                     <h2>Evolução Física</h2>
                     <ResponsiveContainer width="100%" height={400}>
-                    <ComposedChart
-                        data={treinosFeitos}
-                        margin={{
-                            top: 20,
-                            right: 20,
-                            bottom: 20,
-                            left: 0,
-                        }}
-                    >
-                        <CartesianGrid stroke="#f5f5f5" />
-                        <XAxis dataKey="Id" scale="band" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Bar dataKey="Repetições" barSize={20} fill="#413ea0" />
-                        <Line type="monotone" dataKey="Pesagem" stroke="#ff7300" />
-                        <Scatter dataKey="Tempo" fill="red" />
-                    </ComposedChart>
+                        <ComposedChart
+                            data={treinosFeitos}
+                            margin={{
+                                top: 20,
+                                right: 20,
+                                bottom: 20,
+                                left: 0,
+                            }}
+                        >
+                            <CartesianGrid stroke="#f5f5f5" />
+                            <XAxis dataKey="Id" scale="band" />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Bar dataKey="Repetições" barSize={20} fill="#413ea0" />
+                            <Line type="monotone" dataKey="Pesagem" stroke="#ff7300" />
+                            <Scatter dataKey="Tempo" fill="red" />
+                        </ComposedChart>
                     </ResponsiveContainer>
                 </div>
 
