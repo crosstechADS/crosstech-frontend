@@ -14,7 +14,11 @@ import AlunosCards from '../../components/AlunosCards';
 import Api from '../../config/Api';
 import { useTranslation } from 'react-i18next';
 
-function Alunos() {
+function Alunos({ perfil }) {
+  const history = useHistory();
+  const redirect = () => {
+    history.push('/alunoregister');
+  }
 
   const [searchItem, setSearchItem] = useState("");
   const [alunos, setAlunos] = useState([]);
@@ -28,7 +32,7 @@ function Alunos() {
   const pages = Math.ceil(alunos.length / itensPerPage);
   const startIndex = currentPage * itensPerPage;
   const endIndex = startIndex + itensPerPage;
-  
+
 
   useEffect(() => {
     Api.get(`/alunosSelect`)
@@ -44,6 +48,10 @@ function Alunos() {
     <div>
       <h1>{t('Alunos')}</h1>
       <div className='alunos-action'>
+        {perfil === "recepcionista" &&
+          <Button className="alunos-button" size='large'
+            onClick={redirect}
+            content='Cadastrar Aluno' basic />}
         <Input
           type="text" size='large'
           className='alunos-search ui'
@@ -62,29 +70,29 @@ function Alunos() {
           </select>
         </div>
         <div className="alunos-container">
-          {typeof currentItens !== "undefined" && currentItens.filter((value) => { 
+          {typeof currentItens !== "undefined" && currentItens.filter((value) => {
             if (searchItem == "") {
               return value;
             } else if (value.DS_NOME.toLowerCase().includes(searchItem.toLowerCase())) {
               return value;
             }
           })
-          .map((value) => {
-          return <div className='item-container'>
-            <div className='item'>
-              <span >Nome: </span>
-              <span >{value.DS_NOME} - </span>
-              <span > CPF: </span>
-              <span >{value.DS_CPF}</span>
-              {/* <Button primary floated="right" onClick={redirect}>{t('Detalhes')} <Icon name="right chevron" /></Button> */}
-            </div>
-          </div>
-        })}
-        
+            .map((value) => {
+              return <div className='item-container'>
+                <div className='item'>
+                  <span >Nome: </span>
+                  <span >{value.DS_NOME} - </span>
+                  <span > CPF: </span>
+                  <span >{value.DS_CPF}</span>
+                  {/* <Button primary floated="right" onClick={redirect}>{t('Detalhes')} <Icon name="right chevron" /></Button> */}
+                </div>
+              </div>
+            })}
+
         </div>
         <div className='item-action'>
           {Array.from(Array(pages), (alunos, index) => {
-            return <button value={index} onClick={(e) => setCurrentPage(Number(e.target.value))} className='pageButton'>{index +1}</button>
+            return <button value={index} onClick={(e) => setCurrentPage(Number(e.target.value))} className='pageButton'>{index + 1}</button>
           })}
         </div>
       </div>

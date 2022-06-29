@@ -41,7 +41,7 @@ function Login() {
                     token: tokenCriado
                 }).then((Response) => {
                     const isError = !Response.data.msg.includes("Autenticado");
-                    notify.show(Response.data.msg, isError ? "error" : "sucess");
+                    notify.show(Response.data.msg, isError ? "error" : "success");
                     if (isError) {
                         history.push("/login");
                     }
@@ -51,6 +51,12 @@ function Login() {
                         }
                         if (tipoPerfil === "aluno") {
                             history.push('/alunohome');
+                        }
+                        if (tipoPerfil === "recepcionista") {
+                            history.push('/recepcaohome');
+                        }
+                        if (tipoPerfil === "gerencia") {
+                            history.push('/gerenciahome');
                         }
                     }
                 })
@@ -98,7 +104,6 @@ function Login() {
                     </div>
                     <Button className="btn-login" size="large" primary type="submit">{t("Entrar")}</Button>
                     <Link to="/resetsenha">{t("Esqueci minha senha")}</Link>
-                    <Link to="/register">{t("Registre-se")}</Link>
                 </Form>
             </Formik>
 

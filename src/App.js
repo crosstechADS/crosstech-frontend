@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import Home from './pages/Home';
 import Login from './pages/Login';
-import Register from './pages/Register';
+import Register from './pages/ViewGerencia/UsuarioRegister';
 import Exercicios from './pages/Exercicios/Exercicios';
 import Exercicio from './pages/Exercicio/Exercicio.js';
 import ExerciciosRegister from './pages/ExerciciosRegister/ExerciciosRegister';
@@ -23,6 +23,9 @@ import ResetSenha from './pages/ResetSenha/ResetSenha';
 import Alunos from './pages/Alunos/Alunos';
 import AlunoHome from './pages/ViewAluno/AlunoHome/AlunoHome';
 import AlunoTreino from './pages/ViewAluno/AlunoTreino/AlunoTreino'
+import GerenciaHome from './pages/ViewGerencia/GerenciaHome/GerenciaHome';
+import RecepcaoHome from './pages/ViewRecepcao/RecepcaoHome/RecepcaoHome';
+import AlunoRegister from './pages/ViewRecepcao/AlunoRegister/AlunoRegister';
 
 // import { Container } from './styles';
 
@@ -51,6 +54,7 @@ function App() {
         </Route>
 
         <Route path="/register">
+          <Navbar perfil={perfil} />
           <Register />
         </Route>
 
@@ -92,7 +96,7 @@ function App() {
 
         <Route path="/alunos">
           <Navbar perfil={perfil} />
-          <Alunos />
+          <Alunos perfil={perfil} />
         </Route>
 
         <Route path="/alunohome">
@@ -102,7 +106,22 @@ function App() {
 
         <Route path='/alunotreino/:id'>
           <Navbar perfil={perfil} />
-          <AlunoTreino email={email}/>
+          <AlunoTreino email={email} />
+        </Route>
+
+        <Route path="/recepcaohome">
+          <Navbar perfil={perfil} />
+          <RecepcaoHome />
+        </Route>
+
+        <Route path="/alunoregister">
+          <Navbar perfil={perfil} />
+          <AlunoRegister />
+        </Route>
+
+        <Route path="/gerenciahome">
+          <Navbar perfil={perfil} />
+          <GerenciaHome />
         </Route>
 
       </Switch>

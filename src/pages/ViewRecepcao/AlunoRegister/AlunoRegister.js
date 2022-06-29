@@ -1,41 +1,26 @@
-import "./style.css";
+import "./AlunoRegister.css";
 import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
-import Api from '../../config/Api';
-import Authentication from '../Authentication';
-import { Input, Button, Dropdown } from "semantic-ui-react";
+import Api from '../../../config/Api';
+import Authentication from '../../Authentication';
+import { Input, Button } from "semantic-ui-react";
 import { notify } from "react-notify-toast";
 import { useHistory } from "react-router-dom";
 import { CgCornerDownLeft } from "react-icons/cg";
 import { useTranslation } from 'react-i18next';
 
 
-function Register() {
+function AlunoRegister() {
     const { t } = useTranslation();
     const history = useHistory();
-    const [tiposPerfil, setTiposPerfil] = useState([]);
-    const [tipo, setTipo] = useState('');
-    const [tipoNome, setTipoNome] = useState('');
 
     const routeChange = () => {
-        let path = `/login`;
+        let path = `/recepcaohome`;
         history.push(path);
     }
 
-    useEffect(() => {
-        Api.get(`/tipoPerfilSelect`)
-            .then((response) => {
-                setTiposPerfil(response.data);
-            });
-    }, []);
-
-    const tipoPerfilOptions = tiposPerfil.map((value) => ({
-        key: value.DS_TIPO_PERFIL,
-        text: value.DS_TIPO_PERFIL,
-        value: value.ID_TIPO_PERFIL
-    }));
-
+    const tipoPerfil = 15;
 
     //ação do botao cadastrar
     const handleClickRegister = (values) => {
@@ -45,8 +30,7 @@ function Register() {
             password: values.password,
             dataInclusao: values.dataInclusao,
             dataExclusao: values.dataExclusao,
-            profile: tipoNome,
-            idProfile: tipo,
+            idProfile: tipoPerfil,
             cpf: values.cpf,
             dataNascimento: values.dataNascimento,
             cep: values.cep,
@@ -59,10 +43,10 @@ function Register() {
             const isError = !Response.data.msg.includes("sucesso");
             notify.show(Response.data.msg, isError ? "error" : "success");
             if (isError) {
-                history.push("/register");
+                history.push("/alunoregister");
             }
             else {
-                history.push("/login");
+                history.push("/recepcaohome");
             }
         });
     };
@@ -132,7 +116,7 @@ function Register() {
     }
 
     return <Authentication>
-        <h1>{t("Cadastro")}</h1>
+        <h1>{t("Cadastro de Aluno")}</h1>
         <Formik initialValues={{}}
             onSubmit={handleClickRegister}
             validationSchema={validationCadastro}>
@@ -286,25 +270,6 @@ function Register() {
                                 className="form-error"
                             />
                         </div>
-                        <div className="login-form-group">
-                            <Dropdown
-                                name="profile"
-                                value={tipo}
-                                placeholder={t("Tipo de perfil")}
-                                search
-                                selection
-                                options={tipoPerfilOptions}
-                                onChange={(e, data) => {
-                                    setTipo(data.value);
-                                    setTipoNome(data.text);
-                                }} />
-                            <ErrorMessage
-                                component="span"
-                                name="profile"
-                                className="form-error"
-                            />
-
-                        </div>
                     </div>
 
                     <Button className="btn-login" size="large" primary type="submit">{t("Cadastrar")}</Button>
@@ -315,4 +280,4 @@ function Register() {
     </Authentication>
 }
 
-export default Register;
+export default AlunoRegister;

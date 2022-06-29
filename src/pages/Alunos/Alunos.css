@@ -1,16 +1,20 @@
 *,
 *::before,
-*::after{
-    box-sizing: border-box;
+*::after {
+  box-sizing: border-box;
 }
 
-.alunos-action{
+.alunos-action {
   display: flex;
   justify-content: center;
   margin-bottom: 2em;
 }
 
-.alunos-search{
+.alunos-button {
+  padding: 10px;
+}
+
+.alunos-search {
   width: 50rem;
 }
 
@@ -46,4 +50,3 @@
 .item-action {
   width: fit-content;
 }
-

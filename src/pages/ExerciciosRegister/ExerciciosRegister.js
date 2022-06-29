@@ -21,9 +21,9 @@ function ExerciciosRegister() {
 
     useEffect(() => {
         Api.get(`/selectTipoExercicio`)
-        .then((response) => {
-            setTipoExercicio(response.data);
-        })
+            .then((response) => {
+                setTipoExercicio(response.data);
+            })
     }, []);
 
     const exercicioOptions = tipoExercicio.map((value) => ({
@@ -46,10 +46,7 @@ function ExerciciosRegister() {
 
         }).then(async (response) => {
             const isError = !response.data.msg.includes("sucesso");
-            console.log(tipo)
-            console.log(isError);
-            console.log('file: ', fileValue)
-            notify.show(response.data.msg, isError ? "error" : "success");
+            notify.show(response.data.msg, isError ? "error" : "sucess");
             if (isError) {
                 history.push("/exerciciosregister");
             }
@@ -103,13 +100,13 @@ function ExerciciosRegister() {
                     />
                 </div>
 
-                <Dropdown 
-                    name="exercicioTipo" 
-                    value={tipo} 
-                    placeholder={t("Tipo de exercício")} 
+                <Dropdown
+                    name="exercicioTipo"
+                    value={tipo}
+                    placeholder={t("Tipo de exercício")}
                     search
                     selection
-                    options={exercicioOptions} 
+                    options={exercicioOptions}
                     onChange={(e, data) => setTipo(data.value)} />
 
                 <div className="login-form-group">

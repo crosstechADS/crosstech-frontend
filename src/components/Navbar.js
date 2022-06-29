@@ -45,8 +45,13 @@ function Navbar({ perfil }) {
               CROSSTECH
             </Link>
           }
-          {perfil !== 'aluno' &&
+          {perfil === 'professor' &&
             <Link to="/home" className="navbar-logo" onClick={closeMobileMenu}>
+              CROSSTECH
+            </Link>
+          }
+          {perfil === "gerencia" &&
+            <Link to="/gerenciahome" className="navbar-logo" onClick={closeMobileMenu}>
               CROSSTECH
             </Link>
           }
@@ -66,14 +71,14 @@ function Navbar({ perfil }) {
                   Alunos
                 </Link>
               </li>}
-            {perfil == "professor" &&
+            {perfil !== "recepcionista" &&
               <li className="nav-item">
                 <Link to="/exercicios" className="nav-links" onClick={closeMobileMenu}>
                   Exercicios
                 </Link>
               </li>
             }
-            {perfil == "professor" &&
+            {perfil !== "recepcionista" &&
               <li className="nav-item">
                 <Link to="/treinos" className="nav-links" onClick={closeMobileMenu}>
                   Treinos

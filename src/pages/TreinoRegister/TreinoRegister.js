@@ -1,5 +1,5 @@
 import "./TreinoRegister.css";
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import Api from '../../config/Api';
@@ -14,22 +14,20 @@ import { useTranslation } from 'react-i18next';
 function TreinoRegister() {
     const history = useHistory();
     const { t } = useTranslation();
+    const [alunos, setAlunos] = useState([]);
+    const [aluno, setAluno] = useState('');
 
-    const routeChange = () =>{
+    const routeChange = () => {
         let path = `/treinos`;
         history.push(path);
-    } 
+    }
 
     useEffect(() => {
         Api.get(`/alunosSelect`)
-        .then((response) => {
-            setAlunos(response.data);
-        })
+            .then((response) => {
+                setAlunos(response.data);
+            })
     }, []);
-
-    const [alunos, setAlunos] = useState([]);
-
-    const [aluno, setAluno] = useState("");
 
     const alunoOptions = alunos.map((value) => ({
         key: value.DS_NOME,
@@ -92,18 +90,17 @@ function TreinoRegister() {
                         className="form-error"
                     />
                 </div>
-
-                <Dropdown 
-                    name="aluno" 
-                    value={aluno} 
-                    placeholder={t("Alunos" )}
+                <Dropdown
+                    name="aluno"
+                    value={aluno}
+                    placeholder={t("Alunos")}
                     search
                     selection
-                    options={alunoOptions} 
+                    options={alunoOptions}
                     onChange={(e, data) => setAluno(data.value)} />
 
                 <Button className="btn-login" size="large" primary type="submit">{t('Cadastrar Treino')}</Button>
-                <Button size="large" className="btn-voltar" onClick={routeChange}>{t('Voltar')}<CgCornerDownLeft/></Button>
+                <Button size="large" className="btn-voltar" onClick={routeChange}>{t('Voltar')}<CgCornerDownLeft /></Button>
             </Form>
 
         </Formik>
