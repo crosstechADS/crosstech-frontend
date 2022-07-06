@@ -73,7 +73,7 @@ function Login() {
             .required(t("Campo E-mail obrigatório")),
         password: yup
             .string()
-            .min(8, t("Formato de senha inválido"))
+            .min(8, t("A senha deve conter pelo menos oito dígitos"))
             .required(t("Campo Senha obrigatório.")),
     });
 

@@ -6,9 +6,9 @@
   text-align: center;
 }
 
-.aluno-treino-detalhe p{
+.aluno-treino-detalhe p {
   font-size: 20px;
-  color:rgb(201, 201, 201)
+  color: rgb(201, 201, 201)
 }
 
 .aluno-treino-exercicio {
@@ -18,13 +18,18 @@
   border-radius: 17px;
 }
 
-.aluno-treino-exercicio p{
-  font-size: 18px;
+.aluno-treino-exercicio a {
+  color: #0a0a0a;
 }
 
-.aluno-exercicio-img{
+.aluno-treino-exercicio p {
+  font-size: 18px;
+  font-weight: unset;
+}
+
+.aluno-exercicio-img {
   border-radius: 17px;
-  width: 100%;
+  width: 150px;
 }
 
 .stopwatch {
@@ -79,6 +84,21 @@ button {
   margin-top: 5px;
 }
 
+.aluno-home-btn {
+  font-size: 15px;
+  border-radius: 12px;
+  background-color: rgb(41, 40, 40);
+  color: #fafafa;
+  margin: 10px;
+  padding: 7px
+}
+
+.aluno-home-btn:hover {
+  transition: 0.5s;
+  color: rgb(41, 40, 40);
+  background-color: #fafafa;
+}
+
 Loading {
-    background-color: transparent;
+  background-color: transparent;
 }

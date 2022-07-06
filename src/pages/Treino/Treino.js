@@ -42,7 +42,7 @@ function Treino({ perfil }) {
                 .then((response) => {
                     setExercicios(response.data);
                 }).catch((err) => console.log);
-                Api.get(`/exercicioTreinoSelect/${id}`)
+            Api.get(`/exercicioTreinoSelect/${id}`)
                 .then((response) => {
                     setExetre(response.data);
                 }).catch((err) => console.log);
@@ -77,6 +77,9 @@ function Treino({ perfil }) {
     //variaveis de treino_exercicio
     const [descTreino, setDescTreino] = useState("");
     const [exercicio, setExercicio] = useState("");
+    const [repeticoes, setRepeticoes] = useState('');
+    const [pesagem, setPesagem] = useState('');
+    const [tempo, setTempo] = useState('');
 
 
     function toggleTreinoForm() {
@@ -138,11 +141,14 @@ function Treino({ perfil }) {
         })
     }
 
-    function addExercicio(){
+    function addExercicio() {
         Api.post(`/exercicioTreinoRegister`, {
             OBS_EXERCICIO_TREINO: descTreino,
             ID_TREINO: idTreino,
             ID_EXERCICIO: exercicio,
+            NR_REPETICAO: repeticoes,
+            KG_EXERCICIO: pesagem,
+            MINUTOS_EXERCICIO: tempo
         }).then((response) => {
             const isError = !response.data.msg.includes("sucesso");
             notify.show(response.data.msg, isError ? "error" : "success");
@@ -280,12 +286,12 @@ function Treino({ perfil }) {
                                     {!showExercicioForm ? (
                                         <div className='treino-detalhes'>
                                             {exetre.map((data) => {
-                                                return(
+                                                return (
                                                     <div>
                                                         <h3>{data.OBS_EXERCICIO_TREINO}</h3>
                                                         <ExerciciosItem key={data.ID_EXERCICIO}
-                                                        listCard={exercicios} setListCard={setExercicios}
-                                                        exercicio={data} />
+                                                            listCard={exercicios} setListCard={setExercicios}
+                                                            exercicio={data} />
                                                     </div>
                                                 )
                                             })}
@@ -304,6 +310,39 @@ function Treino({ perfil }) {
                                                             placeholder={t("Descrição do Exercício")}
                                                             onChange={(event) => setDescTreino(event.target.value)}
                                                             value={descTreino} />
+                                                    </div>
+
+                                                    <div className="update-form-group">
+                                                        <label>{t('Quantas repetições devem ser feitas?')}</label>
+
+                                                        <Field required as={Input} size="large"
+                                                            name="repeticoes"
+                                                            className="form-field"
+                                                            placeholder={t("Número de repetições")}
+                                                            onChange={(event) => setRepeticoes(event.target.value)}
+                                                            value={repeticoes} />
+                                                    </div>
+
+                                                    <div className="update-form-group">
+                                                        <label>{t('Qual pesagem deve ser utilizada?')}</label>
+
+                                                        <Field required as={Input} size="large"
+                                                            name="pesagem"
+                                                            className="form-field"
+                                                            placeholder={t("Qual a pesagem envolvida no exercício?")}
+                                                            onChange={(event) => setPesagem(event.target.value)}
+                                                            value={pesagem} />
+                                                    </div>
+
+                                                    <div className="update-form-group">
+                                                        <label>{t('Em quantos minutos o exercício deve ser realizado?')}</label>
+
+                                                        <Field required as={Input} size="large"
+                                                            name="tempo"
+                                                            className="form-field"
+                                                            placeholder={t("Em quantos minutos o exercício deve ser feito?")}
+                                                            onChange={(event) => setTempo(event.target.value)}
+                                                            value={tempo} />
                                                     </div>
 
                                                     <label>{t('Exercício')}</label>
