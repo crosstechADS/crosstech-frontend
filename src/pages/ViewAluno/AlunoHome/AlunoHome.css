@@ -2,12 +2,12 @@
 .aluno-home h1 {
     padding: 10px;
     text-align: left;
-    background-color: rgb(41, 40, 40);
-    color: white;
+    background-color: #eeecec;
+    color: rgb(41, 40, 40);
 }
 
 .aluno-container {
-    background-color: rgb(41, 40, 40);
+    background-color: #eeecec;
 }
 
 .treino {
