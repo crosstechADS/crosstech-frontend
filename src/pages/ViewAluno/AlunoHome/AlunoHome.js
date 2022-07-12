@@ -97,7 +97,7 @@ function AlunoHome({ email }) {
                 {/*Gráficos do usuário*/}
 
                 <div className='grafico'>
-                    <h2>Evolução na Realização dos Exercícios</h2>
+                    <h2>Gráfico de Desempenho por Exercício</h2>
 
                     <h3>Escolha um exercício:</h3>
                     <Dropdown

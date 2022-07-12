@@ -63,29 +63,33 @@ export default AlunoTreinos
 
 function ExercicioTreino(props) {
     const { ID_EXERCICIO_TREINO, OBS_EXERCICIO_TREINO, ID_EXERCICIO, DS_EXERCICIO, DS_MIDIA_URL, NR_REPETICAO, KG_EXERCICIO, MINUTOS_EXERCICIO } = props.exercicioTreino;
-    const { time, start, pause, reset, status, advanceTime } = useTimer({
+    const { time, start, pause, reset, advanceTime } = useTimer({
         timerType: 'DECREMENTAL',
         initialTime: 60,
         endTime: 0
     });
     const [firstOpen, setFirstOpen] = useState(false);
     const [secondOpen, setSecondOpen] = useState(false);
+    const [thirdOpen, setThirdOpen] = useState(false);
+    const [repeticao, setRepeticao] = useState("");
+    const [peso, setPeso] = useState("");
     const { t } = useTranslation();
 
     const realizarExercicio = () => {
+        const tiempo = ((MINUTOS_EXERCICIO * 60) - time)
         Api.post(`/AlunoTreinoRegister`, {
-            NR_REPETICAO: NR_REPETICAO,
-            KG_EXERCICIO: KG_EXERCICIO,
+            NR_REPETICAO: repeticao,
+            KG_EXERCICIO: peso,
             ID_EXERCICIO_TREINO: ID_EXERCICIO_TREINO,
-            MINUTOS_EXERCICIO: MINUTOS_EXERCICIO
+            MINUTOS_EXERCICIO: tiempo
         }).then((response) => {
             const isError = !response.data.msg.includes("sucesso");
             notify.show(response.data.msg, isError ? "error" : "success");
             if (isError) {
                 //history.push(`/exercicio`);
             } else {
-                setFirstOpen(false);
-                setSecondOpen(true);
+                setSecondOpen(false);
+                setThirdOpen(true);
                 //history.push(`/exercicios`);
             }
         })
@@ -98,12 +102,24 @@ function ExercicioTreino(props) {
         reset();
     }
 
+    const cancelar2 = () => {
+        setSecondOpen(false);
+        reset();
+    }
+
+    const transicao = () => {
+        pause();
+        setFirstOpen(false);
+        setSecondOpen(true);
+    }
+
     const exercicioOpen = () => {
-        const tempo = ((MINUTOS_EXERCICIO * 60) - 60);
-        console.log(tempo)
+        setPeso(KG_EXERCICIO);
+        setRepeticao(NR_REPETICAO);
+        const tiempo = ((MINUTOS_EXERCICIO * 60) - 60);
         setFirstOpen(true);
         start();
-        advanceTime(-(tempo));
+        advanceTime(-(tiempo));
     }
 
     return (
@@ -113,7 +129,6 @@ function ExercicioTreino(props) {
             <p>{OBS_EXERCICIO_TREINO}</p>
             <button className='aluno-home-btn' onClick={exercicioOpen}>Realizar exercício</button>
             <Modal
-                dimmer={"blurring"}
                 onClose={() => setFirstOpen(false)}
                 onOpen={() => setFirstOpen(true)}
                 open={firstOpen}>
@@ -127,15 +142,55 @@ function ExercicioTreino(props) {
                 </Modal.Content>
                 <Modal.Actions>
                     <Button color='black' onClick={cancelar}>{t('Cancelar')}</Button>
+                    <Button onClick={transicao} primary color='green'>
+                        {t('Próximo')} <Icon name='right chevron' />
+                    </Button>
+                </Modal.Actions>
+            </Modal>
+
+            <Modal
+                onClose={() => setSecondOpen(false)}
+                open={secondOpen}
+                size='small'
+            >
+                <Modal.Header>{DS_EXERCICIO}</Modal.Header>
+                <Modal.Content>
+                    <Modal.Description>
+                        <div><Formik>
+                            <Form>
+                                <div className="login-form-group">
+                                    <label>Qual a pesagem utilizada?</label>
+                                    <Field as={Input} size="large"
+                                        value={peso}
+                                        name="peso"
+                                        className="form-field"
+                                        placeholder={t("Peso utilizado")}
+                                        onChange={(event) => setPeso(event.target.value)} />
+                                </div>
+                                <div className="login-form-group">
+                                    <label>Quantas repetições foram feitas?</label>
+                                    <Field as={Input} size="large"
+                                        value={repeticao}
+                                        name="repeticoes"
+                                        className="form-field"
+                                        placeholder={t("Repetições feitas")}
+                                        onChange={(event) => setRepeticao(event.target.value)} />
+                                </div>
+                            </Form>
+                        </Formik></div>
+                    </Modal.Description>
+                </Modal.Content>
+                <Modal.Actions>
+                    <Button color='black' onClick={cancelar2}>{t('Cancelar')}</Button>
                     <Button onClick={realizarExercicio} primary color='green'>
                         {t('Próximo')} <Icon name='right chevron' />
                     </Button>
                 </Modal.Actions>
             </Modal>
+
             <Modal
-                dimmer={'blurring'}
-                onClose={() => setSecondOpen(false)}
-                open={secondOpen}
+                onClose={() => setThirdOpen(false)}
+                open={thirdOpen}
                 size='small'
             >
                 <Modal.Header>Exercício {DS_EXERCICIO} concluído com sucesso!</Modal.Header>
@@ -144,7 +199,7 @@ function ExercicioTreino(props) {
                         icon='check'
                         content='Finalizar'
                         color='green'
-                        onClick={() => setSecondOpen(false)}
+                        onClick={() => setThirdOpen(false)}
                     />
                 </Modal.Actions>
             </Modal>
